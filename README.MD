@@ -4,4 +4,5 @@
 ## Project stack
 
 + (to be updated)
++ ASP.NET Core 7.0
 
