@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Domain.ValueObjects
 {
-    internal sealed record UserPassword
+    public sealed record UserPassword
     {
         public string Value { get; }
         public UserPassword(string password)

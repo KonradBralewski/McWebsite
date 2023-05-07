@@ -1,5 +1,7 @@
-﻿namespace McWebsite.Application.Services.Authentication
+﻿using McWebsite.Domain.Entities;
+
+namespace McWebsite.Application.Services.Authentication
 {
-    public record AuthenticationResult (Guid Id, string Email, string Token);
+    public record AuthenticationResult (User user, string Token);
    
 }

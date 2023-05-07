@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Domain.Entities
 {
-    internal sealed class User : AggregateRoot<UserEmail>
+    public sealed class User //: AggregateRoot<UserEmail>
     {
-        public UserEmail Email { get; private set; }
-        private UserPassword _password;
-        private MinecraftUserId _minecraftUserId;
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public UserEmail Email { get; set; } = null!;
+        public string Password { get; set; } = null!;
+        public string MinecraftUserId { get; set; } = null!;
     }
 }

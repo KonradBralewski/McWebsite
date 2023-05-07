@@ -21,7 +21,7 @@ namespace McWebsite.API.Controllers
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
         {
             var result = _authenticationService.Register(request.Email, request.Password);
-            var response = new AuthenticationResponse(result.Id, result.Email, result.Token);
+            var response = new AuthenticationResponse(result.user.Id, result.user.Email, result.Token);
 
             return Ok(response);
         }
@@ -30,7 +30,7 @@ namespace McWebsite.API.Controllers
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request)
         {
             var result = _authenticationService.Login(request.Email, request.Password);
-            var response = new AuthenticationResponse(result.Id, result.Email, result.Token);
+            var response = new AuthenticationResponse(result.user.Id, result.user.Email, result.Token);
 
             return Ok(response);
         }

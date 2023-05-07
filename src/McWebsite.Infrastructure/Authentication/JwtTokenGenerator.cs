@@ -1,5 +1,6 @@
-﻿using McWebsite.Application.Common.Interfaces;
+﻿using McWebsite.Application.Common.Interfaces.Authentication;
 using McWebsite.Application.Common.Services;
+using McWebsite.Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -23,7 +24,7 @@ namespace McWebsite.Infrastructure.Authentication
             _jwtSettings = jwtOptions.Value;
 
         }
-        public string GenerateToken(Guid id, string email, string password)
+        public string GenerateToken(User user)
         {
             var signingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
@@ -32,8 +33,8 @@ namespace McWebsite.Infrastructure.Authentication
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
             };
 
             var securityToken = new JwtSecurityToken(

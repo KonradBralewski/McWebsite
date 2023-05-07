@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Domain.ValueObjects
 {
-    internal sealed record MinecraftUserId
+    public sealed record MinecraftUserId
     {
         public string Value { get; }
 

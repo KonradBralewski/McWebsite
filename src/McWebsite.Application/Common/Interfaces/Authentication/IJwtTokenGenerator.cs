@@ -1,13 +1,14 @@
-﻿using System;
+﻿using McWebsite.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Application.Common.Interfaces
+namespace McWebsite.Application.Common.Interfaces.Authentication
 {
     public interface IJwtTokenGenerator
     {
-        string GenerateToken(Guid id, string email, string password);
+        string GenerateToken(User user);
     }
 }

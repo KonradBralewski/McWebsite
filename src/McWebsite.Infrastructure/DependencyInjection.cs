@@ -1,9 +1,11 @@
-﻿using McWebsite.Application.Common.Interfaces;
-using McWebsite.Application.Common.Services;
+﻿using McWebsite.Application.Common.Services;
 using McWebsite.Infrastructure.Authentication;
 using McWebsite.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using McWebsite.Application.Common.Interfaces.Authentication;
+using McWebsite.Application.Common.Interfaces.Persistence;
+using McWebsite.Infrastructure.Persistence;
 
 namespace McWebsite.Infrastructure
 {
@@ -15,6 +17,7 @@ namespace McWebsite.Infrastructure
 
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

@@ -27,6 +27,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McWebsite.Shared", "src\Sha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McWebsite.Shared.Abstractions", "src\Shared\McWebsite.Shared.Abstractions\McWebsite.Shared.Abstractions.csproj", "{93CE2BE6-D5D6-432B-9803-6C5EAAB65EBE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{F2444533-DAA4-41D5-B011-7B377D9FFA84}"
+	ProjectSection(SolutionItems) = preProject
+		docs\API.md = docs\API.md
+		DomainModels.md = DomainModels.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
