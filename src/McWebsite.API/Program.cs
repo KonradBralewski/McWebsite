@@ -1,5 +1,7 @@
+using McWebsite.API.Common.Errors;
 using McWebsite.Application.Services;
 using McWebsite.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -8,10 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSingleton<ProblemDetailsFactory, McWebsiteProblemDetailsFactory>();
 }
 
 var app = builder.Build();
 {
+    app.UseExceptionHandler("/error");
+
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
