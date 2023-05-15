@@ -4,6 +4,8 @@
 #nullable enable
 
 using System.Diagnostics;
+using ErrorOr;
+using McWebsite.API.Common.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -98,5 +100,12 @@ internal sealed class McWebsiteProblemDetailsFactory : ProblemDetailsFactory
         }
 
         _configure?.Invoke(new() { HttpContext = httpContext!, ProblemDetails = problemDetails });
+
+        List<Error>? errorList = httpContext?.Items[HttpContextItemKeys.Errors] as List<Error>;
+
+        if(errorList is not null)
+        {
+            problemDetails.Extensions.Add("errorCodes", errorList.Select(e => e.Code));
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using McWebsite.Domain.Exceptions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +13,7 @@ namespace McWebsite.Domain.ValueObjects
         {
             if(string.IsNullOrWhiteSpace(password))
             {
-                throw new PasswordEmptyException();
+                //throw new PasswordEmptyException();
             }
 
             Value = password;

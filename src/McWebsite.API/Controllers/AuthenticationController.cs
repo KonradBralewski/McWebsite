@@ -1,13 +1,14 @@
-﻿using McWebsite.Application.Services.Authentication;
+﻿using ErrorOr;
+using McWebsite.Application.Services.Authentication;
 using McWebsite.Shared.Contracts.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace McWebsite.API.Controllers
 {
     [Route("auth")]
-    [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthenticationController : McWebsiteController
     {
         private readonly IAuthenticationService _authenticationService;
 
@@ -20,19 +21,27 @@ namespace McWebsite.API.Controllers
         
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
         {
-            var result = _authenticationService.Register(request.Email, request.Password);
-            var response = new AuthenticationResponse(result.user.Id, result.user.Email, result.Token);
+            ErrorOr<AuthenticationResult> registerResult = _authenticationService.Register(request.Email, request.Password);
 
-            return Ok(response);
+            return registerResult.Match(
+                authResult => Ok(MapAuthResult(authResult)),
+                errors => Problem(errors));
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request)
         {
-            var result = _authenticationService.Login(request.Email, request.Password);
-            var response = new AuthenticationResponse(result.user.Id, result.user.Email, result.Token);
+            ErrorOr<AuthenticationResult> loginResult = _authenticationService.Login(request.Email, request.Password);
 
-            return Ok(response);
+            return loginResult.Match(
+                authResult => Ok(MapAuthResult(authResult)),
+                errors => Problem(errors));
+        }
+
+
+        private static AuthenticationResponse MapAuthResult(AuthenticationResult authResult)
+        {
+            return new AuthenticationResponse(authResult.User.Id, authResult.User.Email, authResult.Token);
         }
     }
 }

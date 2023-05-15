@@ -3,6 +3,6 @@
 
 ## Project stack
 
-+ (to be updated)
-+ ASP.NET Core 7.0
++ ASP.NET 7.0
+    - ErrorOr
 

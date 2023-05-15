@@ -1,5 +1,4 @@
-﻿using McWebsite.Domain.Exceptions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +14,7 @@ namespace McWebsite.Domain.ValueObjects
         {
             if(string.IsNullOrWhiteSpace(minecraftUserId))
             {
-                throw new MinecraftUserIdEmptyException();
+                //throw new MinecraftUserIdEmptyException();
             }
 
             Value = minecraftUserId;

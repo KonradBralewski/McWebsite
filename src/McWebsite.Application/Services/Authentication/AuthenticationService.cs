@@ -1,5 +1,7 @@
-﻿using McWebsite.Application.Common.Interfaces.Authentication;
+﻿using ErrorOr;
+using McWebsite.Application.Common.Interfaces.Authentication;
 using McWebsite.Application.Common.Interfaces.Persistence;
+using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -20,20 +22,20 @@ namespace McWebsite.Application.Services.Authentication
             _userRepository = userRepository;
         }
 
-        public AuthenticationResult Login(string email, string password)
+        public ErrorOr<AuthenticationResult> Login(string email, string password)
         {
             // Validate if user exists
 
             if (_userRepository.GetUserByEmail(email) is not User user)
             {
-                throw new Exception("User with given email address does not exists.");
+                return Errors.Authentication.InvalidCredentials;
             }
 
             // Validate if password is correct
 
             if(user.Password != password)
             {
-                throw new Exception("Given password is invalid.");
+                return Errors.Authentication.InvalidCredentials;
             }
 
             // Create JWT Token
@@ -45,13 +47,13 @@ namespace McWebsite.Application.Services.Authentication
                 token);
         }
 
-        public AuthenticationResult Register(string email, string password)
+        public ErrorOr<AuthenticationResult> Register(string email, string password)
         {
             // Check if user already exists
 
             if(_userRepository.GetUserByEmail(email) is not null)
             {
-                throw new Exception("User with given email address already exists.");
+                return Errors.User.DuplicateEmail;
             }
 
             // Create user (generate unique Id)
