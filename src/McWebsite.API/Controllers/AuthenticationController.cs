@@ -1,6 +1,9 @@
 ﻿using ErrorOr;
-using McWebsite.Application.Services.Authentication;
-using McWebsite.Shared.Contracts.Auth;
+using McWebsite.API.Contracts.Auth;
+using McWebsite.Application.Authentication.Commands;
+using McWebsite.Application.Authentication.Commands.Register;
+using McWebsite.Application.Authentication.Queries.Login;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,18 +13,19 @@ namespace McWebsite.API.Controllers
     [Route("auth")]
     public class AuthenticationController : McWebsiteController
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly ISender _mediator;
 
-        public AuthenticationController(IAuthenticationService authenticationService)
+        public AuthenticationController(ISender mediator)
         {
-            _authenticationService = authenticationService;
+            _mediator = mediator;
         }
 
         [HttpPost("register")]
         
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
         {
-            ErrorOr<AuthenticationResult> registerResult = _authenticationService.Register(request.Email, request.Password);
+            var command = new RegisterCommand(request.Email, request.Password);
+            ErrorOr<AuthenticationResult> registerResult = await _mediator.Send(command);
 
             return registerResult.Match(
                 authResult => Ok(MapAuthResult(authResult)),
@@ -31,7 +35,8 @@ namespace McWebsite.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request)
         {
-            ErrorOr<AuthenticationResult> loginResult = _authenticationService.Login(request.Email, request.Password);
+            var query = new LoginQuery(request.Email, request.Password);
+            ErrorOr<AuthenticationResult> loginResult = await _mediator.Send(query);
 
             return loginResult.Match(
                 authResult => Ok(MapAuthResult(authResult)),

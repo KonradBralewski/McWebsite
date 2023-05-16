@@ -28,7 +28,6 @@ namespace McWebsite.API.Controllers
                 _ => StatusCodes.Status500InternalServerError
             };
 
-
             return Problem(statusCode: httpStatusCode, title: firstError.Description);
         }
     }

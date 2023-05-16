@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Shared.Contracts.Auth
+namespace McWebsite.API.Contracts.Auth
 {
-    public sealed record RegisterRequest (
+    public sealed record RegisterRequest(
         string Email,
         string Password);
 }

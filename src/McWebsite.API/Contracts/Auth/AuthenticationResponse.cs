@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Shared.Contracts.Auth
+namespace McWebsite.API.Contracts.Auth
 {
     public sealed record AuthenticationResponse(
-        Guid Id, 
-        string Email, 
+        Guid Id,
+        string Email,
         string Token);
 }
