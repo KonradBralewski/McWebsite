@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace McWebsite.API.Contracts.Auth
 {
     public sealed record AuthenticationResponse(
-        Guid Id,
-        string Email,
+        Guid UserId,
+        string UserEmail,
         string Token);
 }

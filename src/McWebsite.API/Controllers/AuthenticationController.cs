@@ -4,9 +4,9 @@ using McWebsite.Application.Authentication.Commands;
 using McWebsite.Application.Authentication.Commands.Register;
 using McWebsite.Application.Authentication.Queries.Login;
 using MediatR;
-using Microsoft.AspNetCore.Http;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
-
+using MapsterMapper;
 
 namespace McWebsite.API.Controllers
 {
@@ -14,39 +14,35 @@ namespace McWebsite.API.Controllers
     public class AuthenticationController : McWebsiteController
     {
         private readonly ISender _mediator;
+        private readonly IMapper _mapper;
 
-        public AuthenticationController(ISender mediator)
+        public AuthenticationController(ISender mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
         
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
         {
-            var command = new RegisterCommand(request.Email, request.Password);
+            var command = _mapper.Map<RegisterCommand>(request);
             ErrorOr<AuthenticationResult> registerResult = await _mediator.Send(command);
 
             return registerResult.Match(
-                authResult => Ok(MapAuthResult(authResult)),
+                authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
                 errors => Problem(errors));
         }
 
-        [HttpPost("login")]
+        [HttpPost("login")] 
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request)
         {
-            var query = new LoginQuery(request.Email, request.Password);
+            var query = _mapper.Map<LoginQuery>(request);
             ErrorOr<AuthenticationResult> loginResult = await _mediator.Send(query);
 
             return loginResult.Match(
-                authResult => Ok(MapAuthResult(authResult)),
+                authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
                 errors => Problem(errors));
-        }
-
-
-        private static AuthenticationResponse MapAuthResult(AuthenticationResult authResult)
-        {
-            return new AuthenticationResponse(authResult.User.Id, authResult.User.Email, authResult.Token);
         }
     }
 }

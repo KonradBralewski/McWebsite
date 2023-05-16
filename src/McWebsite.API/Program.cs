@@ -1,3 +1,4 @@
+using McWebsite.API;
 using McWebsite.API.Common.Errors;
 using McWebsite.Application;
 using McWebsite.Infrastructure;
@@ -5,12 +6,11 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
+    builder.Services.AddPresentation();
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
 
-    builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSingleton<ProblemDetailsFactory, McWebsiteProblemDetailsFactory>();
 }
 
 var app = builder.Build();
