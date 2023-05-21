@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\McWebsite.Infrastructure\McWebsite.Infrastructure.csproj" />
-    <ProjectReference Include="..\Shared\McWebsite.Shared\McWebsite.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
