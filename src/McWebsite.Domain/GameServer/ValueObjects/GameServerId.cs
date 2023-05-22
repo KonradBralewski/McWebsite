@@ -21,6 +21,11 @@ namespace McWebsite.Domain.GameServer.ValueObjects
             return new GameServerId(Guid.NewGuid());
         }
 
+        public static GameServerId Recreate(Guid id)
+        {
+            return new GameServerId(id);
+        }
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;

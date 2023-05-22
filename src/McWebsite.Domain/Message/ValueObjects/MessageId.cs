@@ -5,26 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Domain.User.ValueObjects
+namespace McWebsite.Domain.MessageModel.ValueObjects
 {
-    public sealed class MinecraftAccountId : ValueObject
+    public sealed class MessageId : ValueObject
     {
-        public int Value { get; }
+        public Guid Value { get; }
 
-        private MinecraftAccountId(int accountId)
+        private MessageId(Guid value)
         {
-            Value = accountId;
+            Value = value;
         }
 
-        public static MinecraftAccountId Create(int accountId)
+        public static MessageId CreateUnique()
         {
-            return new MinecraftAccountId(accountId);
+            return new MessageId(Guid.NewGuid());
         }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;
         }
-
     }
 }

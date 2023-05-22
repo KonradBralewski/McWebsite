@@ -27,10 +27,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{F2444533-D
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainModels", "DomainModels", "{527FD11E-26EC-40D5-9B28-60D08145753B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aggregates", "Aggregates", "{880EF834-A6F6-4936-AC5F-556BB96BD2F1}"
 	ProjectSection(SolutionItems) = preProject
-		docs\DomainModels\Aggregates.InGameEvent.md = docs\DomainModels\Aggregates.InGameEvent.md
-		docs\DomainModels\Aggregates.GameServer.md = docs\DomainModels\Aggregates.GameServer.md
-		docs\DomainModels\Aggregates.User.md = docs\DomainModels\Aggregates.User.md
+		docs\DomainModels\Aggregates\Aggregates.Conversation.md = docs\DomainModels\Aggregates\Aggregates.Conversation.md
+		docs\DomainModels\Aggregates\Aggregates.GameServer.md = docs\DomainModels\Aggregates\Aggregates.GameServer.md
+		docs\DomainModels\Aggregates\Aggregates.User.md = docs\DomainModels\Aggregates\Aggregates.User.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{C9CBB296-90F0-4C59-9FA2-A98021CB0A8E}"
+	ProjectSection(SolutionItems) = preProject
+		docs\DomainModels\Entitites\Entities.InGameEvent.md = docs\DomainModels\Entitites\Entities.InGameEvent.md
+		docs\DomainModels\Entitites\Entitites.Message.md = docs\DomainModels\Entitites\Entitites.Message.md
 	EndProjectSection
 EndProject
 Global
@@ -65,6 +73,8 @@ Global
 		{329F49F7-20FD-40A8-9493-FAA629762850} = {404476C1-7F48-483E-9389-C1485AD70245}
 		{F9A84B6E-68F1-40DB-94A2-12191CFDE52E} = {404476C1-7F48-483E-9389-C1485AD70245}
 		{527FD11E-26EC-40D5-9B28-60D08145753B} = {F2444533-DAA4-41D5-B011-7B377D9FFA84}
+		{880EF834-A6F6-4936-AC5F-556BB96BD2F1} = {527FD11E-26EC-40D5-9B28-60D08145753B}
+		{C9CBB296-90F0-4C59-9FA2-A98021CB0A8E} = {527FD11E-26EC-40D5-9B28-60D08145753B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {48CA43D0-C968-4C25-8234-A757CF433B31}

@@ -12,7 +12,6 @@ namespace McWebsite.Domain.GameServer
 {
     public sealed class GameServer : AggregateRoot<GameServerId>
     {
-        public GameServerId Id { get; }
         public int MaximumPlayersNumber { get; }
         public GameServerLocation ServerLocation { get; }
         public GameServerType ServerType { get; }

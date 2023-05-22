@@ -1,5 +1,5 @@
 ```csharp
-public class InGameEvent : AggregateRoot<InGameEventId>
+public class InGameEvent : Entity<InGameEventId>
 {
 	public InGameEventId Id { get; set; }
 	public int BuyingPlayerId { get; set; }

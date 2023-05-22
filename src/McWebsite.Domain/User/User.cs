@@ -10,8 +10,6 @@ namespace McWebsite.Domain.User
 {
     public sealed class User : AggregateRoot<UserId>
     {
-
-        public UserId Id { get; }
         public MinecraftAccountId MinecraftAccountId { get; }
         public UserEmail Email { get; }
         public UserPassword Password { get; }

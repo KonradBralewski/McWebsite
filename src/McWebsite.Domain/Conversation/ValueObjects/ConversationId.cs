@@ -5,25 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Domain.User.ValueObjects
+namespace McWebsite.Domain.Conversation.ValueObjects
 {
-    public sealed class UserId : ValueObject
+    public sealed class ConversationId : ValueObject
     {
         public Guid Value { get; }
 
-        private UserId(Guid value)
+        private ConversationId(Guid value)
         {
             Value = value;
         }
 
-        public static UserId CreateUnique()
+        public static ConversationId CreateUnique()
         {
-            return new UserId(Guid.NewGuid());
+            return new ConversationId(Guid.NewGuid());
         }
 
-        public static UserId Recreate(Guid id)
+        public static ConversationId Recreate(Guid id)
         {
-            return new UserId(id);
+            return new ConversationId(id);
         }
 
         protected override IEnumerable<object> GetEqualityComponents()
