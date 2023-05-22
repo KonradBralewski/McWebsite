@@ -1,7 +1,7 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Authentication;
 using McWebsite.Application.Common.Interfaces.Persistence;
-using McWebsite.Domain.Entities;
+using McWebsite.Domain.User;
 using MediatR;
 using McWebsite.Domain.Common.Errors;
 using McWebsite.Application.Authentication.Commands;

@@ -1,5 +1,5 @@
 ﻿using McWebsite.Application.Common.Interfaces.Persistence;
-using McWebsite.Domain.Entities;
+using McWebsite.Domain.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

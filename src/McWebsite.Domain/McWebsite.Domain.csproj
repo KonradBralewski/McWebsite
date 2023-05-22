@@ -4,6 +4,14 @@
     <PackageReference Include="ErrorOr" Version="1.2.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="InGameEvent\" />
+    <Folder Include="GameServerSubscription\" />
+    <Folder Include="Message\" />
+    <Folder Include="Conversation\" />
+    <Folder Include="GameServerReport\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

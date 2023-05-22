@@ -29,7 +29,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainModels", "DomainModels", "{527FD11E-26EC-40D5-9B28-60D08145753B}"
 	ProjectSection(SolutionItems) = preProject
 		docs\DomainModels\Aggregates.InGameEvent.md = docs\DomainModels\Aggregates.InGameEvent.md
-		docs\DomainModels\Aggregates.ServerList.md = docs\DomainModels\Aggregates.ServerList.md
+		docs\DomainModels\Aggregates.GameServer.md = docs\DomainModels\Aggregates.GameServer.md
 		docs\DomainModels\Aggregates.User.md = docs\DomainModels\Aggregates.User.md
 	EndProjectSection
 EndProject

@@ -3,7 +3,8 @@ using McWebsite.Application.Common.Interfaces.Authentication;
 using McWebsite.Application.Common.Interfaces.Persistence;
 using MediatR;
 using McWebsite.Domain.Common.Errors;
-using McWebsite.Domain.Entities;
+using McWebsite.Domain.User;
+using McWebsite.Domain.User.ValueObjects;
 
 namespace McWebsite.Application.Authentication.Commands.Register
 {
@@ -27,11 +28,7 @@ namespace McWebsite.Application.Authentication.Commands.Register
 
             // Create user (generate unique Id)
 
-            var user = new User
-            {
-                Email = command.Email,
-                Password = command.Password
-            };
+            var user = User.Create(null, command.Email, command.Password);
 
             _userRepository.AddUser(user);
 

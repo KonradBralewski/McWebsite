@@ -1,6 +1,6 @@
 ﻿using McWebsite.Application.Common.Interfaces.Authentication;
 using McWebsite.Application.Common.Services;
-using McWebsite.Domain.Entities;
+using McWebsite.Domain.User;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;

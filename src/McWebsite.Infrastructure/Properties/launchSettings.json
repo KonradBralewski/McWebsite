@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "McWebsite.Infrastructure": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:53950;http://localhost:53952"
+    }
+  }
+}
