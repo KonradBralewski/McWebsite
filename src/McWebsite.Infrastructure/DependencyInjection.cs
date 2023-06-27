@@ -22,6 +22,7 @@ namespace McWebsite.Infrastructure
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGameServerRepository, GameServerRepository>();
 
             return services;
         }

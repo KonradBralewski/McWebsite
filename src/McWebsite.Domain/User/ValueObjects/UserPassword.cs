@@ -27,6 +27,6 @@ namespace McWebsite.Domain.User.ValueObjects
         }
 
         public static implicit operator string(UserPassword userPassword) => userPassword.Value;
-        public static implicit operator UserPassword(string email) => UserPassword.Create(email);
+        public static implicit operator UserPassword(string password) => UserPassword.Create(password);
     }
 }

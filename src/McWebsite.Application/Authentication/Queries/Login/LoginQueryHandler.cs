@@ -8,7 +8,7 @@ using McWebsite.Application.Authentication.Commands;
 
 namespace McWebsite.Application.Authentication.Queries.Login
 {
-    internal class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<AuthenticationResult>>
+    internal sealed class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<AuthenticationResult>>
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IUserRepository _userRepository;
