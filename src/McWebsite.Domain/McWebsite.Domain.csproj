@@ -5,8 +5,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="GameServerReport\Entities\" />
     <Folder Include="GameServerSubscription\" />
-    <Folder Include="GameServerReport\" />
     <Folder Include="InGameEventOrder\Entites\" />
   </ItemGroup>
 

@@ -1,27 +1,27 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.GameServer.Enums;
 using McWebsite.Domain.GameServer.ValueObjects;
-using McWebsite.Domain.InGameEvent.Enums;
+using McWebsite.Domain.GameServerReport.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Domain.InGameEvent.ValueObjects
+namespace McWebsite.Domain.GameServerReport.ValueObjects
 {
-    public sealed class InGameEventType : ValueObject
+    public sealed class GameServerReportType : ValueObject
     {
-        public EventType Value { get; }
+        public ReportType Value { get; }
 
-        private InGameEventType(EventType type)
+        private GameServerReportType(ReportType type)
         {
             Value = type;
         }
 
-        public static InGameEventType Create(EventType type)
+        public static GameServerReportType Create(ReportType type)
         {
-            return new InGameEventType(type);
+            return new GameServerReportType(type);
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

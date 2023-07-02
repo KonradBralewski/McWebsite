@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aggregates", "Aggregates", 
 	ProjectSection(SolutionItems) = preProject
 		docs\DomainModels\Aggregates\Aggregates.Conversation.md = docs\DomainModels\Aggregates\Aggregates.Conversation.md
 		docs\DomainModels\Aggregates\Aggregates.GameServer.md = docs\DomainModels\Aggregates\Aggregates.GameServer.md
+		docs\DomainModels\Aggregates\Aggregates.GameServerReport.md = docs\DomainModels\Aggregates\Aggregates.GameServerReport.md
+		docs\DomainModels\Aggregates\Aggregates.GameServerSubscription.md = docs\DomainModels\Aggregates\Aggregates.GameServerSubscription.md
 		docs\DomainModels\Aggregates\Aggregates.InGameEventOrder.md = docs\DomainModels\Aggregates\Aggregates.InGameEventOrder.md
 		docs\DomainModels\Aggregates\Aggregates.User.md = docs\DomainModels\Aggregates\Aggregates.User.md
 	EndProjectSection

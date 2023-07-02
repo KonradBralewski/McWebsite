@@ -16,6 +16,11 @@ namespace McWebsite.Domain.InGameEventModel.ValueObjects
             return new InGameEventId(Guid.NewGuid());
         }
 
+        public static InGameEventId Recreate(Guid id)
+        {
+            return new InGameEventId(id);
+        }
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;
