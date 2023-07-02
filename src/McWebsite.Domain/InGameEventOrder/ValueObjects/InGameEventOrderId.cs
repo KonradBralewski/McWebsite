@@ -1,19 +1,19 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 
-namespace McWebsite.Domain.InGameEventOrder.ValueObjects
+namespace McWebsite.Domain.InGameEventModel.ValueObjects
 {
-    public sealed class InGameEventOrderId : ValueObject
+    public sealed class InGameEventId : ValueObject
     {
         public Guid Value { get; }
 
-        private InGameEventOrderId(Guid value)
+        private InGameEventId(Guid value)
         {
             Value = value;
         }
 
-        public static InGameEventOrderId CreateUnique()
+        public static InGameEventId CreateUnique()
         {
-            return new InGameEventOrderId(Guid.NewGuid());
+            return new InGameEventId(Guid.NewGuid());
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

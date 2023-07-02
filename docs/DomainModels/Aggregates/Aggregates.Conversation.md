@@ -1,9 +1,4 @@
 ```csharp
-public class User : AggregateRoot<UserId>
-{
-	public Tuple<UserId, UserId> Performers { get; set; }
-	public ReadOnlyCollection<Message> Messages { get; set; }
-}
 ```
 
 ```json
@@ -17,7 +12,6 @@ public class User : AggregateRoot<UserId>
 		"Message" : {...},
 		"Message" : {...},
 	},
-	"UpdatedDateTime" : "",
-	"UpdatedBy" : ""
+	"UpdatedDateTime" : ""
 }
 ```

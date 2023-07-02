@@ -8,12 +8,12 @@ namespace McWebsite.Domain.GameServer.Enums
 {
     public enum ServerLocation
     {
-        NorthAmerica = 0,
-        SouthAmerica = 1,
-        Europe = 2,
-        Asia = 3,
-        Africa = 4,
-        Australia = 5,
-        Antarctica = 6
+        NorthAmerica,
+        SouthAmerica,
+        Europe,
+        Asia,
+        Africa,
+        Australia,
+        Antarctica
     }
 }

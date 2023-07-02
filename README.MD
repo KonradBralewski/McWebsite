@@ -21,11 +21,6 @@
 (Initial domain events for now) To be updated ...
 ```
 
-### Domain Models
-```json
-To be updated ...
-```
-### API Documentation
-```json
-To be updated ...
-```
+### [Domain Models](docs/DomainModels)
+### [API Documentation](docs/API.md)
+

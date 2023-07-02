@@ -6,19 +6,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Infrastructure.Persistence
+namespace McWebsite.Infrastructure.Persistence.Repositories
 {
     internal sealed class UserRepository : IUserRepository
     {
-        private static readonly List<User> _users = new List<User>();
+        private readonly McWebsiteDbContext _dbContext;
+
+        public UserRepository(McWebsiteDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public void AddUser(User user)
         {
-            _users.Add(user);
+            throw new NotImplementedException();
         }
 
         public User? GetUserByEmail(string email)
         {
-            return _users.SingleOrDefault(u => u.Email == email);
+            throw new NotImplementedException();
         }
     }
 }

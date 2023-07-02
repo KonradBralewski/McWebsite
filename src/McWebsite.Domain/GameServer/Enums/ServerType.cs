@@ -8,11 +8,11 @@ namespace McWebsite.Domain.GameServer.Enums
 {
     public enum ServerType
     {
-        Unknown = 0,
-        Vanilla = 1,
-        Bukkit = 2,
-        Spigot = 3,
-        Paper = 4,
-        Forge = 5,
+        Unknown,
+        Vanilla,
+        Bukkit,
+        Spigot,
+        Paper,
+        Forge
     }
 }

@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="GameServerSubscription\" />
     <Folder Include="GameServerReport\" />
+    <Folder Include="InGameEventOrder\Entites\" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -25,11 +25,11 @@ namespace McWebsite.Domain.User
         }
 
                     
-        public static User Create(MinecraftAccountId minecraftAccountId,
+        public static User Create(int minecraftAccountId,
                                   string email,
                                   string password)
         {
-            return new User(UserId.CreateUnique(), minecraftAccountId, UserEmail.Create(email), UserPassword.Create(password));
+            return new User(UserId.CreateUnique(), MinecraftAccountId.Create(minecraftAccountId), UserEmail.Create(email), UserPassword.Create(password));
         }
 
     }
