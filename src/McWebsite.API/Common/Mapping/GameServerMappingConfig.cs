@@ -1,8 +1,7 @@
 ﻿using Mapster;
-using McWebsite.API.Contracts.Auth;
 using McWebsite.API.Contracts.GameServer;
-using McWebsite.Application.Authentication.Commands;
 using McWebsite.Application.GameServers.Queries.GetGameServers;
+using McWebsite.Domain.GameServer;
 
 namespace McWebsite.API.Common.Mapping
 {
@@ -11,11 +10,19 @@ namespace McWebsite.API.Common.Mapping
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<(int page, int entriesPerPage), GetGameServersQuery>()
-                .Map(dest => dest.page, src => src.page)
-                .Map(dest => dest.entriesPerPage, src => src.entriesPerPage);
+                .Map(dest => dest.Page, src => src.page)
+                .Map(dest => dest.EntriesPerPage, src => src.entriesPerPage);
+
+            config.NewConfig<GameServer, GameServerResponse>()
+                .Map(dest => dest.Id, src => src.Id.Value)
+                .Map(dest => dest.ServerLocation, src => src.ServerLocation.Value)
+                .Map(dest => dest.MaximumPlayersNumber, src => src.MaximumPlayersNumber)
+                .Map(dest => dest.ServerType, src => src.ServerType.Value)
+                .Map(dest => dest.Description, src => src.Description);
 
             config.NewConfig<GetGameServersResult, GetGameServersResponse>()
-                .Map(dest => dest, src => src);
+                .Map(dest => dest.GameServers, src => src.GameServers.Adapt<GameServerResponse>());
+                
         }
     }
 }

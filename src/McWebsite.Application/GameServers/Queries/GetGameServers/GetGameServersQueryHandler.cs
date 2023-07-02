@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Persistence;
+using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.GameServer;
 using MediatR;
 using System;
@@ -17,9 +18,13 @@ namespace McWebsite.Application.GameServers.Queries.GetGameServers
         {
             _gameServerRepository = gameServerRepository;
         }
-        public Task<ErrorOr<IEnumerable<GameServer>>> Handle(GetGameServersQuery request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<IEnumerable<GameServer>>> Handle(GetGameServersQuery request, CancellationToken cancellationToken)
         {
-            return (Task<ErrorOr<IEnumerable<GameServer>>>)Enumerable.Empty<GameServer>();
+            await Task.CompletedTask;
+
+            var gameServers = await _gameServerRepository.GetGameServers(request.Page, request.EntriesPerPage);
+
+            return ErrorOrFactory.From(gameServers);
         }
     }
 }

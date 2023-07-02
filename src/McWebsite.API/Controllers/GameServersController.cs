@@ -4,12 +4,12 @@ using McWebsite.Application.GameServers.Queries.GetGameServers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ErrorOr;
 
 namespace McWebsite.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class GameServersController : ControllerBase
+    public class GameServersController : McWebsiteController
     {
         private readonly ISender _mediator;
         private readonly IMapper _mapper;
@@ -24,9 +24,9 @@ namespace McWebsite.API.Controllers
 
             var queryResult = await _mediator.Send(query);
 
-            var result = _mapper.Map<GetGameServersResponse>(queryResult);
-
-            return Ok(result);
+            return queryResult.Match(
+                serversResult => Ok(_mapper.Map<GetGameServersResult>(serversResult)),
+                errors => Problem(errors));
         }
     }
 }
