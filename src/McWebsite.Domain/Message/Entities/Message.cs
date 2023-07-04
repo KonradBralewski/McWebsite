@@ -8,31 +8,31 @@ namespace McWebsite.Domain.MessageModel.Entities
 {
     public sealed class Message : Entity<MessageId>
     {
-        public ConversationId ConversationId { get; }
-        public UserId ReceiverId { get; }
-        public UserId ShipperId { get; }
-        public string Description { get; }
+        public ConversationId ConversationId { get; private set; }
+        public UserId ReceiverId { get; private set; }
+        public UserId ShipperId { get; private set; }
+        public string MessageContent { get; private set; }
 
         private Message(MessageId id,
                         ConversationId conversationId,
                         UserId receiverId,
                         UserId shipperId,
-                        string description) : base(id)
+                        string messageContent) : base(id)
         {
             Id = id;
             ConversationId = conversationId;
             ReceiverId = receiverId;
             ShipperId = shipperId;
-            Description = description;
+            MessageContent = messageContent;
         }
 
-        public static Message Create(Guid conversationId, Guid receiverId, Guid shipperId, string description)
+        public static Message Create(Guid conversationId, Guid receiverId, Guid shipperId, string messageContent)
         {
             return new Message(MessageId.CreateUnique(),
-                               ConversationId.Recreate(receiverId),
-                               UserId.Recreate(receiverId),
-                               UserId.Recreate(shipperId),
-                               description);
+                               ConversationId.Create(receiverId),
+                               UserId.Create(receiverId),
+                               UserId.Create(shipperId),
+                               messageContent);
         }
     }
 }

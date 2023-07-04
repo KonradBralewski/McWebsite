@@ -4,7 +4,7 @@ namespace McWebsite.Domain.InGameEventModel.ValueObjects
 {
     public sealed class InGameEventId : ValueObject
     {
-        public Guid Value { get; }
+        public Guid Value { get; private set; }
 
         private InGameEventId(Guid value)
         {
@@ -16,7 +16,7 @@ namespace McWebsite.Domain.InGameEventModel.ValueObjects
             return new InGameEventId(Guid.NewGuid());
         }
 
-        public static InGameEventId Recreate(Guid id)
+        public static InGameEventId Create(Guid id)
         {
             return new InGameEventId(id);
         }

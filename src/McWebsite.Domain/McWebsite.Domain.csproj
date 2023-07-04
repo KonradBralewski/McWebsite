@@ -4,12 +4,6 @@
     <PackageReference Include="ErrorOr" Version="1.2.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="GameServerReport\Entities\" />
-    <Folder Include="GameServerSubscription\" />
-    <Folder Include="InGameEventOrder\Entites\" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

@@ -10,7 +10,7 @@ namespace McWebsite.Domain.GameServerReport.ValueObjects
 {
     public sealed class GameServerReportId : ValueObject
     {
-        public Guid Value { get; }
+        public Guid Value { get; private set; }
 
         private GameServerReportId(Guid value)
         {
@@ -22,7 +22,7 @@ namespace McWebsite.Domain.GameServerReport.ValueObjects
             return new GameServerReportId(Guid.NewGuid());
         }
 
-        public static GameServerReportId Recreate(Guid id)
+        public static GameServerReportId Create(Guid id)
         {
             return new GameServerReportId(id);
         }

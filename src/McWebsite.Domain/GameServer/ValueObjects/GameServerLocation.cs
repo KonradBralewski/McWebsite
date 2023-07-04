@@ -10,7 +10,7 @@ namespace McWebsite.Domain.GameServer.ValueObjects
 {
     public sealed class GameServerLocation : ValueObject
     {
-        public ServerLocation Value { get; }
+        public ServerLocation Value { get; private set; }
 
         private GameServerLocation(ServerLocation location)
         {

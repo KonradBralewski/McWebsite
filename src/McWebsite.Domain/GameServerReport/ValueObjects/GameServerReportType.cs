@@ -12,7 +12,7 @@ namespace McWebsite.Domain.GameServerReport.ValueObjects
 {
     public sealed class GameServerReportType : ValueObject
     {
-        public ReportType Value { get; }
+        public ReportType Value { get; private set; }
 
         private GameServerReportType(ReportType type)
         {

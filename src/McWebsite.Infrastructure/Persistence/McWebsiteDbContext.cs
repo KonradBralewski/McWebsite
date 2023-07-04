@@ -13,5 +13,11 @@ namespace McWebsite.Infrastructure.Persistence
         public McWebsiteDbContext(DbContextOptions<McWebsiteDbContext> options) : base(options) { }
 
         public DbSet<GameServer> GameServers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(McWebsiteDbContext).Assembly);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace McWebsite.Domain.User.ValueObjects
 {
     public sealed class UserEmail : ValueObject
     {
-        public string Value { get; }
+        public string Value { get; private set; }
 
         private UserEmail(string email)
         {

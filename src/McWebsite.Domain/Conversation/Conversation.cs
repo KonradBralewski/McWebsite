@@ -10,7 +10,7 @@ namespace McWebsite.Domain.Conversation
     {
 
         private readonly List<Message> _messages = new();
-        public Tuple<UserId, UserId> Perfomers { get; }
+        public Tuple<UserId, UserId> Perfomers { get; private set; }
 
         public ReadOnlyCollection<Message> Messages => _messages.AsReadOnly();
         private Conversation(ConversationId id, Tuple<UserId, UserId> performers) : base(id)

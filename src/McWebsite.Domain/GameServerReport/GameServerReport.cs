@@ -13,10 +13,10 @@ namespace McWebsite.Domain.GameServerReport
 {
     public sealed class GameServerReport : AggregateRoot<GameServerReportId>
     {
-        public GameServerId GameServerId { get; }
-        public UserId ReportingUserId { get; }
-        public GameServerReportType ReportType { get; }
-        public string ReportDescription { get; }
+        public GameServerId GameServerId { get; private set; }
+        public UserId ReportingUserId { get; private set; }
+        public GameServerReportType ReportType { get; private set; }
+        public string ReportDescription { get; private set; }
         public GameServerReport(GameServerReportId id,
                                 GameServerId gameServerId,
                                 UserId reportingUserId,
@@ -36,8 +36,8 @@ namespace McWebsite.Domain.GameServerReport
                                               string description)
         {
             return new GameServerReport(GameServerReportId.CreateUnique(),
-                                        GameServerId.Recreate(gameServerId),
-                                        UserId.Recreate(reportingUserId),
+                                        GameServerId.Create(gameServerId),
+                                        UserId.Create(reportingUserId),
                                         GameServerReportType.Create(reportType),
                                         description);
         }

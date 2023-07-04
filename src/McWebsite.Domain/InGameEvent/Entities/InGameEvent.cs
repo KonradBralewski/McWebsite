@@ -9,13 +9,13 @@ namespace McWebsite.Domain.InGameEventModel.Entities
 {
     public sealed class InGameEvent : Entity<InGameEventId>
     {
-        public GameServerId GameServerId { get; }
-        public int InGameId { get; }
-        public InGameEventType InGameEventType { get; }
-        public string Description { get; }
-        public float Price { get; }
+        public GameServerId GameServerId { get; private set; }
+        public int InGameId { get; private set; }
+        public InGameEventType InGameEventType { get; private set; }
+        public string Description { get; private set; }
+        public float Price { get; private set; }
 
-        public DateTime UpdatedDateTime { get; }
+        public DateTime UpdatedDateTime { get; private set; }
 
         private InGameEvent(InGameEventId id,
                             GameServerId gameServerId,
@@ -38,7 +38,7 @@ namespace McWebsite.Domain.InGameEventModel.Entities
                                          float price)
         {
             return new InGameEvent(InGameEventId.CreateUnique(),
-                                   GameServerId.Recreate(gameServerId),
+                                   GameServerId.Create(gameServerId),
                                    inGameId,
                                    InGameEventType.Create(eventType),
                                    description,

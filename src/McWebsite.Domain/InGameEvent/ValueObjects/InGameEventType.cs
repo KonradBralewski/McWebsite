@@ -12,7 +12,7 @@ namespace McWebsite.Domain.InGameEvent.ValueObjects
 {
     public sealed class InGameEventType : ValueObject
     {
-        public EventType Value { get; }
+        public EventType Value { get; private set; }
 
         private InGameEventType(EventType type)
         {

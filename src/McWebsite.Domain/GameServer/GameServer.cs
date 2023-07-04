@@ -12,12 +12,12 @@ namespace McWebsite.Domain.GameServer
 {
     public sealed class GameServer : AggregateRoot<GameServerId>
     {
-        public int MaximumPlayersNumber { get; }
-        public int CurrentPlayersNumber { get; }
-        public GameServerLocation ServerLocation { get; }
-        public GameServerType ServerType { get; }
-        public string Description { get; }
-        public DateTime UpdatedDateTime { get; }
+        public int MaximumPlayersNumber { get; private set; }
+        public int CurrentPlayersNumber { get; private set; }
+        public GameServerLocation ServerLocation { get; private set; }
+        public GameServerType ServerType { get; private set; }
+        public string Description { get; private set; }
+        public DateTime UpdatedDateTime { get; private set; }
         private GameServer(GameServerId id,
                            int maximumPlayersNumber,
                            int currentPlayersNumber,

@@ -10,7 +10,7 @@ namespace McWebsite.Domain.GameServer.ValueObjects
 {
     public sealed class GameServerType : ValueObject
     {
-        public ServerType Value { get; }
+        public ServerType Value { get; private set; }
 
         private GameServerType(ServerType type)
         {

@@ -9,7 +9,7 @@ namespace McWebsite.Domain.User.ValueObjects
 {
     public sealed class UserId : ValueObject
     {
-        public Guid Value { get; }
+        public Guid Value { get; private set; }
 
         private UserId(Guid value)
         {
@@ -21,7 +21,7 @@ namespace McWebsite.Domain.User.ValueObjects
             return new UserId(Guid.NewGuid());
         }
 
-        public static UserId Recreate(Guid id)
+        public static UserId Create(Guid id)
         {
             return new UserId(id);
         }

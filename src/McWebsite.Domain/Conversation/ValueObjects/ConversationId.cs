@@ -1,15 +1,10 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace McWebsite.Domain.Conversation.ValueObjects
 {
     public sealed class ConversationId : ValueObject
     {
-        public Guid Value { get; }
+        public Guid Value { get; private set; }
 
         private ConversationId(Guid value)
         {
@@ -21,7 +16,7 @@ namespace McWebsite.Domain.Conversation.ValueObjects
             return new ConversationId(Guid.NewGuid());
         }
 
-        public static ConversationId Recreate(Guid id)
+        public static ConversationId Create(Guid id)
         {
             return new ConversationId(id);
         }

@@ -10,9 +10,9 @@ namespace McWebsite.Domain.User
 {
     public sealed class User : AggregateRoot<UserId>
     {
-        public MinecraftAccountId MinecraftAccountId { get; }
-        public UserEmail Email { get; }
-        public UserPassword Password { get; }
+        public MinecraftAccountId MinecraftAccountId { get; private set; }
+        public UserEmail Email { get; private set; }
+        public UserPassword Password { get; private set; }
         private User(UserId id,
                     MinecraftAccountId minecraftAccountId,
                     UserEmail email,
@@ -25,7 +25,7 @@ namespace McWebsite.Domain.User
         }
 
                     
-        public static User Create(int minecraftAccountId,
+        public static User Create(int? minecraftAccountId,
                                   string email,
                                   string password)
         {

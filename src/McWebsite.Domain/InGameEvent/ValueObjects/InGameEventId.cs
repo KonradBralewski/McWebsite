@@ -4,7 +4,7 @@ namespace McWebsite.Domain.InGameEventOrder.ValueObjects
 {
     public sealed class InGameEventOrderId : ValueObject
     {
-        public Guid Value { get; }
+        public Guid Value { get; private set; }
 
         private InGameEventOrderId(Guid value)
         {
@@ -15,6 +15,13 @@ namespace McWebsite.Domain.InGameEventOrder.ValueObjects
         {
             return new InGameEventOrderId(Guid.NewGuid());
         }
+
+        public static InGameEventOrderId Create(Guid value)
+        {
+            return new InGameEventOrderId(value);
+        }
+
+
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
