@@ -17,29 +17,39 @@ namespace McWebsite.Domain.GameServerReport
         public UserId ReportingUserId { get; private set; }
         public GameServerReportType ReportType { get; private set; }
         public string ReportDescription { get; private set; }
+        public DateTime ReportDate { get; private set; }
+        public DateTime UpdatedDateTime { get; private set; }
         public GameServerReport(GameServerReportId id,
                                 GameServerId gameServerId,
                                 UserId reportingUserId,
                                 GameServerReportType reportType,
-                                string reportDescription) : base(id)
+                                string reportDescription,
+                                DateTime reportDate,
+                                DateTime updatedDateTime) : base(id)
         {
             Id = id;
             GameServerId = gameServerId;
             ReportingUserId = reportingUserId;
             ReportType = reportType;
             ReportDescription = reportDescription;
+            ReportDate = reportDate;
+            UpdatedDateTime = updatedDateTime;
         }
         public static GameServerReport Create(Guid gameServerId,
                                               Guid reportingUserId,
                                               ReportType reportType,
                                               string reason,
-                                              string description)
+                                              string description,
+                                              DateTime reportDate,
+                                              DateTime updatedDateTime)
         {
             return new GameServerReport(GameServerReportId.CreateUnique(),
                                         GameServerId.Create(gameServerId),
                                         UserId.Create(reportingUserId),
                                         GameServerReportType.Create(reportType),
-                                        description);
+                                        description, 
+                                        reportDate, 
+                                        updatedDateTime);
         }
     }
 }

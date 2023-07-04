@@ -4,14 +4,15 @@
 ```json
 {
 	"Id" : "",
-	"Performers" : {
-		"First" : "",
-		"Second" : ""
+	"Participants" : {
+		"FirstParticipant" : "",
+		"SecondParticipant" : ""
 	},
-	"Messages": {
-		"Message" : {...},
-		"Message" : {...},
+	"MessageIds": {
+		"Id" : 0000-0000-0000-0000,
+		"Id" : 1111-1111-1111-1111,
 	},
+	"CreatedDateTime" : "",
 	"UpdatedDateTime" : ""
 }
 ```

@@ -1,4 +1,5 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
+using McWebsite.Domain.Conversation.ValueObjects;
 using McWebsite.Domain.GameServer.Enums;
 using McWebsite.Domain.GameServer.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
@@ -17,6 +18,7 @@ namespace McWebsite.Domain.GameServer
         public GameServerLocation ServerLocation { get; private set; }
         public GameServerType ServerType { get; private set; }
         public string Description { get; private set; }
+        public DateTime CreatedDateTime { get; private set; }
         public DateTime UpdatedDateTime { get; private set; }
         private GameServer(GameServerId id,
                            int maximumPlayersNumber,
@@ -24,6 +26,7 @@ namespace McWebsite.Domain.GameServer
                            GameServerLocation location,
                            GameServerType type,
                            string description,
+                           DateTime createdDateTime,
                            DateTime updatedDateTime) : base(id)
         {
             MaximumPlayersNumber = maximumPlayersNumber;
@@ -31,6 +34,7 @@ namespace McWebsite.Domain.GameServer
             ServerLocation = location;
             ServerType = type;
             Description = description;
+            CreatedDateTime = createdDateTime;
             UpdatedDateTime = updatedDateTime;
         }
 
@@ -39,6 +43,7 @@ namespace McWebsite.Domain.GameServer
                                         ServerLocation location,
                                         ServerType type,
                                         string description,
+                                        DateTime createdDateTime,
                                         DateTime updatedDateTime)
         {
             return new GameServer(GameServerId.CreateUnique(),
@@ -47,7 +52,19 @@ namespace McWebsite.Domain.GameServer
                 GameServerLocation.Create(location),
                 GameServerType.Create(type),
                 description,
+                createdDateTime,
                 updatedDateTime);
         }
+
+        /// <summary>
+        /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
+        /// </summary>
+#pragma warning disable CS8618
+        private GameServer(GameServerId id) : base(id)
+        {
+
+        }
+
+#pragma warning restore CS8618
     }
 }

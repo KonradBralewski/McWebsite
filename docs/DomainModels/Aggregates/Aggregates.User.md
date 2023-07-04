@@ -7,6 +7,7 @@
 	"MinecraftAccountId" : "",
 	"Email": "",
 	"Password": "",
+	"CreatedDateTime" : "",
 	"UpdatedDateTime" : ""
 }
 ```

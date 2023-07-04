@@ -7,9 +7,8 @@
 	"ConversationId" : "",
 	"ReceiverId": "",
 	"ShipperId": "",
-	"Description" : "",
+	"MessageContent" : "",
 	"SentDateTime" : "",
-	"UpdatedDateTime" : "",
-	"UpdatedBy" : ""
+	"UpdatedDateTime" : ""
 }
 ```

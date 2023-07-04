@@ -8,6 +8,7 @@
 	"ServerLocation" : "",
 	"ServerType" : "",
 	"Description" : "",
+	"CreatedDateTime" : "",
 	"UpdatedDateTime" : ""
 }
 ```

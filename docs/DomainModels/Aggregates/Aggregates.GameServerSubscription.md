@@ -8,6 +8,7 @@
 	"BuyingPlayerId" : "",
 	"SubscriptionDescription" : "",
 	"SubscriptionStartDate" : "",
-	"SubscriptionEndDate" : ""
+	"SubscriptionEndDate" : "",
+	"UpdatedDateTime" : ""
 }
 ```

@@ -35,6 +35,12 @@ namespace McWebsite.Infrastructure.Persistence.Configurations
                .HasConversion(
                boughtInGameEventId => boughtInGameEventId.Value,
                value => InGameEventId.Create(value));
+
+            builder.Property(x => x.OrderDate)
+                .IsRequired();
+
+            builder.Property(x => x.UpdatedDateTime)
+                .IsRequired();
         }
     }
 }

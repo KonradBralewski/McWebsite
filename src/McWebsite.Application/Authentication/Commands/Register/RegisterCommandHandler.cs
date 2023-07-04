@@ -28,7 +28,7 @@ namespace McWebsite.Application.Authentication.Commands.Register
 
             // Create user (generate unique Id)
 
-            var user = User.Create(null, command.Email, command.Password);
+            var user = User.Create(null, command.Email, command.Password, DateTime.UtcNow, DateTime.UtcNow);
 
             _userRepository.AddUser(user);
 

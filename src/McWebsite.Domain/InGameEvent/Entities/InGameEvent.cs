@@ -44,5 +44,16 @@ namespace McWebsite.Domain.InGameEventModel.Entities
                                    description,
                                    price);
         }
+
+        /// <summary>
+        /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
+        /// </summary>
+#pragma warning disable CS8618
+        private InGameEvent(InGameEventId id) : base(id)
+        {
+
+        }
+
+#pragma warning restore CS8618
     }
 }

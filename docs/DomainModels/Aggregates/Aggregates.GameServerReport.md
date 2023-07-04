@@ -5,8 +5,10 @@
 {
 	"Id" : "",
 	"GameServerId" : "",
-	"ReportingPlayerId" : "",
+	"ReportingUserId" : "",
 	"ReportType" : "",
 	"ReportDescription" : "",
+	"ReportDate" : "",
+	"UpdatedDateTime" : ""
 }
 ```

@@ -46,6 +46,9 @@ namespace McWebsite.Infrastructure.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(100);
 
+            builder.Property(x => x.CreatedDateTime)
+                .IsRequired();
+
             builder.Property(x => x.UpdatedDateTime)
                 .IsRequired();
         }

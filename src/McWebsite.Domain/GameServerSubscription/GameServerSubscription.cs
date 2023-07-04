@@ -1,14 +1,8 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.GameServer.ValueObjects;
-using McWebsite.Domain.GameServerReport.Enums;
-using McWebsite.Domain.GameServerReport.ValueObjects;
 using McWebsite.Domain.GameServerSubscription.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace McWebsite.Domain.GameServerSubscription
 {
@@ -18,15 +12,17 @@ namespace McWebsite.Domain.GameServerSubscription
         public GameServerId GameServerId { get; private set; }
         public UserId BuyingPlayerId { get; private set; }
         public string SubscriptionDescription { get; private set; }
-
         public DateTime SubscriptionStartDate { get; private set; }
         public DateTime SubscriptionEndDate { get; private set; }
+
+        public DateTime UpdatedDateTime { get; private set; }
         public GameServerSubscription(GameServerSubscriptionId id,
                                 GameServerId gameServerId,
                                 UserId buyingPlayerId,
                                 string subscriptionDescription,
                                 DateTime subscriptionStartDate,
-                                DateTime subscriptionEndDate) : base(id)
+                                DateTime subscriptionEndDate,
+                                DateTime updatedDateTime) : base(id)
         {
             Id = id;
             GameServerId = gameServerId;
@@ -34,19 +30,22 @@ namespace McWebsite.Domain.GameServerSubscription
             SubscriptionDescription = subscriptionDescription;
             SubscriptionStartDate = subscriptionStartDate;
             SubscriptionEndDate = subscriptionEndDate;
+            UpdatedDateTime = updatedDateTime;
         }
         public static GameServerSubscription Create(Guid gameServerId,
                                 Guid buyingPlayerId,
                                 string subscriptionDescription,
                                 DateTime subscriptionStartDate,
-                                DateTime subscriptionEndDate)
+                                DateTime subscriptionEndDate,
+                                DateTime updatedDateTime)
         {
             return new GameServerSubscription(GameServerSubscriptionId.CreateUnique(),
                                         GameServerId.Create(gameServerId),
                                         UserId.Create(buyingPlayerId),
                                         subscriptionDescription,
                                         subscriptionStartDate,
-                                        subscriptionEndDate);
+                                        subscriptionEndDate,
+                                        updatedDateTime);
         }
     }
 }
