@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Domain.GameServerReport.ValueObjects
 {
-    public sealed class GameServerReportId : ValueObject
+    public sealed class GameServerReportId : AggregateRootId<Guid>
     {
-        public Guid Value { get; private set; }
+        public override Guid Value { get; protected set; }
 
         private GameServerReportId(Guid value)
         {

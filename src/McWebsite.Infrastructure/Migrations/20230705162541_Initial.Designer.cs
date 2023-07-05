@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace McWebsite.Infrastructure.Migrations
 {
     [DbContext(typeof(McWebsiteDbContext))]
-    [Migration("20230704100407_Initial")]
+    [Migration("20230705162541_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -137,7 +137,7 @@ namespace McWebsite.Infrastructure.Migrations
                     b.ToTable("GameServerSubscriptions", (string)null);
                 });
 
-            modelBuilder.Entity("McWebsite.Domain.InGameEventModel.Entities.InGameEvent", b =>
+            modelBuilder.Entity("McWebsite.Domain.InGameEvent.Entities.InGameEvent", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");

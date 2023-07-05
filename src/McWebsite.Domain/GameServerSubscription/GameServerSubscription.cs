@@ -6,7 +6,7 @@ using McWebsite.Domain.User.ValueObjects;
 
 namespace McWebsite.Domain.GameServerSubscription
 {
-    public sealed class GameServerSubscription : AggregateRoot<GameServerSubscriptionId>
+    public sealed class GameServerSubscription : AggregateRoot<GameServerSubscriptionId, Guid>
     {
 
         public GameServerId GameServerId { get; private set; }
@@ -47,5 +47,16 @@ namespace McWebsite.Domain.GameServerSubscription
                                         subscriptionEndDate,
                                         updatedDateTime);
         }
+
+        /// <summary>
+        /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
+        /// </summary>
+#pragma warning disable CS8618
+        private GameServerSubscription()
+        {
+
+        }
+
+#pragma warning restore CS8618
     }
 }

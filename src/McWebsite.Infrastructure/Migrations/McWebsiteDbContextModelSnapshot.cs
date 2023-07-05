@@ -134,7 +134,7 @@ namespace McWebsite.Infrastructure.Migrations
                     b.ToTable("GameServerSubscriptions", (string)null);
                 });
 
-            modelBuilder.Entity("McWebsite.Domain.InGameEventModel.Entities.InGameEvent", b =>
+            modelBuilder.Entity("McWebsite.Domain.InGameEvent.Entities.InGameEvent", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");

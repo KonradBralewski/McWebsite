@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Domain.GameServerReport
 {
-    public sealed class GameServerReport : AggregateRoot<GameServerReportId>
+    public sealed class GameServerReport : AggregateRoot<GameServerReportId, Guid>
     {
         public GameServerId GameServerId { get; private set; }
         public UserId ReportingUserId { get; private set; }
@@ -51,5 +51,18 @@ namespace McWebsite.Domain.GameServerReport
                                         reportDate, 
                                         updatedDateTime);
         }
+
+
+        /// <summary>
+        /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
+        /// </summary>
+#pragma warning disable CS8618
+        private GameServerReport()
+        {
+
+        }
+
+#pragma warning restore CS8618
+
     }
 }

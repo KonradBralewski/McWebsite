@@ -2,9 +2,9 @@
 
 namespace McWebsite.Domain.Conversation.ValueObjects
 {
-    public sealed class ConversationId : ValueObject
+    public sealed class ConversationId : AggregateRootId<Guid>
     {
-        public Guid Value { get; private set; }
+        public override Guid Value { get; protected set; }
 
         private ConversationId(Guid value)
         {

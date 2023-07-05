@@ -2,10 +2,9 @@
 using McWebsite.Domain.GameServer.ValueObjects;
 using McWebsite.Domain.InGameEvent.Enums;
 using McWebsite.Domain.InGameEvent.ValueObjects;
-using McWebsite.Domain.InGameEventModel.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
 
-namespace McWebsite.Domain.InGameEventModel.Entities
+namespace McWebsite.Domain.InGameEvent.Entities
 {
     public sealed class InGameEvent : Entity<InGameEventId>
     {

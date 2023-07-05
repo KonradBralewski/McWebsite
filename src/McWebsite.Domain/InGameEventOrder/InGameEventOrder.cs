@@ -1,11 +1,11 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
-using McWebsite.Domain.InGameEventModel.ValueObjects;
+using McWebsite.Domain.InGameEvent.ValueObjects;
 using McWebsite.Domain.InGameEventOrder.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
 
 namespace McWebsite.Domain.InGameEventOrder
 {
-    public sealed class InGameEventOrder : AggregateRoot<InGameEventOrderId>
+    public sealed class InGameEventOrder : AggregateRoot<InGameEventOrderId, Guid>
     { 
         public UserId BuyingUserId { get; private set; }
         public InGameEventId BoughtInGameEventId { get; private set; }
@@ -36,5 +36,16 @@ namespace McWebsite.Domain.InGameEventOrder
                 orderDate,
                 updatedDateTime);
         }
+
+        /// <summary>
+        /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
+        /// </summary>
+#pragma warning disable CS8618
+        private InGameEventOrder()
+        {
+
+        }
+
+#pragma warning restore CS8618
     }
 }

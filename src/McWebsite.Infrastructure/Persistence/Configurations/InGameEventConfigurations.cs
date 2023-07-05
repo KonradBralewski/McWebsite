@@ -1,7 +1,6 @@
 ﻿using McWebsite.Domain.GameServer.ValueObjects;
+using McWebsite.Domain.InGameEvent.Entities;
 using McWebsite.Domain.InGameEvent.ValueObjects;
-using McWebsite.Domain.InGameEventModel.Entities;
-using McWebsite.Domain.InGameEventModel.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,4 +1,4 @@
-﻿using McWebsite.Domain.InGameEventModel.ValueObjects;
+﻿using McWebsite.Domain.InGameEvent.ValueObjects;
 using McWebsite.Domain.InGameEventOrder;
 using McWebsite.Domain.InGameEventOrder.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;

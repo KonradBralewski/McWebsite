@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Domain.User
 {
-    public sealed class User : AggregateRoot<UserId>
+    public sealed class User : AggregateRoot<UserId, Guid>
     {
         public MinecraftAccountId MinecraftAccountId { get; private set; }
         public UserEmail Email { get; private set; }
@@ -45,6 +45,17 @@ namespace McWebsite.Domain.User
                             createdDateTime,
                             updatedDateTime);
         }
+
+        /// <summary>
+        /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
+        /// </summary>
+#pragma warning disable CS8618
+        private User()
+        {
+
+        }
+
+#pragma warning restore CS8618
 
     }
 }

@@ -1,24 +1,24 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 
-namespace McWebsite.Domain.InGameEventOrder.ValueObjects
+namespace McWebsite.Domain.InGameEvent.ValueObjects
 {
-    public sealed class InGameEventOrderId : ValueObject
+    public sealed class InGameEventId : AggregateRootId<Guid>
     {
-        public Guid Value { get; private set; }
+        public override Guid Value { get; protected set; }
 
-        private InGameEventOrderId(Guid value)
+        private InGameEventId(Guid value)
         {
             Value = value;
         }
 
-        public static InGameEventOrderId CreateUnique()
+        public static InGameEventId CreateUnique()
         {
-            return new InGameEventOrderId(Guid.NewGuid());
+            return new InGameEventId(Guid.NewGuid());
         }
 
-        public static InGameEventOrderId Create(Guid value)
+        public static InGameEventId Create(Guid value)
         {
-            return new InGameEventOrderId(value);
+            return new InGameEventId(value);
         }
 
 

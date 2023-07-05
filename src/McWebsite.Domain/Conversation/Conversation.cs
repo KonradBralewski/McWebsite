@@ -7,7 +7,7 @@ using McWebsite.Domain.MessageModel.ValueObjects;
 
 namespace McWebsite.Domain.Conversation
 {
-    public sealed class Conversation : AggregateRoot<ConversationId>
+    public sealed class Conversation : AggregateRoot<ConversationId, Guid>
     {
 
         private readonly List<MessageId> _messageIds = new();
@@ -43,7 +43,7 @@ namespace McWebsite.Domain.Conversation
         /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
         /// </summary>
 #pragma warning disable CS8618
-        private Conversation(ConversationId id) : base(id)
+        private Conversation()
         {
 
         }

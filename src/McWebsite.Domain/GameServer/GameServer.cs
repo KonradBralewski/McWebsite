@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Domain.GameServer
 {
-    public sealed class GameServer : AggregateRoot<GameServerId>
+    public sealed class GameServer : AggregateRoot<GameServerId, Guid>
     {
         public int MaximumPlayersNumber { get; private set; }
         public int CurrentPlayersNumber { get; private set; }
@@ -60,7 +60,7 @@ namespace McWebsite.Domain.GameServer
         /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
         /// </summary>
 #pragma warning disable CS8618
-        private GameServer(GameServerId id) : base(id)
+        private GameServer()
         {
 
         }
