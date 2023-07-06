@@ -36,7 +36,7 @@ Response
 
 ## GameServers
 
-### GetAllGameServers
+### API/GameServers?page=1&entriesPerPage=15
 ```json
 Response
 {
@@ -50,10 +50,21 @@ Response
                   "ServerType" : "PVE",
                   "Description" "Nothing else matters..."
                   
-              ],s
+              ],
               [
               ...
               ]
         ]
+}
+```
+### API/GameServers/(gameServerId)
+```json
+Response
+{
+        "Id" : 0000-0000-0000-0000,
+        "ServerLocation" : "EU",
+        "MaximumPlayersNumber" : 50,
+        "ServerType" : "PVE",
+        "Description" "Nothing else matters..."
 }
 ```

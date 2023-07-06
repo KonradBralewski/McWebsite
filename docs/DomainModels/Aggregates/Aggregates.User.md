@@ -1,4 +1,5 @@
 ```csharp
+User Create(...);
 ```
 
 ```json

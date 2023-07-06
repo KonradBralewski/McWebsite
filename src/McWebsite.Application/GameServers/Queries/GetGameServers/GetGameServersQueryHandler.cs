@@ -11,20 +11,20 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServers.Queries.GetGameServers
 {
-    internal sealed class GetGameServersQueryHandler : IRequestHandler<GetGameServersQuery, ErrorOr<IEnumerable<GameServer>>>
+    internal sealed class GetGameServersQueryHandler : IRequestHandler<GetGameServersQuery, ErrorOr<GetGameServersResult>>
     {
         private readonly IGameServerRepository _gameServerRepository;
         public GetGameServersQueryHandler(IGameServerRepository gameServerRepository)
         {
             _gameServerRepository = gameServerRepository;
         }
-        public async Task<ErrorOr<IEnumerable<GameServer>>> Handle(GetGameServersQuery request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<GetGameServersResult>> Handle(GetGameServersQuery query, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
 
-            var gameServers = await _gameServerRepository.GetGameServers(request.Page, request.EntriesPerPage);
+            var gameServers = await _gameServerRepository.GetGameServers(query.Page, query.EntriesPerPage);
 
-            return ErrorOrFactory.From(gameServers);
+            return new GetGameServersResult(gameServers);
         }
     }
 }

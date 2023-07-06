@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServers.Queries.GetGameServers
 {
-    public sealed record GetGameServersQuery(int Page, int EntriesPerPage) : IRequest<ErrorOr<IEnumerable<GameServer>>>;
+    public sealed record GetGameServersQuery(int Page, int EntriesPerPage) : IRequest<ErrorOr<GetGameServersResult>>;
 }

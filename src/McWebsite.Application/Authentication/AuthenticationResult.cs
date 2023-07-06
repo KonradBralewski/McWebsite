@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Application.Authentication.Commands
+namespace McWebsite.Application.Authentication
 {
     public sealed record AuthenticationResult(User User, string Token);
 }

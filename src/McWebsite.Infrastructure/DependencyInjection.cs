@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using McWebsite.Infrastructure.Persistence.Repositories;
+using McWebsite.Infrastructure.Persistence.Interceptors;
 
 namespace McWebsite.Infrastructure
 {
@@ -19,7 +20,7 @@ namespace McWebsite.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
         {
-            services.AddPersistance();
+            services.AddPersistance(configuration);
             services.AddAuth(configuration);
 
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
@@ -28,11 +29,12 @@ namespace McWebsite.Infrastructure
             return services;
         }
 
-        public static IServiceCollection AddPersistance(this IServiceCollection services)
+        public static IServiceCollection AddPersistance(this IServiceCollection services, ConfigurationManager configuration)
         {
-            services.AddDbContext<McWebsiteDbContext>(options => 
-            options.UseSqlServer());
+            services.AddDbContext<McWebsiteDbContext>(options =>
+            options.UseSqlServer(configuration["ConnectionString"]));
 
+            services.AddScoped<PublishDomainEventsInterceptor>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IGameServerRepository, GameServerRepository>();
 

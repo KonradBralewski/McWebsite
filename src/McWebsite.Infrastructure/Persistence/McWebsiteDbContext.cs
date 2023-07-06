@@ -1,4 +1,6 @@
-﻿using McWebsite.Domain.GameServer;
+﻿using McWebsite.Domain.Common.DomainBase;
+using McWebsite.Domain.GameServer;
+using McWebsite.Infrastructure.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,14 +12,26 @@ namespace McWebsite.Infrastructure.Persistence
 {
     public sealed class McWebsiteDbContext : DbContext
     {
-        public McWebsiteDbContext(DbContextOptions<McWebsiteDbContext> options) : base(options) { }
+        private readonly PublishDomainEventsInterceptor _publishDomainEventsInterceptor;
+        public McWebsiteDbContext(DbContextOptions<McWebsiteDbContext> options, PublishDomainEventsInterceptor publishDomainEventsInterceptor) : base(options)
+        {
+            _publishDomainEventsInterceptor = publishDomainEventsInterceptor;
+        }
 
         public DbSet<GameServer> GameServers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(McWebsiteDbContext).Assembly);
+            modelBuilder
+                .Ignore<List<IDomainEvent>>()
+                .ApplyConfigurationsFromAssembly(typeof(McWebsiteDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.AddInterceptors(_publishDomainEventsInterceptor);
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

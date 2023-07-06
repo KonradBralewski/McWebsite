@@ -1,4 +1,5 @@
 ```csharp
+GameServerSubscription Create(...);
 ```
 
 ```json

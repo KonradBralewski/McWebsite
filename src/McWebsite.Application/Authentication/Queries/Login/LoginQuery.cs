@@ -1,5 +1,4 @@
 ﻿using ErrorOr;
-using McWebsite.Application.Authentication.Commands;
 using MediatR;
 using System;
 using System.Collections.Generic;

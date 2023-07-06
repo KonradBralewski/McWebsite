@@ -4,7 +4,6 @@ using McWebsite.Application.Common.Interfaces.Persistence;
 using McWebsite.Domain.User;
 using MediatR;
 using McWebsite.Domain.Common.Errors;
-using McWebsite.Application.Authentication.Commands;
 
 namespace McWebsite.Application.Authentication.Queries.Login
 {

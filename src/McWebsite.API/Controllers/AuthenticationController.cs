@@ -1,12 +1,12 @@
 ﻿using ErrorOr;
 using McWebsite.API.Contracts.Auth;
-using McWebsite.Application.Authentication.Commands;
 using McWebsite.Application.Authentication.Commands.Register;
 using McWebsite.Application.Authentication.Queries.Login;
 using MediatR;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using MapsterMapper;
+using McWebsite.Application.Authentication;
 
 namespace McWebsite.API.Controllers
 {

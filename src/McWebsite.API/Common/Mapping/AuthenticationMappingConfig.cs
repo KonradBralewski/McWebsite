@@ -1,6 +1,6 @@
 ﻿using Mapster;
 using McWebsite.API.Contracts.Auth;
-using McWebsite.Application.Authentication.Commands;
+using McWebsite.Application.Authentication;
 
 namespace McWebsite.API.Common.Mapping
 {

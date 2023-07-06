@@ -1,4 +1,5 @@
 ```csharp
+GameServerReport Create(...);
 ```
 
 ```json
