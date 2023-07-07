@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ErrorOr;
 using McWebsite.Application.GameServers.Queries.GetGameServer;
+using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
 
 namespace McWebsite.API.Controllers
 {
@@ -44,6 +45,19 @@ namespace McWebsite.API.Controllers
             return queryResult.Match(
                 serversResult => Ok(_mapper.Map<GetGameServersResponse>(serversResult)),
                 errors => Problem(errors));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateGameServerAsync([FromBody]CreateGameServerRequest request)
+        {
+            var command = _mapper.Map<CreateGameServerCommand>(request);
+
+            var commandResult = await _mediator.Send(command);
+
+            return commandResult.Match(
+                serverResult => Ok(_mapper.Map<CreateGameServerResponse>(serverResult)),
+                errors => Problem(errors));
+
         }
 
     }

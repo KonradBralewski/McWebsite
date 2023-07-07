@@ -1,4 +1,6 @@
-﻿using McWebsite.Application.Common.Interfaces.Persistence;
+﻿using ErrorOr;
+using McWebsite.Application.Common.Interfaces.Persistence;
+using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.GameServer;
 using McWebsite.Domain.GameServer.ValueObjects;
 using McWebsite.Domain.User;
@@ -23,17 +25,29 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<GameServer>> GetGameServers(int page, int entriesPerPage)
         {
-            await Task.CompletedTask;
-            return _dbContext.GameServers.Skip(page * entriesPerPage).Take(entriesPerPage);
+            return await _dbContext.GameServers
+                .Skip(page * entriesPerPage)
+                .Take(entriesPerPage)
+                .OrderByDescending(p =>p.CreatedDateTime)
+                .ToListAsync();
         }
         public async Task<GameServer> GetGameServer(GameServerId gameServerId)
         {
             return await _dbContext.GameServers.FirstOrDefaultAsync(gs => gs.Id == gameServerId);
         }
 
-        public Task<GameServer> CreateGameServer(GameServer gameServer)
+        public async Task<ErrorOr<GameServer>> CreateGameServer(GameServer gameServer)
         {
-            throw new NotImplementedException();
+            _dbContext.GameServers.Add(gameServer);
+
+            int result = await _dbContext.SaveChangesAsync();
+
+            if(result == 0)
+            {
+                return Errors.Persistence.UnitCreationError;
+            }
+
+            return gameServer;
         }
 
         public Task DeleteGameServer(GameServer gameServer)

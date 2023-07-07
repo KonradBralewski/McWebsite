@@ -71,14 +71,11 @@ namespace McWebsite.Infrastructure
         public static IServiceCollection ConfigureSerilog(this IServiceCollection services, ConfigurationManager configuration)
         {
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel
-                    .Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-                .MinimumLevel
-                    .Information()
-                .WriteTo
-                    .Console()
-                .WriteTo
-                    .MSSqlServer(
+                .MinimumLevel.Information()
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
+                .WriteTo.Console()
+                .WriteTo.MSSqlServer(
                     connectionString: configuration["ConnectionString"],
                     sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions
                     {
@@ -86,10 +83,8 @@ namespace McWebsite.Infrastructure
                         AutoCreateSqlTable = true
                     }
                     )
-                .Enrich
-                    .WithExceptionDetails()
-                .Enrich
-                    .FromLogContext()
+                .Enrich.WithExceptionDetails()
+                .Enrich.FromLogContext()
                 .CreateLogger();
 
             return services;

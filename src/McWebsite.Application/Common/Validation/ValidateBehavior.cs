@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Application.Authentication.Commands.Common
+namespace McWebsite.Application.Common.Validation
 {
-    internal sealed class ValidateBehavior<TRequest, TResponse> : 
+    internal sealed class ValidateBehavior<TRequest, TResponse> :
         IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse> where TResponse : IErrorOr
 
     {
@@ -23,14 +23,14 @@ namespace McWebsite.Application.Authentication.Commands.Common
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
-            if(_validator is null)
+            if (_validator is null)
             {
                 return await next();
             }
 
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
-            if(validationResult.IsValid)
+            if (validationResult.IsValid)
             {
                 return await next();
             }

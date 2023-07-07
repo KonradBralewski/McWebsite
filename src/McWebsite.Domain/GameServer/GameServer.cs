@@ -29,6 +29,7 @@ namespace McWebsite.Domain.GameServer
                            DateTime createdDateTime,
                            DateTime updatedDateTime) : base(id)
         {
+            Id = id;
             MaximumPlayersNumber = maximumPlayersNumber;
             CurrentPlayersNumber = currentPlayersNumber;
             ServerLocation = location;

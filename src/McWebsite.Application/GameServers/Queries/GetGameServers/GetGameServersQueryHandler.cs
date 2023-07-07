@@ -20,8 +20,6 @@ namespace McWebsite.Application.GameServers.Queries.GetGameServers
         }
         public async Task<ErrorOr<GetGameServersResult>> Handle(GetGameServersQuery query, CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
-
             var gameServers = await _gameServerRepository.GetGameServers(query.Page, query.EntriesPerPage);
 
             return new GetGameServersResult(gameServers);

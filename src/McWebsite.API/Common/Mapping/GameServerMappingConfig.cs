@@ -16,13 +16,16 @@ namespace McWebsite.API.Common.Mapping
 
             config.NewConfig<GameServer, GetGameServerResponse>()
                 .Map(dest => dest.Id, src => src.Id.Value)
-                .Map(dest => dest.ServerLocation, src => src.ServerLocation.Value)
                 .Map(dest => dest.MaximumPlayersNumber, src => src.MaximumPlayersNumber)
-                .Map(dest => dest.ServerType, src => src.ServerType.Value)
-                .Map(dest => dest.Description, src => src.Description);
+                .Map(dest => dest.CurrentPlayersNumber, src => src.CurrentPlayersNumber)
+                .Map(dest => dest.ServerLocation, src => src.ServerLocation.Value.ToString())
+                .Map(dest => dest.ServerType, src => src.ServerType.Value.ToString())
+                .Map(dest => dest.Description, src => src.Description)
+                .MapToConstructor(true);
 
-            config.NewConfig<GetGameServersResponse, GetGameServersResult>()
-                .Map(dest => dest.GameServers, src => src.GameServers.Adapt<GetGameServerResponse>());
+            config.NewConfig<GetGameServersResult, GetGameServersResponse>()
+                .Map(dest => dest.GameServers, src => src.GameServers.Select(gs=>gs.Adapt<GetGameServerResponse>()))
+                .MapToConstructor(true);
 
 
             config.NewConfig<Guid, GetGameServerQuery>()

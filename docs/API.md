@@ -45,11 +45,12 @@ Response
             "GameServer" : 
               [
                   "Id" : 0000-0000-0000-0000,
-                  "ServerLocation" : "EU",
                   "MaximumPlayersNumber" : 50,
+                  "CurrentPlayersNumber" : 4,
+                  "ServerLocation" : "EU",
                   "ServerType" : "PVE",
-                  "Description" "Nothing else matters..."
-                  
+                  "Description" : "Nothing else matters..."
+               
               ],
               [
               ...
@@ -62,9 +63,10 @@ Response
 Response
 {
         "Id" : 0000-0000-0000-0000,
-        "ServerLocation" : "EU",
         "MaximumPlayersNumber" : 50,
+        "CurrentPlayersNumber" : 4,
+        "ServerLocation" : "EU",
         "ServerType" : "PVE",
-        "Description" "Nothing else matters..."
+        "Description" : "Nothing else matters..."
 }
 ```

@@ -1,4 +1,5 @@
-﻿using McWebsite.Domain.GameServer;
+﻿using ErrorOr;
+using McWebsite.Domain.GameServer;
 using McWebsite.Domain.GameServer.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace McWebsite.Application.Common.Interfaces.Persistence
     {
         Task<IEnumerable<GameServer>> GetGameServers(int page, int entriesPerPage);
         Task<GameServer> GetGameServer(GameServerId gameServerId);
-        Task<GameServer> CreateGameServer(GameServer gameServer);
+        Task<ErrorOr<GameServer>> CreateGameServer(GameServer gameServer);
         Task<GameServer> UpdateGameServer(GameServer gameServer);
         Task DeleteGameServer(GameServer gameServer);
     }

@@ -6,7 +6,7 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using System.Reflection;
-using McWebsite.Application.Authentication.Commands.Common;
+using McWebsite.Application.Common.Validation;
 
 namespace McWebsite.Application
 {
