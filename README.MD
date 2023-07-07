@@ -11,6 +11,7 @@
 + CQRS & MediatR
 + FluentValidation
 + ErrorOr
++ Serilog
 
 <hr/>
 

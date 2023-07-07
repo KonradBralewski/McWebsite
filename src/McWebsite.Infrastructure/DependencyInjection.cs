@@ -9,10 +9,14 @@ using McWebsite.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using McWebsite.Infrastructure.Persistence.Repositories;
 using McWebsite.Infrastructure.Persistence.Interceptors;
+using Serilog;
+using Serilog.Events;
+using Serilog.Core.Enrichers;
+using Serilog.Core;
+using Serilog.Exceptions;
 
 namespace McWebsite.Infrastructure
 {
@@ -22,6 +26,7 @@ namespace McWebsite.Infrastructure
         {
             services.AddPersistance(configuration);
             services.AddAuth(configuration);
+            services.ConfigureSerilog(configuration);
 
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
@@ -59,6 +64,33 @@ namespace McWebsite.Infrastructure
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(jwtSettings.Secret))
                 });
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureSerilog(this IServiceCollection services, ConfigurationManager configuration)
+        {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel
+                    .Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                .MinimumLevel
+                    .Information()
+                .WriteTo
+                    .Console()
+                .WriteTo
+                    .MSSqlServer(
+                    connectionString: configuration["ConnectionString"],
+                    sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions
+                    {
+                        TableName = "Logs",
+                        AutoCreateSqlTable = true
+                    }
+                    )
+                .Enrich
+                    .WithExceptionDetails()
+                .Enrich
+                    .FromLogContext()
+                .CreateLogger();
 
             return services;
         }
