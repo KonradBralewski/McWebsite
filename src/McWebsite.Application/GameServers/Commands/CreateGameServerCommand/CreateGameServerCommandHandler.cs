@@ -31,16 +31,12 @@ namespace McWebsite.Application.GameServers.Commands.CreateGameServerCommand
 
            var creationResult = await _gameServerRepository.CreateGameServer(toBeAdded);
 
-            if(creationResult.Value is not GameServer createdGameServer || creationResult.IsError )
-            {
-                return creationResult.Errors;
-            }
-
-           return new CreateGameServerResult(createdGameServer.MaximumPlayersNumber,
-                                              createdGameServer.CurrentPlayersNumber,
-                                              createdGameServer.ServerLocation.Value.ToString(),
-                                              createdGameServer.ServerType.Value.ToString(),
-                                              createdGameServer.Description);
+           return new CreateGameServerResult(creationResult.Id.Value,
+                                             creationResult.MaximumPlayersNumber,
+                                             creationResult.CurrentPlayersNumber,
+                                             creationResult.ServerLocation.Value.ToString(),
+                                             creationResult.ServerType.Value.ToString(),
+                                             creationResult.Description);
         }
     }
 }

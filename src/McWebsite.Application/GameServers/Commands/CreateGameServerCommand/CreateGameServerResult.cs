@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServers.Commands.CreateGameServerCommand
 {
-    public sealed record CreateGameServerResult(int MaximumPlayersNumber,
+    public sealed record CreateGameServerResult(Guid Id,
+                                                int MaximumPlayersNumber,
                                                 int CurrentPlayersNumber,
                                                 string ServerLocation,
                                                 string ServerType,

@@ -24,7 +24,7 @@ namespace McWebsite.Application.GameServers.Queries.GetGameServer
         {
             await Task.CompletedTask;
 
-            GameServer gameServer = await _gameServerRepository.GetGameServer(GameServerId.Create(query.GameServerId));
+            GameServer gameServer = await _gameServerRepository.GetGameServer(GameServerId.Create(query.GameServerId).Value);
 
             if(gameServer is null)
             {

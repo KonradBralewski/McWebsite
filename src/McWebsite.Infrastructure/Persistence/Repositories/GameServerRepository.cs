@@ -1,15 +1,9 @@
-﻿using ErrorOr;
-using McWebsite.Application.Common.Interfaces.Persistence;
-using McWebsite.Domain.Common.Errors;
+﻿using McWebsite.Application.Common.Interfaces.Persistence;
 using McWebsite.Domain.GameServer;
-using McWebsite.Domain.GameServer.ValueObjects;
-using McWebsite.Domain.User;
+using McWebsite.Infrastructure.Exceptions;
+using McWebsite.Infrastructure.ExceptionsList;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace McWebsite.Infrastructure.Persistence.Repositories
 {
@@ -31,12 +25,12 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
                 .OrderByDescending(p =>p.CreatedDateTime)
                 .ToListAsync();
         }
-        public async Task<GameServer> GetGameServer(GameServerId gameServerId)
+        public async Task<GameServer> GetGameServer(Guid gameServerId)
         {
-            return await _dbContext.GameServers.FirstOrDefaultAsync(gs => gs.Id == gameServerId);
+            return await _dbContext.GameServers.FirstOrDefaultAsync(gs => gs.Id.Value == gameServerId);
         }
 
-        public async Task<ErrorOr<GameServer>> CreateGameServer(GameServer gameServer)
+        public async Task<GameServer> CreateGameServer(GameServer gameServer)
         {
             _dbContext.GameServers.Add(gameServer);
 
@@ -44,13 +38,13 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
 
             if(result == 0)
             {
-                return Errors.Persistence.UnitCreationError;
+                ExceptionsList.ThrowCreationException;
             }
 
             return gameServer;
         }
 
-        public Task DeleteGameServer(GameServer gameServer)
+        public Task DeleteGameServer(Guid gameServer)
         {
             throw new NotImplementedException();
         }

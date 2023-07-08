@@ -1,6 +1,8 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.Conversation.ValueObjects;
+using McWebsite.Domain.GameServer;
 using McWebsite.Domain.GameServer.Enums;
+using McWebsite.Domain.GameServer.Events;
 using McWebsite.Domain.GameServer.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
 using System;
@@ -11,6 +13,14 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Domain.GameServer
 {
+    public static class GameServerEventsExtensions
+    {
+        public static void Delete(this GameServer gameServer)
+        {
+            gameServer.AddDomainEvent(new GameServerDeleted());
+        }
+    }
+
     public sealed class GameServer : AggregateRoot<GameServerId, Guid>
     {
         public int MaximumPlayersNumber { get; private set; }
@@ -69,3 +79,5 @@ namespace McWebsite.Domain.GameServer
 #pragma warning restore CS8618
     }
 }
+
+

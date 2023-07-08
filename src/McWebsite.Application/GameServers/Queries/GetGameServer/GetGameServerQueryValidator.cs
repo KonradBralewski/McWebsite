@@ -10,8 +10,6 @@ namespace McWebsite.Application.GameServers.Queries.GetGameServer
             RuleFor(x => x.GameServerId).NotEmpty().WithMessage("GameServerId cannot be empty.");
 
             RuleFor(x => x.GameServerId).Must(id => Guid.TryParse(id.ToString(), out _)).WithMessage("GameServerId has to be a valid guid value.");
-
-
         }
     }
 }

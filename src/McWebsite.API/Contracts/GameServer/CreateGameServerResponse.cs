@@ -1,6 +1,7 @@
 ﻿namespace McWebsite.API.Contracts.GameServer
 {
-    public sealed record CreateGameServerResponse(int MaximumPlayersNumber,
+    public sealed record CreateGameServerResponse(Guid Id,
+                                                 int MaximumPlayersNumber,
                                                  int CurrentPlayersNumber,
                                                  string ServerLocation,
                                                  string ServerType,

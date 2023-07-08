@@ -12,9 +12,9 @@ namespace McWebsite.Application.Common.Interfaces.Persistence
     public interface IGameServerRepository
     {
         Task<IEnumerable<GameServer>> GetGameServers(int page, int entriesPerPage);
-        Task<GameServer> GetGameServer(GameServerId gameServerId);
-        Task<ErrorOr<GameServer>> CreateGameServer(GameServer gameServer);
+        Task<GameServer> GetGameServer(Guid gameServerId);
+        Task<GameServer> CreateGameServer(GameServer gameServer);
         Task<GameServer> UpdateGameServer(GameServer gameServer);
-        Task DeleteGameServer(GameServer gameServer);
+        Task DeleteGameServer(Guid gameServerId);
     }
 }

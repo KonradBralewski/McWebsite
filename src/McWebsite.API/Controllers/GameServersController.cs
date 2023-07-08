@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ErrorOr;
 using McWebsite.Application.GameServers.Queries.GetGameServer;
 using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
+using McWebsite.Application.GameServers.Commands.DeleteGameServerCommand;
 
 namespace McWebsite.API.Controllers
 {
@@ -21,8 +22,7 @@ namespace McWebsite.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        [Route("{gameServerId}")]
+        [HttpGet("{gameServerId}")]
         public async Task<IActionResult> GetGameServerById([FromRoute] Guid gameServerId)
         {
             var query = _mapper.Map<GetGameServerQuery>(gameServerId);
@@ -55,7 +55,20 @@ namespace McWebsite.API.Controllers
             var commandResult = await _mediator.Send(command);
 
             return commandResult.Match(
-                serverResult => Ok(_mapper.Map<CreateGameServerResponse>(serverResult)),
+                serverResult => Created($"api/GameServers/{serverResult.Id}",_mapper.Map<CreateGameServerResponse>(serverResult)),
+                errors => Problem(errors));
+
+        }
+
+        [HttpDelete("{gameServerId}")]
+        public async Task<IActionResult> DeleteGameServerAsync([FromRoute] Guid gameServerId)
+        {
+            var command = _mapper.Map<DeleteGameServerCommand>(gameServerId);
+
+            var commandResult = await _mediator.Send(command);
+
+            return commandResult.Match(
+                result => NoContent(),
                 errors => Problem(errors));
 
         }
