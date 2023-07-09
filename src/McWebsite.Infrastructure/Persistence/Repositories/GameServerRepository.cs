@@ -1,7 +1,9 @@
-﻿using McWebsite.Application.Common.Interfaces.Persistence;
+﻿using ErrorOr;
+using McWebsite.Application.Common.Interfaces.Persistence;
+using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.GameServer;
+using McWebsite.Domain.GameServer.ValueObjects;
 using McWebsite.Infrastructure.Exceptions;
-using McWebsite.Infrastructure.ExceptionsList;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -17,20 +19,27 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
         }
 
 
-        public async Task<IEnumerable<GameServer>> GetGameServers(int page, int entriesPerPage)
+        public async Task<ErrorOr<IEnumerable<GameServer>>> GetGameServers(int page, int entriesPerPage)
         {
             return await _dbContext.GameServers
+                .OrderByDescending(p => p.CreatedDateTime)
                 .Skip(page * entriesPerPage)
                 .Take(entriesPerPage)
-                .OrderByDescending(p =>p.CreatedDateTime)
                 .ToListAsync();
         }
-        public async Task<GameServer> GetGameServer(Guid gameServerId)
+        public async Task<ErrorOr<GameServer>> GetGameServer(GameServerId gameServerId)
         {
-            return await _dbContext.GameServers.FirstOrDefaultAsync(gs => gs.Id.Value == gameServerId);
+            var gameServer = await _dbContext.GameServers.FirstOrDefaultAsync(gs => gs.Id == gameServerId);
+
+            if(gameServer is null)
+            {
+                return Errors.DomainModels.ModelNotFound;
+            }
+
+            return gameServer;
         }
 
-        public async Task<GameServer> CreateGameServer(GameServer gameServer)
+        public async Task<ErrorOr<GameServer>> CreateGameServer(GameServer gameServer)
         {
             _dbContext.GameServers.Add(gameServer);
 
@@ -38,21 +47,38 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
 
             if(result == 0)
             {
-                ExceptionsList.ThrowCreationException;
+                ExceptionsList.ThrowCreationException();
             }
 
             return gameServer;
         }
 
-        public Task DeleteGameServer(Guid gameServer)
+        public async Task DeleteGameServer(GameServer gameServer)
         {
-            throw new NotImplementedException();
+            _dbContext.Remove(gameServer);
+
+            int result = await _dbContext.SaveChangesAsync();
+
+            if (result == 0)
+            {
+                ExceptionsList.ThrowDeletionException();
+            }
         }
 
 
-        public Task<GameServer> UpdateGameServer(GameServer gameServer)
+        public async Task<ErrorOr<GameServer>> UpdateGameServer(GameServer gameServer)
         {
-            throw new NotImplementedException();
+            _dbContext.ChangeTracker.Clear();
+            _dbContext.GameServers.Update(gameServer);
+
+            int result = await _dbContext.SaveChangesAsync();
+
+            if (result == 0)
+            {
+                ExceptionsList.ThrowUpdateException();
+            }
+
+            return gameServer;
         }
     }
 }

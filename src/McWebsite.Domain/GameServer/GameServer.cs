@@ -19,6 +19,11 @@ namespace McWebsite.Domain.GameServer
         {
             gameServer.AddDomainEvent(new GameServerDeleted());
         }
+
+        public static void Update(this GameServer gameServer)
+        {
+            gameServer.AddDomainEvent(new GameServerUpdated());
+        }
     }
 
     public sealed class GameServer : AggregateRoot<GameServerId, Guid>
@@ -58,6 +63,28 @@ namespace McWebsite.Domain.GameServer
                                         DateTime updatedDateTime)
         {
             return new GameServer(GameServerId.CreateUnique(),
+                maximumPlayersNumber,
+                currentPlayersNumber,
+                GameServerLocation.Create(location),
+                GameServerType.Create(type),
+                description,
+                createdDateTime,
+                updatedDateTime);
+        }
+
+        /// <summary>
+        /// Used to recreate GameServer or create his instance with different values for update purpose for an example.
+        /// </summary>
+        public static GameServer Recreate(Guid Id,
+                                        int maximumPlayersNumber,
+                                        int currentPlayersNumber,
+                                        ServerLocation location,
+                                        ServerType type,
+                                        string description,
+                                        DateTime createdDateTime,
+                                        DateTime updatedDateTime)
+        {
+            return new GameServer(GameServerId.Create(Id),
                 maximumPlayersNumber,
                 currentPlayersNumber,
                 GameServerLocation.Create(location),

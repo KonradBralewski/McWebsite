@@ -8,6 +8,7 @@ using ErrorOr;
 using McWebsite.Application.GameServers.Queries.GetGameServer;
 using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
 using McWebsite.Application.GameServers.Commands.DeleteGameServerCommand;
+using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
 
 namespace McWebsite.API.Controllers
 {
@@ -69,6 +70,24 @@ namespace McWebsite.API.Controllers
 
             return commandResult.Match(
                 result => NoContent(),
+                errors => Problem(errors));
+
+        }
+
+        [HttpPatch("{gameServerId}")]
+        public async Task<IActionResult> UpdateGameServerAsync([FromRoute] Guid gameServerId, [FromBody] UpdateGameServerRequest request)
+        {
+            var command = _mapper.Map<UpdateGameServerCommand>((gameServerId, request));
+
+            var commandResult = await _mediator.Send(command);
+
+            if(commandResult is null)
+            {
+                return NoContent();
+            }
+
+            return commandResult.Value.Match(
+                result => Ok(_mapper.Map<UpdateGameServerResponse>(result)),
                 errors => Problem(errors));
 
         }

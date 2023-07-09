@@ -24,14 +24,14 @@ namespace McWebsite.Application.GameServers.Queries.GetGameServer
         {
             await Task.CompletedTask;
 
-            GameServer gameServer = await _gameServerRepository.GetGameServer(GameServerId.Create(query.GameServerId).Value);
+            var getGameServerResult = await _gameServerRepository.GetGameServer(GameServerId.Create(query.GameServerId));
 
-            if(gameServer is null)
+            if(getGameServerResult.IsError)
             {
-                return Errors.DomainModels.ModelNotFound;
+                return getGameServerResult.Errors;
             }
 
-            return gameServer;
+            return getGameServerResult.Value;
         }
     }
 }

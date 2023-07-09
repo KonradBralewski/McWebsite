@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Persistence;
+using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.GameServer;
 using McWebsite.Domain.GameServer.ValueObjects;
 using MediatR;
@@ -20,11 +21,18 @@ namespace McWebsite.Application.GameServers.Commands.DeleteGameServerCommand
         }
         public async Task<ErrorOr<bool>> Handle(DeleteGameServerCommand request, CancellationToken cancellationToken)
         {
-            GameServer gameServer = await _gameServerRepository.GetGameServer(GameServerId.Create(request.GameServerId).Value);
+            var gameServerSearchResult = await _gameServerRepository.GetGameServer(GameServerId.Create(request.GameServerId));
+
+            if(gameServerSearchResult.IsError)
+            {
+                return gameServerSearchResult.Errors;
+            }
+
+            GameServer gameServer = gameServerSearchResult.Value;
 
             gameServer.Delete();
 
-            await _gameServerRepository.DeleteGameServer(gameServer.Id.Value);
+            await _gameServerRepository.DeleteGameServer(gameServer);
 
             return true;
         }
