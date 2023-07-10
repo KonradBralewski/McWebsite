@@ -7,6 +7,7 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using MapsterMapper;
 using McWebsite.Application.Authentication;
+using McWebsite.API.Controllers.Base;
 
 namespace McWebsite.API.Controllers
 {

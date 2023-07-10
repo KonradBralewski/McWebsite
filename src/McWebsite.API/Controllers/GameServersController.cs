@@ -9,10 +9,10 @@ using McWebsite.Application.GameServers.Queries.GetGameServer;
 using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
 using McWebsite.Application.GameServers.Commands.DeleteGameServerCommand;
 using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
+using McWebsite.API.Controllers.Base;
 
 namespace McWebsite.API.Controllers
 {
-    [Route("api/[controller]")]
     public class GameServersController : McWebsiteController
     {
         private readonly ISender _mediator;

@@ -42,6 +42,7 @@ namespace McWebsite.Infrastructure
             services.AddScoped<PublishDomainEventsInterceptor>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IGameServerRepository, GameServerRepository>();
+            services.AddScoped<IGameServerReportRepository, GameServerReportRepository>();
 
             return services;
         }

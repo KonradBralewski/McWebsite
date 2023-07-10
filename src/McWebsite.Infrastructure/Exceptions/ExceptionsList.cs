@@ -1,5 +1,6 @@
-﻿using McWebsite.Domain.Common.Errors;
+﻿using McWebsite.Domain.Common.Errors.SystemUnexpected;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Principal;
 
 namespace McWebsite.Infrastructure.Exceptions
 {
@@ -23,6 +24,12 @@ namespace McWebsite.Infrastructure.Exceptions
             throw exception;
         }
 
+        // TO:DO make this class partial and seperate concerns
+        public static McWebsiteException ThrowIdenificationTryException()
+        {
+            var exception = new McWebsiteException(new Exception(), UnexpectedErrors.Identity.IdentifactionTryFailureError).Exception;
+            throw exception;
+        }
 
     }
 }

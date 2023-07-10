@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Domain.Common.Errors
+namespace McWebsite.Domain.Common.Errors.SystemUnexpected
 {
     public static partial class UnexpectedErrors
     {

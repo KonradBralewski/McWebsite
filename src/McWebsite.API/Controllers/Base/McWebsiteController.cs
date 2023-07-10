@@ -3,15 +3,29 @@ using McWebsite.API.Common.Http;
 using Microsoft.AspNetCore.Mvc;
 using McWebsite.Domain.Common.Errors;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Security.Claims;
+using McWebsite.Infrastructure.Exceptions;
 
-namespace McWebsite.API.Controllers
+namespace McWebsite.API.Controllers.Base
 {
     [ApiController]
+    [Route("api/[controller]")]
     public abstract class McWebsiteController : ControllerBase
     {
+        protected Guid RetrieveRequestSendingUserId()
+        {
+            Claim userId = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userId is null)
+            {
+                ExceptionsList.ThrowIdenificationTryException();
+            }
+
+            return Guid.Parse(userId!.Value);
+        }
         protected IActionResult Problem(List<Error> errors)
         {
-            if(errors.Count is 0)
+            if (errors.Count is 0)
             {
                 return Problem();
             }
@@ -25,7 +39,7 @@ namespace McWebsite.API.Controllers
             HttpContext.Items[HttpContextItemKeys.Errors] = errors;
 
             /// CUSTOM
-            if (firstError == Errors.Authentication.InvalidCredentials)
+            if (firstError == Errors.Authentication.InvalidCredentials || firstError.Type == (ErrorOr.ErrorType)CustomErrorsCodes.Codes.Identity)
             {
                 return Problem(statusCode: StatusCodes.Status401Unauthorized, title: firstError.Description);
             }

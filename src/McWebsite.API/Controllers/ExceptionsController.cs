@@ -1,4 +1,5 @@
-﻿using McWebsite.Domain.Common.Errors;
+﻿using McWebsite.API.Controllers.Base;
+using McWebsite.Domain.Common.Errors;
 using McWebsite.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
