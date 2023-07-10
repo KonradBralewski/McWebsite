@@ -69,7 +69,7 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
         public async Task<ErrorOr<GameServer>> UpdateGameServer(GameServer gameServer)
         {
             _dbContext.ChangeTracker.Clear();
-            _dbContext.GameServers.Update(gameServer);
+            var updatedGameServer = _dbContext.GameServers.Update(gameServer);
 
             int result = await _dbContext.SaveChangesAsync();
 
@@ -78,7 +78,7 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
                 ExceptionsList.ThrowUpdateException();
             }
 
-            return gameServer;
+            return updatedGameServer.Entity;
         }
     }
 }

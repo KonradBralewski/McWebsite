@@ -38,12 +38,7 @@ namespace McWebsite.Application.GameServers.Commands.CreateGameServerCommand
 
             GameServer createdGameServer = creationResult.Value;
 
-           return new CreateGameServerResult(createdGameServer.Id.Value,
-                                             createdGameServer.MaximumPlayersNumber,
-                                             createdGameServer.CurrentPlayersNumber,
-                                             createdGameServer.ServerLocation.Value.ToString(),
-                                             createdGameServer.ServerType.Value.ToString(),
-                                             createdGameServer.Description);
+            return new CreateGameServerResult(createdGameServer);
         }
     }
 }

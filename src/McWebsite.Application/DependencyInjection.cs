@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using System.Reflection;
 using McWebsite.Application.Common.Validation;
+using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
 
 namespace McWebsite.Application
 {
@@ -20,6 +21,7 @@ namespace McWebsite.Application
             });
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidateBehavior<,>));
 
             return services;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Application.GameServers.Commands.UpdateGameServerCommand
+namespace McWebsite.Application.GameServers.Queries.GetGameServerQuery
 {
-    public sealed record UpdateGameServerResult(GameServer GameServer);
+    public sealed record GetGameServerResult(GameServer GameServer);
 }

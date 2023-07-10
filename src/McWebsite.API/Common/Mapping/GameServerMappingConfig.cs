@@ -4,6 +4,7 @@ using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
 using McWebsite.Application.GameServers.Commands.DeleteGameServerCommand;
 using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
 using McWebsite.Application.GameServers.Queries.GetGameServer;
+using McWebsite.Application.GameServers.Queries.GetGameServerQuery;
 using McWebsite.Application.GameServers.Queries.GetGameServers;
 using McWebsite.Domain.GameServer;
 
@@ -23,19 +24,29 @@ namespace McWebsite.API.Common.Mapping
                                                                  src.ServerType.Value.ToString(),
                                                                  src.Description));
 
+            config.NewConfig<GetGameServerResult, GetGameServerResponse>()
+                .ConstructUsing(src => src.GameServer.Adapt<GetGameServerResponse>());
+
             config.NewConfig<GetGameServersResult, GetGameServersResponse>()
-                .BeforeMapping((src, dest) => Console.WriteLine((src,dest)))
                 .Map(dest => dest.GameServers, src => src.GameServers.Select(gs=>gs.Adapt<GetGameServerResponse>()))
                 .MapToConstructor(true);
 
             config.NewConfig<UpdateGameServerResult, UpdateGameServerResponse>()
-               .Map(dest => dest.Id, src => src.Id)
-               .Map(dest => dest.MaximumPlayersNumber, src => src.MaximumPlayersNumber)
-               .Map(dest => dest.CurrentPlayersNumber, src => src.CurrentPlayersNumber)
-               .Map(dest => dest.ServerLocation, src => src.ServerLocation)
-               .Map(dest => dest.ServerType, src => src.ServerType)
-               .Map(dest => dest.Description, src => src.Description)
-               .MapToConstructor(true);
+              .ConstructUsing(src => new UpdateGameServerResponse(src.GameServer.Id.Value,
+                                                                  src.GameServer.MaximumPlayersNumber,
+                                                                  src.GameServer.CurrentPlayersNumber,
+                                                                  src.GameServer.ServerLocation.Value.ToString(),
+                                                                  src.GameServer.ServerType.Value.ToString(),
+                                                                  src.GameServer.Description));
+
+            config.NewConfig<CreateGameServerResult, CreateGameServerResponse>()
+                .ConstructUsing(src => new CreateGameServerResponse(src.GameServer.Id.Value,
+                                                                    src.GameServer.MaximumPlayersNumber,
+                                                                    src.GameServer.CurrentPlayersNumber,
+                                                                    src.GameServer.ServerLocation.Value.ToString(),
+                                                                    src.GameServer.ServerType.Value.ToString(),
+                                                                    src.GameServer.Description));
+     
 
         }
 

@@ -1,5 +1,6 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.GameServer;
+using McWebsite.Domain.GameServerReport;
 using McWebsite.Infrastructure.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,7 @@ namespace McWebsite.Infrastructure.Persistence
         }
 
         public DbSet<GameServer> GameServers { get; set; }
+        public DbSet<GameServerReport> GameServersReports { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -28,12 +28,12 @@ namespace McWebsite.Application.GameServers.Commands.UpdateGameServerCommand
 
             GameServer foundGameServer = gameServerSearchResult.Value;
 
-            foundGameServer.Update();
-
             if(ApplyModfications(foundGameServer, command) is not GameServer gameServerAfterUpdate)
             {
                 return null;
             }
+
+            gameServerAfterUpdate.Update();
 
             var updatedGameServerResult = await _gameServerRepository.UpdateGameServer(gameServerAfterUpdate);
 
@@ -42,15 +42,10 @@ namespace McWebsite.Application.GameServers.Commands.UpdateGameServerCommand
                 return updatedGameServerResult.Errors;
             }
 
-            GameServer updatedGameServer = gameServerSearchResult.Value;
+            GameServer updatedGameServer = updatedGameServerResult.Value;
 
 
-            return new UpdateGameServerResult(updatedGameServer.Id.Value,
-                                              updatedGameServer.MaximumPlayersNumber,
-                                              updatedGameServer.CurrentPlayersNumber,
-                                              updatedGameServer.ServerLocation.Value.ToString(),
-                                              updatedGameServer.ServerType.Value.ToString(),
-                                              updatedGameServer.Description);
+            return new UpdateGameServerResult(updatedGameServer);
         }
 
         private GameServer? ApplyModfications(GameServer toBeUpdated, UpdateGameServerCommand command)

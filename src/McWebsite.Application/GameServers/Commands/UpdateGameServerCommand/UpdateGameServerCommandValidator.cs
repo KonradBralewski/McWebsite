@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using McWebsite.Domain.GameServer.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServers.Commands.UpdateGameServerCommand
 {
@@ -14,6 +9,8 @@ namespace McWebsite.Application.GameServers.Commands.UpdateGameServerCommand
         {
             RuleFor(x => x.MaximumPlayersNumber)
                 .GreaterThan(0);
+            RuleFor(x => x.CurrentPlayersNumber)
+                .GreaterThanOrEqualTo(0);
             RuleFor(x => x.ServerLocation)
                 .NotEmpty()
                 .IsEnumName(typeof(ServerLocation));
