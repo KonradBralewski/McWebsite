@@ -12,20 +12,20 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServers.Commands.CreateGameServerCommand
 {
-    internal sealed class CreateGameServerCommandHandler : IRequestHandler<CreateGameServerCommand, ErrorOr<CreateGameServerResult>>
+    public sealed class CreateGameServerCommandHandler : IRequestHandler<CreateGameServerCommand, ErrorOr<CreateGameServerResult>>
     {
         private readonly IGameServerRepository _gameServerRepository;
         public CreateGameServerCommandHandler(IGameServerRepository gameServerRepository)
         {
             _gameServerRepository = gameServerRepository;
         }
-        public async Task<ErrorOr<CreateGameServerResult>> Handle(CreateGameServerCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<CreateGameServerResult>> Handle(CreateGameServerCommand command, CancellationToken cancellationToken)
         {
-            GameServer toBeAdded = GameServer.Create(request.MaximumPlayersNumber,
+            GameServer toBeAdded = GameServer.Create(command.MaximumPlayersNumber,
                                                      0,
-                                                     request.ServerLocation.ToEnum<ServerLocation>(),
-                                                     request.ServerType.ToEnum<ServerType>(),
-                                                     request.Description,
+                                                     command.ServerLocation.ToEnum<ServerLocation>(),
+                                                     command.ServerType.ToEnum<ServerType>(),
+                                                     command.Description,
                                                      DateTime.UtcNow,
                                                      DateTime.UtcNow);
 
