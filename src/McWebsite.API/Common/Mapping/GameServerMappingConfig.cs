@@ -16,6 +16,7 @@ namespace McWebsite.API.Common.Mapping
         {
             RegisterQueriesCommandsMapping(config);
 
+
             config.NewConfig<GameServer, GetGameServerResponse>()
                 .ConstructUsing(src => new GetGameServerResponse(src.Id.Value,
                                                                  src.MaximumPlayersNumber,
@@ -25,7 +26,7 @@ namespace McWebsite.API.Common.Mapping
                                                                  src.Description));
 
             config.NewConfig<GetGameServerResult, GetGameServerResponse>()
-                .ConstructUsing(src => src.GameServer.Adapt<GetGameServerResponse>());
+                .ConstructUsing(src => new GetGameServerResponse(Guid.NewGuid(), 3, 4, "xx", "xxx", "xxxx"));
 
             config.NewConfig<GetGameServersResult, GetGameServersResponse>()
                 .Map(dest => dest.GameServers, src => src.GameServers.Select(gs=>gs.Adapt<GetGameServerResponse>()))

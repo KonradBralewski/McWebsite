@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServers.Queries.GetGameServers
 {
-    internal sealed class GetGameServersQueryHandler : IRequestHandler<GetGameServersQuery, ErrorOr<GetGameServersResult>>
+    public sealed class GetGameServersQueryHandler : IRequestHandler<GetGameServersQuery, ErrorOr<GetGameServersResult>>
     {
         private readonly IGameServerRepository _gameServerRepository;
         public GetGameServersQueryHandler(IGameServerRepository gameServerRepository)

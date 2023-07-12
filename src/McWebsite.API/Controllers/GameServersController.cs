@@ -10,6 +10,7 @@ using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
 using McWebsite.Application.GameServers.Commands.DeleteGameServerCommand;
 using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
 using McWebsite.API.Controllers.Base;
+using Mapster;
 
 namespace McWebsite.API.Controllers
 {
@@ -31,7 +32,7 @@ namespace McWebsite.API.Controllers
             var queryResult = await _mediator.Send(query);
 
             return queryResult.Match(
-                serverResult => Ok(_mapper.Map<GetGameServerResponse>(serverResult)),
+                serverResult => Ok(serverResult.Adapt<GetGameServerResponse>()),
                 errors => Problem(errors));
 
         }

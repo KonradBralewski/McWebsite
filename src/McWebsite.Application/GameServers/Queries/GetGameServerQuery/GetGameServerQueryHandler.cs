@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServers.Queries.GetGameServer
 {
-    internal sealed class GetGameServerQueryHandler : IRequestHandler<GetGameServerQuery, ErrorOr<GetGameServerResult>>
+    public sealed class GetGameServerQueryHandler : IRequestHandler<GetGameServerQuery, ErrorOr<GetGameServerResult>>
     {
         private readonly IGameServerRepository _gameServerRepository;
         public GetGameServerQueryHandler(IGameServerRepository gameServerRepository)
@@ -23,8 +23,6 @@ namespace McWebsite.Application.GameServers.Queries.GetGameServer
         }
         public async Task<ErrorOr<GetGameServerResult>> Handle(GetGameServerQuery query, CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
-
             var getGameServerResult = await _gameServerRepository.GetGameServer(GameServerId.Create(query.GameServerId));
 
             if(getGameServerResult.IsError)

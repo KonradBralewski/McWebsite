@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServers.Commands.DeleteGameServerCommand
 {
-    internal sealed class DeleteGameServerCommandHandler : IRequestHandler<DeleteGameServerCommand, ErrorOr<bool>>
+    public sealed class DeleteGameServerCommandHandler : IRequestHandler<DeleteGameServerCommand, ErrorOr<bool>>
     {
         private readonly IGameServerRepository _gameServerRepository;
         public DeleteGameServerCommandHandler(IGameServerRepository gameServerRepository)

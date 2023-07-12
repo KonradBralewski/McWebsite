@@ -10,7 +10,7 @@ using McWebsite.Domain.Common.Errors;
 
 namespace McWebsite.Application.GameServers.Commands.UpdateGameServerCommand
 {
-    internal class UpdateGameServerCommandHandler : IRequestHandler<UpdateGameServerCommand, ErrorOr<UpdateGameServerResult>?>
+    public sealed class UpdateGameServerCommandHandler : IRequestHandler<UpdateGameServerCommand, ErrorOr<UpdateGameServerResult>?>
     {
         private readonly IGameServerRepository _gameServerRepository;
         public UpdateGameServerCommandHandler(IGameServerRepository gameServerRepository)

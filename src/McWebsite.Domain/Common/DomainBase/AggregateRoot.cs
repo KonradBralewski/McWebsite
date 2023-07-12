@@ -13,7 +13,7 @@ namespace McWebsite.Domain.Common.DomainBase
 
         protected AggregateRoot(TId id)
         {
-            Id = Id;
+            Id = id!;
         }
 
 #pragma warning disable CS8618 
