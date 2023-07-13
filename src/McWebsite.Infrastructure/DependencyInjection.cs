@@ -97,7 +97,9 @@ namespace McWebsite.Infrastructure
 
         public static IServiceCollection ConfigureIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<McWebsiteIdentityUser, IdentityRole>()
+            services.AddIdentityCore<McWebsiteIdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<McWebsiteDbContext>()
                 .AddDefaultTokenProviders();
 

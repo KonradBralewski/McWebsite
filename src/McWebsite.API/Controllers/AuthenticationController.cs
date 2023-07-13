@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using MapsterMapper;
 using McWebsite.Application.Authentication;
 using McWebsite.API.Controllers.Base;
+using Microsoft.AspNetCore.Authorization;
 
 namespace McWebsite.API.Controllers
 {
     [Route("auth")]
+    [AllowAnonymous]
     public class AuthenticationController : McWebsiteController
     {
         private readonly ISender _mediator;

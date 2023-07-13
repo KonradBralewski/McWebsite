@@ -46,6 +46,21 @@ namespace McWebsite.Domain.User
                             updatedDateTime);
         }
 
+        public static User Recreate(Guid id,
+                                   int? minecraftAccountId,
+                                   string email,
+                                   string password,
+                                   DateTime createdDateTime,
+                                   DateTime updatedDateTime)
+        {
+            return new User(UserId.Create(id),
+                            MinecraftAccountId.Create(minecraftAccountId),
+                            UserEmail.Create(email),
+                            UserPassword.Create(password),
+                            createdDateTime,
+                            updatedDateTime);
+        }
+
         /// <summary>
         /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
         /// </summary>

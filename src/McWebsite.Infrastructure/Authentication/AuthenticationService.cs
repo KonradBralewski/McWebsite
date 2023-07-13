@@ -3,6 +3,7 @@ using McWebsite.Application.Common.Services;
 using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.Common.Errors.SystemUnexpected;
 using McWebsite.Domain.User;
+using McWebsite.Domain.User.ValueObjects;
 using McWebsite.Infrastructure.Exceptions;
 using McWebsite.Infrastructure.Persistence;
 using McWebsite.Infrastructure.Persistence.Identity;
@@ -35,7 +36,9 @@ namespace McWebsite.Infrastructure.Authentication
                 await transaction.CreateSavepointAsync("BeforeAddingUser");
 
                 _dbContext.DomainUsers.Add(user);
-                var addToIdentityTableResult = await _userManager.CreateAsync(new McWebsiteIdentityUser { Email = user.Email.Value }, user.Password.Value);
+                var addToIdentityTableResult = await _userManager.CreateAsync(
+                    new McWebsiteIdentityUser { Id = user.Id.Value.ToString(), Email = user.Email.Value, UserName = user.Email.Value },
+                    user.Password.Value);
 
                 int result = await _dbContext.SaveChangesAsync();
 
@@ -49,7 +52,12 @@ namespace McWebsite.Infrastructure.Authentication
                     
                 }
 
-                if (result == 0 || !addToIdentityTableResult.Succeeded)
+                if(await _dbContext.DomainUsers.FirstOrDefaultAsync(u => u.Id == user.Id) is null)
+                {
+                    ExceptionsList.ThrowCreationException();
+                }
+
+                if (!addToIdentityTableResult.Succeeded)
                 {
                     ExceptionsList.ThrowCreationException();
                 }
@@ -65,18 +73,50 @@ namespace McWebsite.Infrastructure.Authentication
             }
         }
 
+        public async Task<ErrorOr<bool>> DoCredentialsMatch(string email, string password)
+        {
+            var identityUserEntry = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (identityUserEntry is null)
+            {
+                return Errors.Authentication.InvalidCredentials;
+            }
+
+            bool passwordMatch = await _userManager.CheckPasswordAsync(identityUserEntry, password);
+
+            if (passwordMatch is false)
+            {
+                return Errors.Authentication.InvalidCredentials;
+            }
+
+            return true;
+        }
+
         public async Task<User?> GetUserByEmail(string email)
         {
-            var foundMatchingEmailUser = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var identityUserEntry = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == email);
 
-            if (foundMatchingEmailUser is null)
+            if (identityUserEntry is null)
             {
                 return null;
             }
 
-            var user = await _dbContext.DomainUsers.FirstOrDefaultAsync(u => u.Id.Value.ToString() == foundMatchingEmailUser.Id);
+            var user = await _dbContext.DomainUsers.FirstOrDefaultAsync(u => u.Id == UserId.Create(Guid.Parse(identityUserEntry.Id)));
 
-            return user;
+            if(user is null)
+            {
+                ExceptionsList.ThrowUserNotFoundButShouldBeException();
+            }
+
+            User syncedUser = User.Recreate(
+                user!.Id.Value,
+                user.MinecraftAccountId?.Value,
+                identityUserEntry.Email!,
+                identityUserEntry.PasswordHash!,
+                user.CreatedDateTime,
+                user.UpdatedDateTime);
+
+            return syncedUser;
         }
     }
 }

@@ -5,11 +5,13 @@ using McWebsite.Domain.Common.Errors;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
 using McWebsite.Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace McWebsite.API.Controllers.Base
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public abstract class McWebsiteController : ControllerBase
     {
         protected Guid RetrieveRequestSendingUserId()

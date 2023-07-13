@@ -10,28 +10,30 @@ namespace McWebsite.Application.Authentication.Queries.Login
     internal sealed class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<AuthenticationResult>>
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-        private readonly IAuthenticationService _userRepository;
+        private readonly IAuthenticationService _authenticationService;
 
-        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IAuthenticationService userRepository)
+        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IAuthenticationService authenticationService)
         {
             _jwtTokenGenerator = jwtTokenGenerator;
-            _userRepository = userRepository;
+            _authenticationService = authenticationService;
         }
 
         public async Task<ErrorOr<AuthenticationResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
         {
             // Validate if user exists
 
-            if (await _userRepository.GetUserByEmail(query.Email) is not User user)
+            if (await _authenticationService.GetUserByEmail(query.Email) is not User user)
             {
                 return Errors.Authentication.InvalidCredentials;
             }
 
             // Validate if password is correct
 
-            if (user.Password != query.Password)
+            var credentialsMatchResult = await _authenticationService.DoCredentialsMatch(query.Email, query.Password);
+
+            if (credentialsMatchResult.IsError)
             {
-                return Errors.Authentication.InvalidCredentials;
+                return credentialsMatchResult.Errors;
             }
 
             // Create JWT Token

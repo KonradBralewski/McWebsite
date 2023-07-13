@@ -7,5 +7,6 @@ namespace McWebsite.Application.Common.Services
     {
         Task<User?> GetUserByEmail(string email);
         Task<ErrorOr<User>> AddUser(User user);
+        Task<ErrorOr<bool>> DoCredentialsMatch(string email, string password);
     }
 }

@@ -31,5 +31,14 @@ namespace McWebsite.Infrastructure.Exceptions
             throw exception;
         }
 
+        /// <summary>
+        /// Should never happen. Identity table & Table defining User domain bounded context are out of sync.
+        /// </summary>
+        public static McWebsiteException ThrowUserNotFoundButShouldBeException()
+        {
+            var exception = new McWebsiteException(new Exception(), UnexpectedErrors.Identity.UserNotFoundButShouldBe).Exception;
+            throw exception;
+        }
+
     }
 }

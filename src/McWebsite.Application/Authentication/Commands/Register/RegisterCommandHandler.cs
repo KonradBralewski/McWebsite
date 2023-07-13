@@ -12,17 +12,17 @@ namespace McWebsite.Application.Authentication.Commands.Register
     internal sealed class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResult>>
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-        private readonly IAuthenticationService _userRepository;
+        private readonly IAuthenticationService _authenticationService;
 
-        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IAuthenticationService userRepository)
+        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IAuthenticationService authenticationService)
         {
             _jwtTokenGenerator = jwtTokenGenerator;
-            _userRepository = userRepository;
+            _authenticationService = authenticationService;
         }
 
         public async Task<ErrorOr<AuthenticationResult>> Handle(RegisterCommand command, CancellationToken cancellationToken)
         {
-            if (await _userRepository.GetUserByEmail(command.Email) is not null)
+            if (await _authenticationService.GetUserByEmail(command.Email) is not null)
             {
                 return Errors.User.DuplicateEmail;
             }
@@ -31,7 +31,7 @@ namespace McWebsite.Application.Authentication.Commands.Register
 
             var user = User.Create(null, command.Email, command.Password, DateTime.UtcNow, DateTime.UtcNow);
 
-            var addUserResult = await _userRepository.AddUser(user);
+            var addUserResult = await _authenticationService.AddUser(user);
 
             if (addUserResult.IsError)
             {
