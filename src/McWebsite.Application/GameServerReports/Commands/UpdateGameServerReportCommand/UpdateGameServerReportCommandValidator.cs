@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+using McWebsite.Domain.GameServerReport.Enums;
 
 namespace McWebsite.Application.GameServerReports.Commands.UpdateGameServerReportCommand
 {
-    internal class UpdateGameServerReportCommandValidator
+    public sealed class UpdateGameServerReportCommandValidator : AbstractValidator<UpdateGameServerReportCommand>
     {
+        public UpdateGameServerReportCommandValidator()
+        {
+            RuleFor(x => x.ReportedGameServerId)
+               .NotEmpty()
+               .Must(id => Guid.TryParse(id.ToString(), out _));
+            RuleFor(x => x.ReportType)
+                .NotEmpty()
+                .IsEnumName(typeof(ReportType));
+            RuleFor(x => x.ReportDescription)
+                    .NotEmpty();
+        }
     }
 }

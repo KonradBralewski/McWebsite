@@ -17,6 +17,9 @@ using Serilog.Events;
 using Serilog.Core.Enrichers;
 using Serilog.Core;
 using Serilog.Exceptions;
+using Microsoft.AspNetCore.Identity;
+using System;
+using McWebsite.Infrastructure.Persistence.Identity;
 
 namespace McWebsite.Infrastructure
 {
@@ -25,6 +28,7 @@ namespace McWebsite.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddPersistance(configuration);
+            services.ConfigureIdentity();
             services.AddAuth(configuration);
             services.ConfigureSerilog(configuration);
 
@@ -37,7 +41,7 @@ namespace McWebsite.Infrastructure
         public static IServiceCollection AddPersistance(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddDbContext<McWebsiteDbContext>(options =>
-            options.UseSqlServer(configuration["ConnectionString"]));
+                options.UseSqlServer(configuration["ConnectionString"]));
 
             services.AddScoped<PublishDomainEventsInterceptor>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -87,6 +91,15 @@ namespace McWebsite.Infrastructure
                 .Enrich.WithExceptionDetails()
                 .Enrich.FromLogContext()
                 .CreateLogger();
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<McWebsiteIdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<McWebsiteDbContext>()
+                .AddDefaultTokenProviders();
 
             return services;
         }

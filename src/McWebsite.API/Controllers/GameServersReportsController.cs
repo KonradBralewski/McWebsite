@@ -1,9 +1,12 @@
 ﻿using MapsterMapper;
+using McWebsite.API.Contracts;
 using McWebsite.API.Contracts.GameServer;
 using McWebsite.API.Contracts.GameServerReport;
 using McWebsite.API.Controllers.Base;
 using McWebsite.Application.GameServerReports.Commands.CreateGameServerReportCommand;
 using McWebsite.Application.GameServerReports.Queries.GetGameServersReportsQuery;
+using McWebsite.Application.GameServers.Commands.DeleteGameServerCommand;
+using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
 using McWebsite.Application.GameServers.Queries.GetGameServer;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -59,36 +62,36 @@ namespace McWebsite.API.Controllers
 
         }
 
-        //[HttpDelete("{gameServerId}")]
-        //public async Task<IActionResult> DeleteGameServerReportAsync([FromRoute] Guid gameServerId)
-        //{
-        //    var command = _mapper.Map<DeleteGameServerCommand>(gameServerId);
+        [HttpDelete("{gameServerReportId}")]
+        public async Task<IActionResult> DeleteGameServerReportAsync([FromRoute] Guid gameServerReportId)
+        {
+            var command = _mapper.Map<DeleteGameServerCommand>(gameServerReportId);
 
-        //    var commandResult = await _mediator.Send(command);
+            var commandResult = await _mediator.Send(command);
 
-        //    return commandResult.Match(
-        //        result => NoContent(),
-        //        errors => Problem(errors));
+            return commandResult.Match(
+                result => NoContent(),
+                errors => Problem(errors));
 
-        //}
+        }
 
-        //[HttpPatch("{gameServerId}")]
-        //public async Task<IActionResult> UpdateGameServerReportAsync([FromRoute] Guid gameServerId, [FromBody] UpdateGameServerReportRequest request)
-        //{
-        //    var command = _mapper.Map<UpdateGameServerCommand>((gameServerId, request));
+        [HttpPatch("{gameServerReportId}")]
+        public async Task<IActionResult> UpdateGameServerReportAsync([FromRoute] Guid gameServerReportId, [FromBody] UpdateGameServerReportRequest request)
+        {
+            var command = _mapper.Map<UpdateGameServerCommand>((gameServerReportId, request));
 
-        //    var commandResult = await _mediator.Send(command);
+            var commandResult = await _mediator.Send(command);
 
-        //    if (commandResult is null)
-        //    {
-        //        return NoContent();
-        //    }
+            if (commandResult is null)
+            {
+                return NoContent();
+            }
 
-        //    return commandResult.Value.Match(
-        //        result => Ok(_mapper.Map<UpdateGameServerResponse>(result)),
-        //        errors => Problem(errors));
+            return commandResult.Value.Match(
+                result => Ok(_mapper.Map<UpdateGameServerResponse>(result)),
+                errors => Problem(errors));
 
-        //}
+        }
 
     }
 }

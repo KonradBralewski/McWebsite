@@ -1,7 +1,9 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.GameServer;
 using McWebsite.Domain.GameServerReport;
+using McWebsite.Infrastructure.Persistence.Identity;
 using McWebsite.Infrastructure.Persistence.Interceptors;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Infrastructure.Persistence
 {
-    public sealed class McWebsiteDbContext : DbContext
+    public sealed class McWebsiteDbContext : IdentityDbContext<McWebsiteIdentityUser>
     {
         private readonly PublishDomainEventsInterceptor _publishDomainEventsInterceptor;
         public McWebsiteDbContext(DbContextOptions<McWebsiteDbContext> options, PublishDomainEventsInterceptor publishDomainEventsInterceptor) : base(options)

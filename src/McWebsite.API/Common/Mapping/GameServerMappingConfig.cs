@@ -25,9 +25,6 @@ namespace McWebsite.API.Common.Mapping
                                                                  src.ServerType.Value.ToString(),
                                                                  src.Description));
 
-            config.NewConfig<GetGameServerResult, GetGameServerResponse>()
-                .ConstructUsing(src => new GetGameServerResponse(Guid.NewGuid(), 3, 4, "xx", "xxx", "xxxx"));
-
             config.NewConfig<GetGameServersResult, GetGameServersResponse>()
                 .Map(dest => dest.GameServers, src => src.GameServers.Select(gs=>gs.Adapt<GetGameServerResponse>()))
                 .MapToConstructor(true);

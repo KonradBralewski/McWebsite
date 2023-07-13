@@ -39,7 +39,7 @@ namespace McWebsite.API.Controllers.Base
             HttpContext.Items[HttpContextItemKeys.Errors] = errors;
 
             /// CUSTOM
-            if (firstError == Errors.Authentication.InvalidCredentials || firstError.Type == (ErrorOr.ErrorType)CustomErrorsCodes.Codes.Identity)
+            if (firstError == Errors.Authentication.InvalidCredentials)
             {
                 return Problem(statusCode: StatusCodes.Status401Unauthorized, title: firstError.Description);
             }

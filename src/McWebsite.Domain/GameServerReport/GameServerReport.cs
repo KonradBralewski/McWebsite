@@ -3,11 +3,6 @@ using McWebsite.Domain.GameServer.ValueObjects;
 using McWebsite.Domain.GameServerReport.Enums;
 using McWebsite.Domain.GameServerReport.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace McWebsite.Domain.GameServerReport
 {
@@ -38,7 +33,6 @@ namespace McWebsite.Domain.GameServerReport
         public static GameServerReport Create(Guid gameServerId,
                                               Guid reportingUserId,
                                               ReportType reportType,
-                                              string reason,
                                               string description,
                                               DateTime reportDate,
                                               DateTime updatedDateTime)
@@ -49,6 +43,23 @@ namespace McWebsite.Domain.GameServerReport
                                         GameServerReportType.Create(reportType),
                                         description, 
                                         reportDate, 
+                                        updatedDateTime);
+        }
+
+        public static GameServerReport Recreate(Guid id,
+                                                Guid gameServerId,
+                                                Guid reportingUserId,
+                                                ReportType reportType,
+                                                string description,
+                                                DateTime reportDate,
+                                                DateTime updatedDateTime)
+        {
+            return new GameServerReport(GameServerReportId.Create(id),
+                                        GameServerId.Create(gameServerId),
+                                        UserId.Create(reportingUserId),
+                                        GameServerReportType.Create(reportType),
+                                        description,
+                                        reportDate,
                                         updatedDateTime);
         }
 

@@ -7,6 +7,7 @@ using McWebsite.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -14,9 +15,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace McWebsite.Infrastructure.Migrations
 {
     [DbContext(typeof(McWebsiteDbContext))]
-    partial class McWebsiteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230713055629_ASP_Identity_And_Domain_User_BoundedContext")]
+    partial class ASP_Identity_And_Domain_User_BoundedContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

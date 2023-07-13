@@ -10,11 +10,10 @@ namespace McWebsite.API.Controllers
 {
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = true)]
+    [Route("exceptions")]
     public class ExceptionsController : McWebsiteController
     {
-
-        [Route("exceptions")]
-        public IActionResult Error()
+        public IActionResult Exceptions()
         {
             var exception = HttpContext.Features.Get<IExceptionHandlerPathFeature>()!.Error;
 
