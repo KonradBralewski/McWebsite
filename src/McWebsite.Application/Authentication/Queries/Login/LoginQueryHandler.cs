@@ -1,18 +1,18 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Authentication;
-using McWebsite.Application.Common.Interfaces.Persistence;
 using McWebsite.Domain.User;
 using MediatR;
 using McWebsite.Domain.Common.Errors;
+using McWebsite.Application.Common.Services;
 
 namespace McWebsite.Application.Authentication.Queries.Login
 {
     internal sealed class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<AuthenticationResult>>
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-        private readonly IUserRepository _userRepository;
+        private readonly IAuthenticationService _userRepository;
 
-        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IAuthenticationService userRepository)
         {
             _jwtTokenGenerator = jwtTokenGenerator;
             _userRepository = userRepository;
@@ -22,7 +22,7 @@ namespace McWebsite.Application.Authentication.Queries.Login
         {
             // Validate if user exists
 
-            if (_userRepository.GetUserByEmail(query.Email) is not User user)
+            if (await _userRepository.GetUserByEmail(query.Email) is not User user)
             {
                 return Errors.Authentication.InvalidCredentials;
             }

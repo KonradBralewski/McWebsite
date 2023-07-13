@@ -1,19 +1,20 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Authentication;
-using McWebsite.Application.Common.Interfaces.Persistence;
 using MediatR;
 using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.User;
 using McWebsite.Domain.User.ValueObjects;
+using Microsoft.AspNetCore.Identity;
+using McWebsite.Application.Common.Services;
 
 namespace McWebsite.Application.Authentication.Commands.Register
 {
     internal sealed class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResult>>
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-        private readonly IUserRepository _userRepository;
+        private readonly IAuthenticationService _userRepository;
 
-        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IAuthenticationService userRepository)
         {
             _jwtTokenGenerator = jwtTokenGenerator;
             _userRepository = userRepository;
@@ -21,7 +22,7 @@ namespace McWebsite.Application.Authentication.Commands.Register
 
         public async Task<ErrorOr<AuthenticationResult>> Handle(RegisterCommand command, CancellationToken cancellationToken)
         {
-            if (_userRepository.GetUserByEmail(command.Email) is not null)
+            if (await _userRepository.GetUserByEmail(command.Email) is not null)
             {
                 return Errors.User.DuplicateEmail;
             }
@@ -30,7 +31,12 @@ namespace McWebsite.Application.Authentication.Commands.Register
 
             var user = User.Create(null, command.Email, command.Password, DateTime.UtcNow, DateTime.UtcNow);
 
-            _userRepository.AddUser(user);
+            var addUserResult = await _userRepository.AddUser(user);
+
+            if (addUserResult.IsError)
+            {
+                return addUserResult.Errors;
+            }
 
             // Create JWT Token
 

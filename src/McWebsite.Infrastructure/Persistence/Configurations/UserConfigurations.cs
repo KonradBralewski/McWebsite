@@ -31,7 +31,7 @@ namespace McWebsite.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.MinecraftAccountId)
                 .ValueGeneratedNever()
-                .IsRequired()
+                .IsRequired(false)
                 .HasConversion(
                 minecraftAccountId => minecraftAccountId.Value,
                 value => MinecraftAccountId.Create(value));

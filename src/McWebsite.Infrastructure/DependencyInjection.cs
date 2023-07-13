@@ -44,7 +44,7 @@ namespace McWebsite.Infrastructure
                 options.UseSqlServer(configuration["ConnectionString"]));
 
             services.AddScoped<PublishDomainEventsInterceptor>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IGameServerRepository, GameServerRepository>();
             services.AddScoped<IGameServerReportRepository, GameServerReportRepository>();
 

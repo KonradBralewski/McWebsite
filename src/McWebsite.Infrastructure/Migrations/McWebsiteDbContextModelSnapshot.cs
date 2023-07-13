@@ -223,7 +223,7 @@ namespace McWebsite.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MinecraftAccountId")
+                    b.Property<int?>("MinecraftAccountId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDateTime")

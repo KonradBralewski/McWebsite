@@ -6,16 +6,14 @@ using McWebsite.Domain.InGameEvent.Enums;
 using McWebsite.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace McWebsite.Infrastructure.Migrations
 {
     [DbContext(typeof(McWebsiteDbContext))]
-    [Migration("20230713055629_ASP_Identity_And_Domain_User_BoundedContext")]
+    [Migration("20230713082148_ASP_Identity_And_Domain_User_BoundedContext")]
     partial class ASP_Identity_And_Domain_User_BoundedContext
     {
         /// <inheritdoc />
@@ -226,7 +224,7 @@ namespace McWebsite.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MinecraftAccountId")
+                    b.Property<int?>("MinecraftAccountId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDateTime")

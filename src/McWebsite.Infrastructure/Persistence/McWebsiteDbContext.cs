@@ -1,6 +1,7 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.GameServer;
 using McWebsite.Domain.GameServerReport;
+using McWebsite.Domain.User;
 using McWebsite.Infrastructure.Persistence.Identity;
 using McWebsite.Infrastructure.Persistence.Interceptors;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace McWebsite.Infrastructure.Persistence
             _publishDomainEventsInterceptor = publishDomainEventsInterceptor;
         }
 
+        public DbSet<User> DomainUsers { get; set; }
         public DbSet<GameServer> GameServers { get; set; }
         public DbSet<GameServerReport> GameServersReports { get; set; }
 

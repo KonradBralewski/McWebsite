@@ -11,7 +11,7 @@ namespace McWebsite.Domain.Common.DomainBase
     {
         public new AggregateRootId<TIdType> Id { get; protected set; }
 
-        protected AggregateRoot(TId id)
+        protected AggregateRoot(TId id) : base(id)
         {
             Id = id!;
         }
