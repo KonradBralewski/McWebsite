@@ -20,6 +20,7 @@ using Serilog.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using System;
 using McWebsite.Infrastructure.Persistence.Identity;
+using McWebsite.Domain.GameServerSubscription;
 
 namespace McWebsite.Infrastructure
 {
@@ -47,6 +48,7 @@ namespace McWebsite.Infrastructure
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IGameServerRepository, GameServerRepository>();
             services.AddScoped<IGameServerReportRepository, GameServerReportRepository>();
+            services.AddScoped<IGameServerSubscriptionRepository, GameServerSubscriptionRepository>();
 
             return services;
         }

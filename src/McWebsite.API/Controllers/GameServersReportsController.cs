@@ -1,5 +1,4 @@
 ﻿using MapsterMapper;
-using McWebsite.API.Contracts;
 using McWebsite.API.Contracts.GameServer;
 using McWebsite.API.Contracts.GameServerReport;
 using McWebsite.API.Controllers.Base;

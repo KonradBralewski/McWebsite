@@ -33,22 +33,30 @@ namespace McWebsite.Infrastructure.Persistence.Configurations
                 gameServerId => gameServerId.Value,
                 value => GameServerId.Create(value));
 
-            builder.Property(x => x.BuyingPlayerId)
+            builder.Property(x => x.SubscriptionType)
                 .ValueGeneratedNever()
                 .IsRequired()
                 .HasConversion(
-                reportingUserId => reportingUserId.Value,
-                value => UserId.Create(value));
+                subscriptionType => subscriptionType.Value,
+                value => GameServerSubscriptionType.Create(value));
+
+            builder.Property(x => x.InGameSubscriptionId)
+                .IsRequired();
+
+            builder.Property(x => x.Price)
+                .IsRequired()
+                .HasDefaultValue(50.0f);
 
             builder.Property(x => x.SubscriptionDescription)
                 .IsRequired()
                 .HasMaxLength(255);
 
-            builder.Property(x => x.SubscriptionStartDate)
-                .IsRequired();
+            builder.Property(x => x.SubscriptionDuration)
+                .IsRequired()
+                .HasDefaultValue(TimeSpan.FromDays(1));
 
-            builder.Property(x => x.SubscriptionEndDate)
-                .IsRequired();
+            builder.Property(x => x.CreatedDateTime)
+               .IsRequired();
 
             builder.Property(x => x.UpdatedDateTime)
                .IsRequired();

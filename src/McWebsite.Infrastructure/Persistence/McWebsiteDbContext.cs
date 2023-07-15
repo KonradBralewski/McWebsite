@@ -1,16 +1,12 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.GameServer;
 using McWebsite.Domain.GameServerReport;
+using McWebsite.Domain.GameServerSubscription;
 using McWebsite.Domain.User;
 using McWebsite.Infrastructure.Persistence.Identity;
 using McWebsite.Infrastructure.Persistence.Interceptors;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace McWebsite.Infrastructure.Persistence
 {
@@ -25,6 +21,7 @@ namespace McWebsite.Infrastructure.Persistence
         public DbSet<User> DomainUsers { get; set; }
         public DbSet<GameServer> GameServers { get; set; }
         public DbSet<GameServerReport> GameServersReports { get; set; }
+        public DbSet<GameServerSubscription> GameServerSubscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

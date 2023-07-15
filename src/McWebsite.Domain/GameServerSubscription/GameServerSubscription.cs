@@ -1,7 +1,7 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.GameServer.ValueObjects;
+using McWebsite.Domain.GameServerSubscription.Enums;
 using McWebsite.Domain.GameServerSubscription.ValueObjects;
-using McWebsite.Domain.User.ValueObjects;
 
 
 namespace McWebsite.Domain.GameServerSubscription
@@ -10,42 +10,73 @@ namespace McWebsite.Domain.GameServerSubscription
     {
 
         public GameServerId GameServerId { get; private set; }
-        public UserId BuyingPlayerId { get; private set; }
+        
+        public GameServerSubscriptionType SubscriptionType { get; private set; }
+        public int InGameSubscriptionId { get; private set; }
+        public float Price { get; private set; }
         public string SubscriptionDescription { get; private set; }
-        public DateTime SubscriptionStartDate { get; private set; }
-        public DateTime SubscriptionEndDate { get; private set; }
-
+        public TimeSpan SubscriptionDuration { get; private set; }
+        public DateTime CreatedDateTime { get; private set; }
         public DateTime UpdatedDateTime { get; private set; }
-        public GameServerSubscription(GameServerSubscriptionId id,
+        private GameServerSubscription(GameServerSubscriptionId id,
                                 GameServerId gameServerId,
-                                UserId buyingPlayerId,
+                                GameServerSubscriptionType subscriptionType,
+                                int inGameSubscriptionId,
+                                float price,
                                 string subscriptionDescription,
-                                DateTime subscriptionStartDate,
-                                DateTime subscriptionEndDate,
+                                TimeSpan subscriptionDuration,
+                                DateTime createdDateTime,
                                 DateTime updatedDateTime) : base(id)
         {
             Id = id;
             GameServerId = gameServerId;
-            BuyingPlayerId = buyingPlayerId;
+            SubscriptionType = subscriptionType;
+            InGameSubscriptionId = inGameSubscriptionId;
+            Price = price;
             SubscriptionDescription = subscriptionDescription;
-            SubscriptionStartDate = subscriptionStartDate;
-            SubscriptionEndDate = subscriptionEndDate;
+            SubscriptionDuration = subscriptionDuration;
+            CreatedDateTime = createdDateTime;
             UpdatedDateTime = updatedDateTime;
         }
         public static GameServerSubscription Create(Guid gameServerId,
-                                Guid buyingPlayerId,
+                                SubscriptionType subscriptionType,
+                                int inGameSubscriptionId,
+                                float price,
                                 string subscriptionDescription,
-                                DateTime subscriptionStartDate,
-                                DateTime subscriptionEndDate,
-                                DateTime updatedDateTime)
+                                TimeSpan subscriptionDuration,
+                                DateTime createdDateTime,
+                                DateTime subscriptionEndDate)
         {
             return new GameServerSubscription(GameServerSubscriptionId.CreateUnique(),
                                         GameServerId.Create(gameServerId),
-                                        UserId.Create(buyingPlayerId),
+                                        GameServerSubscriptionType.Create(subscriptionType),
+                                        inGameSubscriptionId,
+                                        price,
                                         subscriptionDescription,
-                                        subscriptionStartDate,
-                                        subscriptionEndDate,
-                                        updatedDateTime);
+                                        subscriptionDuration,
+                                        createdDateTime,
+                                        subscriptionEndDate);
+        }
+
+        public static GameServerSubscription Recreate(Guid id,
+                                                      Guid gameServerId,
+                                                      SubscriptionType subscriptionType,
+                                                      int inGameSubscriptionId,
+                                                      float price,
+                                                      string subscriptionDescription,
+                                                      TimeSpan subscriptionDuration,
+                                                      DateTime createdDateTime,
+                                                      DateTime subscriptionEndDate)
+        {
+            return new GameServerSubscription(GameServerSubscriptionId.Create(id),
+                                              GameServerId.Create(gameServerId),
+                                              GameServerSubscriptionType.Create(subscriptionType),
+                                              inGameSubscriptionId,
+                                              price,
+                                              subscriptionDescription,
+                                              subscriptionDuration,
+                                              createdDateTime,
+                                              subscriptionEndDate);
         }
 
         /// <summary>
