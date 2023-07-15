@@ -1,12 +1,9 @@
 ﻿using FluentAssertions;
-using FluentValidation;
-using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
 using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
-using McWebsite.Application.UnitTests.GameServers.TestEnvironments;
+using McWebsite.Application.UnitTests.TestEnvironments;
 using McWebsite.Application.UnitTests.GameServers.TestUtils;
-using McWebsite.Application.UnitTests.TestUtils.Extensions;
+using McWebsite.Application.UnitTests.TestUtils.Extensions.GameServerExtensions;
 using McWebsite.Domain.GameServer;
-using McWebsite.Domain.GameServer.Enums;
 using Moq;
 using Xunit;
 

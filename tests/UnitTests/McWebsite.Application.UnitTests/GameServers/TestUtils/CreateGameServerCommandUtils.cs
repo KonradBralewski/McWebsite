@@ -10,10 +10,10 @@ namespace McWebsite.Application.UnitTests.GameServers.TestUtils
                                                      string? serverType = null,
                                                      string? description = null)
         {
-            return new CreateGameServerCommand(maximumPlayersNumber ?? Constants.GameServer.MaximumPlayersNumber,
-                                               serverLocation ?? Constants.GameServer.ServerLocation,
-                                               serverType ?? Constants.GameServer.ServerType,
-                                               description ?? Constants.GameServer.Description);
+            return new CreateGameServerCommand(maximumPlayersNumber ?? Constants.GameServerQueriesAndCommands.MaximumPlayersNumber,
+                                               serverLocation ?? Constants.GameServerQueriesAndCommands.ServerLocation,
+                                               serverType ?? Constants.GameServerQueriesAndCommands.ServerType,
+                                               description ?? Constants.GameServerQueriesAndCommands.Description);
         }
     }
 }

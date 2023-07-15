@@ -4,13 +4,13 @@ using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
 using McWebsite.Domain.GameServer;
 using McWebsite.Domain.GameServer.Enums;
 
-namespace McWebsite.Application.UnitTests.TestUtils.Extensions
+namespace McWebsite.Application.UnitTests.TestUtils.Extensions.GameServerExtensions
 {
     public static class GameServerValidationExtensions
     {
         public static void ValidateIfCreatedFrom(this GameServer gameServer, CreateGameServerCommand command)
         {
-            gameServer.Id.Should().NotBeNull();
+            gameServer.Id.Value.ToString().Should().NotBeEmpty();
 
             gameServer.Description.Should().Be(command.Description);
 

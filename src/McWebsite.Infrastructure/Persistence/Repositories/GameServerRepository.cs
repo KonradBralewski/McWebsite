@@ -22,7 +22,7 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
         public async Task<ErrorOr<IEnumerable<GameServer>>> GetGameServers(int page, int entriesPerPage)
         {
             return await _dbContext.GameServers
-                .OrderByDescending(p => p.CreatedDateTime)
+                .OrderBy(p => p.CreatedDateTime)
                 .Skip(page * entriesPerPage)
                 .Take(entriesPerPage)
                 .ToListAsync();

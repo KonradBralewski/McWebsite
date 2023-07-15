@@ -19,11 +19,11 @@ namespace McWebsite.Application.UnitTests.GameServers.TestUtils
                                                      string? description = null)
         {
             return new UpdateGameServerCommand(id ?? Constants.GameServerQueriesAndCommands.Id,
-                                               maximumPlayersNumber ?? Constants.GameServer.MaximumPlayersNumber,
-                                               currentPlayersNumber ?? Constants.GameServer.CurrentPlayersNumber,
-                                               serverLocation ?? Constants.GameServer.ServerLocation,
-                                               serverType ?? Constants.GameServer.ServerType,
-                                               description ?? Constants.GameServer.Description);
+                                               maximumPlayersNumber ?? Constants.GameServerQueriesAndCommands.MaximumPlayersNumber,
+                                               currentPlayersNumber ?? Constants.GameServerQueriesAndCommands.CurrentPlayersNumber,
+                                               serverLocation ?? Constants.GameServerQueriesAndCommands.ServerLocation,
+                                               serverType ?? Constants.GameServerQueriesAndCommands.ServerType,
+                                               description ?? Constants.GameServerQueriesAndCommands.Description);
         }
     }
 }

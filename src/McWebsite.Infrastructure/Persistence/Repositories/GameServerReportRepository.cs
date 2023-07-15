@@ -28,7 +28,7 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
         public async Task<ErrorOr<IEnumerable<GameServerReport>>> GetGameServersReports(int page, int entriesPerPage)
         {
             return await _dbContext.GameServersReports
-                .OrderByDescending(p => p.ReportDate)
+                .OrderBy(p => p.ReportDate)
                 .Skip(page * entriesPerPage)
                 .Take(entriesPerPage)
                 .ToListAsync();

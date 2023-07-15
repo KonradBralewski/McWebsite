@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using McWebsite.Application.GameServers.Queries.GetGameServers;
-using McWebsite.Application.UnitTests.GameServers.TestEnvironments;
+using McWebsite.Application.UnitTests.TestEnvironments;
 using McWebsite.Application.UnitTests.GameServers.TestUtils;
 using Moq;
 using Xunit;

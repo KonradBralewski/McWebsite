@@ -2,7 +2,7 @@
 using McWebsite.Application.Common.Interfaces.Persistence;
 using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
 using McWebsite.Application.GameServers.Queries.GetGameServer;
-using McWebsite.Application.UnitTests.GameServers.TestEnvironments;
+using McWebsite.Application.UnitTests.TestEnvironments;
 using McWebsite.Application.UnitTests.GameServers.TestUtils;
 using McWebsite.Application.UnitTests.TestUtils.Extensions;
 using McWebsite.Domain.GameServer.ValueObjects;

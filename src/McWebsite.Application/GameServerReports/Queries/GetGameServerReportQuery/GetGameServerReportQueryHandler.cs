@@ -1,19 +1,11 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Persistence;
-using McWebsite.Application.GameServers.Queries.GetGameServer;
-using McWebsite.Application.GameServers.Queries.GetGameServerQuery;
-using McWebsite.Domain.GameServer.ValueObjects;
 using McWebsite.Domain.GameServerReport.ValueObjects;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServerReports.Queries.GetGameServerReportQuery
 {
-    internal sealed class GetGameServerReportQueryHandler : IRequestHandler<GetGameServerReportQuery, ErrorOr<GetGameServerReportResult>>
+    public sealed class GetGameServerReportQueryHandler : IRequestHandler<GetGameServerReportQuery, ErrorOr<GetGameServerReportResult>>
     {
         private readonly IGameServerReportRepository _gameServerReportRepository;
         public GetGameServerReportQueryHandler(IGameServerReportRepository gameServerReportRepository)

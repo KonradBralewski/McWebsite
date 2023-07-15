@@ -1,9 +1,8 @@
 ﻿using FluentAssertions;
-using McWebsite.Application.GameServerReports.Commands.CreateGameServerReportCommand;
 using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
-using McWebsite.Application.UnitTests.GameServers.TestEnvironments;
+using McWebsite.Application.UnitTests.TestEnvironments;
 using McWebsite.Application.UnitTests.GameServers.TestUtils;
-using McWebsite.Application.UnitTests.TestUtils.Extensions;
+using McWebsite.Application.UnitTests.TestUtils.Extensions.GameServerExtensions;
 using McWebsite.Domain.GameServer;
 using Moq;
 using Xunit;

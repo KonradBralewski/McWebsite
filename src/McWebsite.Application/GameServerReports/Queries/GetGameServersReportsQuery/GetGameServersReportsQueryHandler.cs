@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServerReports.Queries.GetGameServersReportsQuery
 {
-    internal sealed class GetGameServersReportsQueryHandler : IRequestHandler<GetGameServersReportsQuery, ErrorOr<GetGameServersReportsResult>>
+    public sealed class GetGameServersReportsQueryHandler : IRequestHandler<GetGameServersReportsQuery, ErrorOr<GetGameServersReportsResult>>
     {
         private readonly IGameServerReportRepository _gameServerReportRepository;
         public GetGameServersReportsQueryHandler(IGameServerReportRepository gameServerReportRepository)

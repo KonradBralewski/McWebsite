@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using McWebsite.Application.GameServers.Commands.DeleteGameServerCommand;
-using McWebsite.Application.UnitTests.GameServers.TestEnvironments;
+using McWebsite.Application.UnitTests.TestEnvironments;
 using McWebsite.Application.UnitTests.GameServers.TestUtils;
 using McWebsite.Domain.GameServer;
 using Moq;
@@ -41,7 +41,7 @@ namespace McWebsite.Application.UnitTests.GameServers.Commands.DeleteGameServer
 
         [Theory]
         [MemberData(nameof(InvalidIdsDeleteGameServerCommands))]
-        public async Task HandleCreateGameServerCommand_InvalidIdCommandGiven_ShouldReturnNotFoundError(DeleteGameServerCommand command)
+        public async Task HandleDeleteGameServerCommand_InvalidIdCommandGiven_ShouldReturnNotFoundError(DeleteGameServerCommand command)
         {
             // Arrange
             var validator = new DeleteGameServerCommandValidator();

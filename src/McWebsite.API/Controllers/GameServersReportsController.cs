@@ -4,6 +4,9 @@ using McWebsite.API.Contracts.GameServer;
 using McWebsite.API.Contracts.GameServerReport;
 using McWebsite.API.Controllers.Base;
 using McWebsite.Application.GameServerReports.Commands.CreateGameServerReportCommand;
+using McWebsite.Application.GameServerReports.Commands.DeleteGameServerReportCommand;
+using McWebsite.Application.GameServerReports.Commands.UpdateGameServerReportCommand;
+using McWebsite.Application.GameServerReports.Queries.GetGameServerReportQuery;
 using McWebsite.Application.GameServerReports.Queries.GetGameServersReportsQuery;
 using McWebsite.Application.GameServers.Commands.DeleteGameServerCommand;
 using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
@@ -26,12 +29,12 @@ namespace McWebsite.API.Controllers
         [HttpGet("{gameServerReportId}")]
         public async Task<IActionResult> GetGameServerReportById([FromRoute] Guid gameServerReportId)
         {
-            var query = _mapper.Map<GetGameServerQuery>(gameServerReportId);
+            var query = _mapper.Map<GetGameServerReportQuery>(gameServerReportId);
 
             var queryResult = await _mediator.Send(query);
 
             return queryResult.Match(
-                serverResult => Ok(_mapper.Map<GetGameServerReportResponse>(serverResult)),
+                serverResult => Ok(_mapper.Map<GetGameServerReportResponse>(serverResult.GameServerReport)),
                 errors => Problem(errors));
 
         }
@@ -44,7 +47,7 @@ namespace McWebsite.API.Controllers
             var queryResult = await _mediator.Send(query);
 
             return queryResult.Match(
-                serversResult => Ok(_mapper.Map<GetGameServersResponse>(serversResult)),
+                serversResult => Ok(_mapper.Map<GetGameServersReportsResponse>(serversResult)),
                 errors => Problem(errors));
         }
 
@@ -65,7 +68,7 @@ namespace McWebsite.API.Controllers
         [HttpDelete("{gameServerReportId}")]
         public async Task<IActionResult> DeleteGameServerReportAsync([FromRoute] Guid gameServerReportId)
         {
-            var command = _mapper.Map<DeleteGameServerCommand>(gameServerReportId);
+            var command = _mapper.Map<DeleteGameServerReportCommand>(gameServerReportId);
 
             var commandResult = await _mediator.Send(command);
 
@@ -78,7 +81,7 @@ namespace McWebsite.API.Controllers
         [HttpPatch("{gameServerReportId}")]
         public async Task<IActionResult> UpdateGameServerReportAsync([FromRoute] Guid gameServerReportId, [FromBody] UpdateGameServerReportRequest request)
         {
-            var command = _mapper.Map<UpdateGameServerCommand>((gameServerReportId, request));
+            var command = _mapper.Map<UpdateGameServerReportCommand>((gameServerReportId, request));
 
             var commandResult = await _mediator.Send(command);
 
@@ -88,7 +91,7 @@ namespace McWebsite.API.Controllers
             }
 
             return commandResult.Value.Match(
-                result => Ok(_mapper.Map<UpdateGameServerResponse>(result)),
+                result => Ok(_mapper.Map<UpdateGameServerReportResponse>(result)),
                 errors => Problem(errors));
 
         }
