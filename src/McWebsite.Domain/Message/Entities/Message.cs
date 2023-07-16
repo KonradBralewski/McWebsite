@@ -4,7 +4,7 @@ using McWebsite.Domain.MessageModel.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
 
 
-namespace McWebsite.Domain.MessageModel.Entities
+namespace McWebsite.Domain.Message.Entities
 {
     public sealed class Message : Entity<MessageId>
     {

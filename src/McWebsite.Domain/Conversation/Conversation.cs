@@ -1,8 +1,6 @@
 ﻿using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.Conversation.ValueObjects;
-using McWebsite.Domain.User.ValueObjects;
 using System.Collections.ObjectModel;
-using McWebsite.Domain.MessageModel.Entities;
 using McWebsite.Domain.MessageModel.ValueObjects;
 
 namespace McWebsite.Domain.Conversation

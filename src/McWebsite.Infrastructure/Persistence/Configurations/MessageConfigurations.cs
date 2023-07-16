@@ -1,7 +1,7 @@
 ﻿using McWebsite.Domain.Conversation.ValueObjects;
 using McWebsite.Domain.GameServerReport;
 using McWebsite.Domain.GameServerReport.ValueObjects;
-using McWebsite.Domain.MessageModel.Entities;
+using McWebsite.Domain.Message.Entities;
 using McWebsite.Domain.MessageModel.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
 using Microsoft.EntityFrameworkCore;
