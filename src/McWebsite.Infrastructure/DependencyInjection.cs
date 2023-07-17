@@ -49,6 +49,10 @@ namespace McWebsite.Infrastructure
             services.AddScoped<IGameServerRepository, GameServerRepository>();
             services.AddScoped<IGameServerReportRepository, GameServerReportRepository>();
             services.AddScoped<IGameServerSubscriptionRepository, GameServerSubscriptionRepository>();
+            services.AddScoped<IInGameEventRepository, InGameEventRepository>();
+            services.AddScoped<IInGameEventOrderRepository, InGameEventOrderRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IConversationRepository, ConversationRepository>();
 
             return services;
         }

@@ -37,6 +37,19 @@ namespace McWebsite.Domain.InGameEventOrder
                 updatedDateTime);
         }
 
+        public static InGameEventOrder Recreate(Guid id,
+                                                Guid buyingUserId,
+                                                Guid boughtInGameEventId,
+                                                DateTime orderDate,
+                                                DateTime updatedDateTime)
+        {
+            return new InGameEventOrder(InGameEventOrderId.Create(id),
+                UserId.Create(buyingUserId),
+                InGameEventId.Create(boughtInGameEventId),
+                orderDate,
+                updatedDateTime);
+        }
+
         /// <summary>
         /// Constructor that will be used by EF Core, EF Core is not able to setup navigation property for Tuple<UserId, UserId>
         /// </summary>
