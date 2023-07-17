@@ -30,7 +30,7 @@ namespace McWebsite.API.Controllers
             var queryResult = await _mediator.Send(query);
 
             return queryResult.Match(
-                inGameEventResult => Ok(inGameEventResult.InGameEvent.Adapt<GetInGameEventResponse>()),
+                inGameEventResult => Ok(inGameEventResult.Adapt<GetInGameEventResponse>()),
                 errors => Problem(errors));
 
         }

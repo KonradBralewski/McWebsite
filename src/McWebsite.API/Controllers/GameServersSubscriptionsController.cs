@@ -36,7 +36,7 @@ namespace McWebsite.API.Controllers
             var queryResult = await _mediator.Send(query);
 
             return queryResult.Match(
-                subscriptionResult => Ok(_mapper.Map<GetGameServerSubscriptionResponse>(subscriptionResult.GameServerSubscription)),
+                subscriptionResult => Ok(_mapper.Map<GetGameServerSubscriptionResponse>(subscriptionResult)),
                 errors => Problem(errors));
 
         }

@@ -25,7 +25,7 @@ namespace McWebsite.Application.InGameEventOrders.Commands.UpdateInGameEventOrde
         public async Task<ErrorOr<UpdateInGameEventOrderResult>?> Handle(UpdateInGameEventOrderCommand command, CancellationToken cancellationToken)
         {
             var inGameEventOrderSearchResult = await _inGameEventOrderRepository.GetInGameEventOrder(
-                InGameEventOrderId.Create(command.InGameEventId));
+                InGameEventOrderId.Create(command.InGameEventOrderId));
 
             if (inGameEventOrderSearchResult.IsError)
             {

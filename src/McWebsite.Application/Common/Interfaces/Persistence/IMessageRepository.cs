@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using McWebsite.Domain.Conversation.ValueObjects;
 using McWebsite.Domain.Message.Entities;
 using McWebsite.Domain.MessageModel.ValueObjects;
 
@@ -6,6 +7,7 @@ namespace McWebsite.Application.Common.Interfaces.Persistence
 {
     public interface IMessageRepository
     {
+        Task<ErrorOr<IEnumerable<Message>>> GetConversationMessages(ConversationId conversationId);
         Task<ErrorOr<IEnumerable<Message>>> GetMessages(int page, int entriesPerPage);
         Task<ErrorOr<Message>> GetMessage(MessageId messageId);
         Task<ErrorOr<Message>> CreateMessage(Message message);

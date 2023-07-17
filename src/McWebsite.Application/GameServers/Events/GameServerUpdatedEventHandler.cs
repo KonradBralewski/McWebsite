@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.GameServers.Events
 {
-    public sealed class GameServerUpdatedEventHandler : INotificationHandler<GameServerUpdated>
+    public sealed class GameServerUpdatedEventHandler : INotificationHandler<GameServerUpdatedEvent>
     {
-        public Task Handle(GameServerUpdated notification, CancellationToken cancellationToken)
+        public Task Handle(GameServerUpdatedEvent notification, CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }

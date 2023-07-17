@@ -30,7 +30,7 @@ namespace McWebsite.API.Common.Mapping
                 .MapToConstructor(true);
 
             config.NewConfig<GetGameServerSubscriptionResult, GetGameServerSubscriptionResponse>()
-                .ConstructUsing(src => src.Adapt<GetGameServerSubscriptionResponse>());
+                .ConstructUsing(src => src.GameServerSubscription.Adapt<GetGameServerSubscriptionResponse>());
 
             config.NewConfig<CreateGameServerSubscriptionResult, CreateGameServerSubscriptionResponse>()
                 .ConstructUsing(src => new CreateGameServerSubscriptionResponse(src.GameServerSubscription.Id.Value,

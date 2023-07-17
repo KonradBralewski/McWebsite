@@ -2,5 +2,5 @@
 
 namespace McWebsite.Application.InGameEventOrders.Commands.UpdateInGameEventOrderCommand
 {
-    public sealed record UpdateInGameEventOrderResult(InGameEventOrder InGameEvent);
+    public sealed record UpdateInGameEventOrderResult(InGameEventOrder InGameEventOrder);
 }

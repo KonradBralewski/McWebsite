@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Domain.GameServer.Events
 {
-    public sealed record GameServerUpdated() : IDomainEvent; // TODO: Take care of it when GameServerSubscriptions & Reports will be implemented
+    public sealed record GameServerUpdatedEvent() : IDomainEvent; // TODO: Take care of it when GameServerSubscriptions & Reports will be implemented
 }

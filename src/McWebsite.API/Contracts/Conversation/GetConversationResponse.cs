@@ -3,7 +3,7 @@
 namespace McWebsite.API.Contracts.Conversation
 {
     public sealed record GetConversationResponse(Guid Id,
-                                               Guid FirstParticipant,
-                                               Guid SecondParticipant,
-                                               List<GetMessageResponse> Messages);
+                                                 Guid FirstParticipant,
+                                                 Guid SecondParticipant,
+                                                 IEnumerable<GetMessageResponse> Messages);
 }

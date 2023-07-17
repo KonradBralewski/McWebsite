@@ -17,12 +17,12 @@ namespace McWebsite.Domain.GameServer
     {
         public static void Delete(this GameServer gameServer)
         {
-            gameServer.AddDomainEvent(new GameServerDeleted());
+            gameServer.AddDomainEvent(new GameServerDeletedEvent());
         }
 
         public static void Update(this GameServer gameServer)
         {
-            gameServer.AddDomainEvent(new GameServerUpdated());
+            gameServer.AddDomainEvent(new GameServerUpdatedEvent());
         }
     }
 

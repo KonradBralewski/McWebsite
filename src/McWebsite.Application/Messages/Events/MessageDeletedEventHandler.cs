@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.Messages.Events
 {
-    public sealed class MessageDeletedEventHandler : INotificationHandler<GameServerDeleted>
+    public sealed class MessageDeletedEventHandler : INotificationHandler<GameServerDeletedEvent>
     {
-        public Task Handle(GameServerDeleted notification, CancellationToken cancellationToken)
+        public Task Handle(GameServerDeletedEvent notification, CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }

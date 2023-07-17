@@ -32,7 +32,7 @@ namespace McWebsite.API.Controllers
             var queryResult = await _mediator.Send(query);
 
             return queryResult.Match(
-                serverResult => Ok(serverResult.GameServer.Adapt<GetGameServerResponse>()),
+                serverResult => Ok(serverResult.Adapt<GetGameServerResponse>()),
                 errors => Problem(errors));
 
         }

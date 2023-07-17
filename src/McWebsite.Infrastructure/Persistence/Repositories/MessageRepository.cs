@@ -1,6 +1,7 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Persistence;
 using McWebsite.Domain.Common.Errors;
+using McWebsite.Domain.Conversation.ValueObjects;
 using McWebsite.Domain.Message.Entities;
 using McWebsite.Domain.MessageModel.ValueObjects;
 using McWebsite.Infrastructure.Exceptions;
@@ -15,6 +16,15 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
         public MessageRepository(McWebsiteDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+
+        public async Task<ErrorOr<IEnumerable<Message>>> GetConversationMessages(ConversationId conversationId)
+        {
+            return await _dbContext.Messages
+                .Where(m => m.ConversationId == conversationId)
+                .OrderBy(p => p.SentDateTime)
+                .ToListAsync();
         }
 
 

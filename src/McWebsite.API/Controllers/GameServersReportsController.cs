@@ -33,7 +33,7 @@ namespace McWebsite.API.Controllers
             var queryResult = await _mediator.Send(query);
 
             return queryResult.Match(
-                serverResult => Ok(_mapper.Map<GetGameServerReportResponse>(serverResult.GameServerReport)),
+                serverResult => Ok(_mapper.Map<GetGameServerReportResponse>(serverResult)),
                 errors => Problem(errors));
 
         }

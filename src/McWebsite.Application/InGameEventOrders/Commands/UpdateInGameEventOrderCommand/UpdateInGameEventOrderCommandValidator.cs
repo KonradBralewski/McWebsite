@@ -9,7 +9,7 @@ namespace McWebsite.Application.InGameEventOrders.Commands.UpdateInGameEventOrde
     {
         public UpdateInGameEventOrderCommandValidator()
         {
-            RuleFor(x => x.InGameEventId)
+            RuleFor(x => x.InGameEventOrderId)
                 .NotEmpty()
                 .Must(id => Guid.TryParse(id.ToString(), out _));
             RuleFor(x => x.BoughtInGameEventId)

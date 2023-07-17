@@ -1,15 +1,10 @@
 ﻿using Mapster;
-using McWebsite.API.Contracts.GameServer;
 using McWebsite.API.Contracts.GameServerReport;
 using McWebsite.Application.GameServerReports.Commands.CreateGameServerReportCommand;
 using McWebsite.Application.GameServerReports.Commands.DeleteGameServerReportCommand;
 using McWebsite.Application.GameServerReports.Commands.UpdateGameServerReportCommand;
 using McWebsite.Application.GameServerReports.Queries.GetGameServerReportQuery;
 using McWebsite.Application.GameServerReports.Queries.GetGameServersReportsQuery;
-using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
-using McWebsite.Application.GameServers.Commands.UpdateGameServerCommand;
-using McWebsite.Application.GameServers.Queries.GetGameServerQuery;
-using McWebsite.Application.GameServers.Queries.GetGameServers;
 using McWebsite.Domain.GameServerReport;
 
 namespace McWebsite.API.Common.Mapping
@@ -32,7 +27,7 @@ namespace McWebsite.API.Common.Mapping
                 .MapToConstructor(true);
 
             config.NewConfig<GetGameServerReportResult, GetGameServerReportResponse>()
-                .ConstructUsing(src => src.Adapt<GetGameServerReportResponse>());
+                .ConstructUsing(src => src.GameServerReport.Adapt<GetGameServerReportResponse>());
 
             config.NewConfig<CreateGameServerReportResult, CreateGameServerReportResponse>()
                 .ConstructUsing(src => new CreateGameServerReportResponse(src.GameServerReport.Id.Value,
@@ -55,9 +50,9 @@ namespace McWebsite.API.Common.Mapping
                 .MapToConstructor(true);
 
             config.NewConfig<(int page, int entriesPerPage), GetGameServersReportsQuery>()
-             .Map(dest => dest.Page, src => src.page)
-             .Map(dest => dest.EntriesPerPage, src => src.entriesPerPage)
-             .MapToConstructor(true);
+                 .Map(dest => dest.Page, src => src.page)
+                 .Map(dest => dest.EntriesPerPage, src => src.entriesPerPage)
+                 .MapToConstructor(true);
 
             config.NewConfig<Guid, DeleteGameServerReportCommand>()
                 .Map(dest => dest.GameServerReportId, src => src)
@@ -71,11 +66,11 @@ namespace McWebsite.API.Common.Mapping
                 .MapToConstructor(true);
 
             config.NewConfig<(Guid reportingUserId, CreateGameServerReportRequest request), CreateGameServerReportCommand>()
-             .Map(dest => dest.ReportingUserId, src => src.reportingUserId)
-             .Map(dest => dest.ReportedGameServerId, src => src.request.ReportedGameServerId)
-             .Map(dest => dest.ReportType, src => src.request.ReportType)
-             .Map(dest => dest.ReportDescription, src => src.request.ReportDescription)
-             .MapToConstructor(true);
+                 .Map(dest => dest.ReportingUserId, src => src.reportingUserId)
+                 .Map(dest => dest.ReportedGameServerId, src => src.request.ReportedGameServerId)
+                 .Map(dest => dest.ReportType, src => src.request.ReportType)
+                 .Map(dest => dest.ReportDescription, src => src.request.ReportDescription)
+                 .MapToConstructor(true);
         }
 
     }

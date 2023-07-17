@@ -2,5 +2,5 @@
 
 namespace McWebsite.Application.Messages.Commands.UpdateMessageCommand
 {
-    public sealed record UpdateMessageResult(Message message);
+    public sealed record UpdateMessageResult(Message Message);
 }

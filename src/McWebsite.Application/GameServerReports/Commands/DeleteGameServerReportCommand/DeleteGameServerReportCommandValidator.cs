@@ -11,8 +11,8 @@ namespace McWebsite.Application.GameServerReports.Commands.DeleteGameServerRepor
     {
         public DeleteGameServerReportCommandValidator()
         {
-            RuleFor(x => x.GameServerReportId).NotEmpty().WithMessage("GameServerId cannot be empty.");
-            RuleFor(x => x.GameServerReportId).Must(id => Guid.TryParse(id.ToString(), out _)).WithMessage("GameServerId has to be a valid guid value.");
+            RuleFor(x => x.GameServerReportId).NotEmpty().WithMessage("GameServerReportId cannot be empty.");
+            RuleFor(x => x.GameServerReportId).Must(id => Guid.TryParse(id.ToString(), out _)).WithMessage("GameServerReportId has to be a valid guid value.");
         }
     }
 }

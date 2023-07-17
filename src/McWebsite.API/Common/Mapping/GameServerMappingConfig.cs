@@ -26,8 +26,11 @@ namespace McWebsite.API.Common.Mapping
                                                                  src.Description));
 
             config.NewConfig<GetGameServersResult, GetGameServersResponse>()
-                .Map(dest => dest.GameServers, src => src.GameServers.Select(gs=>gs.Adapt<GetGameServerResponse>()))
+                .Map(dest => dest.GameServers, src => src.GameServers.Select(gs => gs.Adapt<GetGameServerResponse>()))
                 .MapToConstructor(true);
+
+            config.NewConfig<GetGameServerResult, GetGameServerResponse>()
+                .ConstructUsing(src => src.GameServer.Adapt<GetGameServerResponse>());
 
             config.NewConfig<UpdateGameServerResult, UpdateGameServerResponse>()
               .ConstructUsing(src => new UpdateGameServerResponse(src.GameServer.Id.Value,

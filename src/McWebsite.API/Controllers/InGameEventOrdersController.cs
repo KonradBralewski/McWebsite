@@ -35,7 +35,7 @@ namespace McWebsite.API.Controllers
             var queryResult = await _mediator.Send(query);
 
             return queryResult.Match(
-                inGameEventOrderResult => Ok(inGameEventOrderResult.InGameEventOrder.Adapt<GetInGameEventOrderResponse>()),
+                inGameEventOrderResult => Ok(inGameEventOrderResult.Adapt<GetInGameEventOrderResponse>()),
                 errors => Problem(errors));
 
         }
