@@ -29,16 +29,16 @@ namespace McWebsite.Infrastructure.Persistence.Configurations
 
             builder.OwnsOne(x => x.Participants, pb =>
             {
-                pb.Property(p => p.FirstParticipant)
+                pb.Property(p => p.FirstParticipantId)
                     .IsRequired()
-                    .HasColumnName("FirstParticipant")
+                    .HasColumnName("FirstParticipantId")
                     .HasConversion(
                     participant => participant.Value,
                     value => UserId.Create(value));
 
-                pb.Property(p => p.SecondParticipant)
+                pb.Property(p => p.SecondParticipantId)
                    .IsRequired()
-                   .HasColumnName("SecondParticipant")
+                   .HasColumnName("SecondParticipantId")
                    .HasConversion(
                    participant => participant.Value,
                    value => UserId.Create(value));

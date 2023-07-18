@@ -1,16 +1,12 @@
 ﻿using McWebsite.Domain.GameServer.Events;
+using McWebsite.Domain.Message.Events;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace McWebsite.Application.Messages.Events
 {
-    public sealed class MessageDeletedEventHandler : INotificationHandler<GameServerDeletedEvent>
+    public sealed class MessageDeletedEventHandler : INotificationHandler<MessageDeletedEvent>
     {
-        public Task Handle(GameServerDeletedEvent notification, CancellationToken cancellationToken)
+        public Task Handle(MessageDeletedEvent notification, CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }

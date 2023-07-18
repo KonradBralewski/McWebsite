@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Persistence;
+using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.Conversation;
 using McWebsite.Domain.Conversation.ValueObjects;
@@ -43,7 +44,7 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
 
             int result = await _dbContext.SaveChangesAsync();
 
-            if (result == 0)
+            if(await _dbContext.Conversations.FirstOrDefaultAsync(c => c.Id == conversation.Id) is not Conversation)
             {
                 ExceptionsList.ThrowCreationException();
             }

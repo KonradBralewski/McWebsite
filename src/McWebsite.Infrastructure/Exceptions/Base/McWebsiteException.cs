@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Infrastructure.Exceptions
+namespace McWebsite.Infrastructure.Exceptions.Base
 {
     public class McWebsiteException
     {

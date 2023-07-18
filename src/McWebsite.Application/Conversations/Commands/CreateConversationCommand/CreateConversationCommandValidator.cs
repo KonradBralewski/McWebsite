@@ -14,10 +14,10 @@ namespace McWebsite.Application.Conversations.Commands.CreateConversationCommand
     {
         public CreateConversationCommandValidator()
         {
-            RuleFor(x => x.FirstParticipant)
+            RuleFor(x => x.FirstParticipantId)
                 .NotEmpty()
                 .Must(id => Guid.TryParse(id.ToString(), out _));
-            RuleFor(x => x.SecondParticipant)
+            RuleFor(x => x.SecondParticipantId)
                 .NotEmpty()
                 .Must(id => Guid.TryParse(id.ToString(), out _));
         }

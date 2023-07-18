@@ -1,10 +1,11 @@
 ﻿using McWebsite.Domain.Common.Errors.SystemUnexpected;
+using McWebsite.Infrastructure.Exceptions.Base;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
 
 namespace McWebsite.Infrastructure.Exceptions
 {
-    public static class ExceptionsList
+    public static partial class ExceptionsList
     {
         public static McWebsiteException ThrowCreationException()
         {
@@ -24,19 +25,9 @@ namespace McWebsite.Infrastructure.Exceptions
             throw exception;
         }
 
-        // TO:DO make this class partial and seperate concerns
-        public static McWebsiteException ThrowIdenificationTryException()
+        public static McWebsiteException ThrowUnitBoundToEventNotFound()
         {
-            var exception = new McWebsiteException(new Exception(), UnexpectedErrors.Identity.IdentifactionTryFailureError).Exception;
-            throw exception;
-        }
-
-        /// <summary>
-        /// Should never happen. Identity table & Table defining User domain bounded context are out of sync.
-        /// </summary>
-        public static McWebsiteException ThrowUserNotFoundButShouldBeException()
-        {
-            var exception = new McWebsiteException(new Exception(), UnexpectedErrors.Identity.UserNotFoundButShouldBe).Exception;
+            var exception = new McWebsiteException(new DbUpdateException(), UnexpectedErrors.Persistence.UnitUpdateError).Exception;
             throw exception;
         }
 

@@ -10,14 +10,19 @@ namespace McWebsite.Domain.Conversation.ValueObjects
 {
     public sealed class ConversationParticipants : ValueObject
     {
-        public UserId FirstParticipant { get; private set; }
-        public UserId SecondParticipant { get; private set; }
+        public UserId FirstParticipantId { get; private set; }
+        public UserId SecondParticipantId { get; private set; }
 
         private ConversationParticipants(UserId firstParticipant, UserId secondParticipant)
         {
-            FirstParticipant = firstParticipant;
-            SecondParticipant = secondParticipant;
+            FirstParticipantId = firstParticipant;
+            SecondParticipantId = secondParticipant;
         }
+
+#pragma warning disable CS8618
+        private ConversationParticipants()
+#pragma warning restore CS8618
+        { }
 
         public static ConversationParticipants Create(Guid firstParticipantId, Guid secondParticipantId)
         {
@@ -26,8 +31,8 @@ namespace McWebsite.Domain.Conversation.ValueObjects
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return FirstParticipant;
-            yield return SecondParticipant;
+            yield return FirstParticipantId;
+            yield return SecondParticipantId;
         }
     }
 }

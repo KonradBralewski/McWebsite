@@ -4,6 +4,6 @@ using McWebsite.Domain.GameServer.ValueObjects;
 
 namespace McWebsite.API.Contracts.Conversation
 {
-    public sealed record CreateConversationRequest(Guid OtherParticipant,
+    public sealed record CreateConversationRequest(Guid OtherParticipantId,
                                                    string FirstMessageContent);
 }

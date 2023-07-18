@@ -4,6 +4,7 @@ using McWebsite.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using McWebsite.Domain.GameServer.Enums;
 using McWebsite.Domain.GameServerReport.Enums;
@@ -15,9 +16,11 @@ using McWebsite.Domain.InGameEvent.Enums;
 namespace McWebsite.Infrastructure.Migrations
 {
     [DbContext(typeof(McWebsiteDbContext))]
-    partial class McWebsiteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230718050551_JustRenamingConversationProperties")]
+    partial class JustRenamingConversationProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

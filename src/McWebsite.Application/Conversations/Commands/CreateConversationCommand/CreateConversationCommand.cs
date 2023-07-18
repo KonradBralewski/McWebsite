@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.Conversations.Commands.CreateConversationCommand
 {
-    public sealed record CreateConversationCommand(Guid FirstParticipant,
-                                                   Guid SecondParticipant,
+    public sealed record CreateConversationCommand(Guid FirstParticipantId,
+                                                   Guid SecondParticipantId,
                                                    string FirstMessageContent) : IRequest<ErrorOr<CreateConversationResult>>;
 }

@@ -1,6 +1,7 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Persistence;
 using McWebsite.Domain.Conversation;
+using McWebsite.Domain.Conversation.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
 using MediatR;
 
@@ -17,25 +18,26 @@ namespace McWebsite.Application.Conversations.Commands.CreateConversationCommand
         }
         public async Task<ErrorOr<CreateConversationResult>> Handle(CreateConversationCommand command, CancellationToken cancellationToken)
         {
-            var firstParticipantSearchResult = await _userRepository.GetUser(UserId.Create(command.FirstParticipant));
+            var firstParticipantSearchResult = await _userRepository.GetUser(UserId.Create(command.FirstParticipantId));
 
             if (firstParticipantSearchResult.IsError)
             {
                 return firstParticipantSearchResult.Errors;
             }
 
-            var secondParticipantSearchResult = await _userRepository.GetUser(UserId.Create(command.SecondParticipant));
+            var secondParticipantSearchResult = await _userRepository.GetUser(UserId.Create(command.SecondParticipantId));
 
             if (secondParticipantSearchResult.IsError)
             {
                 return secondParticipantSearchResult.Errors;
             }
 
-            Conversation toBeAdded = Conversation.Create(command.FirstParticipant,
-                                                     command.SecondParticipant,
+            Conversation toBeAdded = Conversation.Create(command.FirstParticipantId,
+                                                     command.SecondParticipantId,
                                                      DateTime.UtcNow,
                                                      DateTime.UtcNow);
 
+            toBeAdded.Start(command.FirstMessageContent);
             var creationResult = await _conversationRepository.CreateConversation(toBeAdded);
 
             if (creationResult.IsError)
@@ -44,8 +46,6 @@ namespace McWebsite.Application.Conversations.Commands.CreateConversationCommand
             }
 
             Conversation createdConversation = creationResult.Value;
-
-            createdConversation.Start();
 
             return new CreateConversationResult(createdConversation);
         }

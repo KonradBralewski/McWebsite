@@ -10,6 +10,10 @@ namespace McWebsite.Domain.Message.Entities
 {
     public static class MessageEventsExtensions
     {
+        public static void Create(this Message message)
+        {
+            message.AddDomainEvent(new MessageCreatedEvent(message.ConversationId, message.Id));
+        }
         public static void Delete(this Message message)
         {
             message.AddDomainEvent(new MessageDeletedEvent());
