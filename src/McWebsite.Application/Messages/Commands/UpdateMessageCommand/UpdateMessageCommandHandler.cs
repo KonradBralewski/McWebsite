@@ -45,7 +45,7 @@ namespace McWebsite.Application.Messages.Commands.UpdateMessageCommand
 
         private Message? ApplyModfications(Message toBeUpdated, UpdateMessageCommand command)
         {
-            if(toBeUpdated.MessageContent != command.MessageContent)
+            if(toBeUpdated.MessageContent == command.MessageContent)
             {
                 return null;
             }

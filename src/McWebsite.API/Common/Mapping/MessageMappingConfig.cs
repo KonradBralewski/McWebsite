@@ -68,7 +68,6 @@ namespace McWebsite.API.Common.Mapping
                 .MapToConstructor(true);
 
             config.NewConfig<(Guid shipperId, CreateMessageRequest request), CreateMessageCommand>()
-                .Map(dest => dest.ConversationId, src => src.request.ConversationId)
                 .Map(dest => dest.ReceiverId, src => src.request.ReceiverId)
                 .Map(dest => dest.ShipperId, src => src.shipperId)
                 .Map(dest => dest.MessageContent, src => src.request.MessageContent)

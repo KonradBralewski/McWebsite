@@ -1,9 +1,4 @@
-﻿using McWebsite.Application.Common.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using McWebsite.Application.Common.Interfaces.Services;
 
 namespace McWebsite.Infrastructure.Services
 {

@@ -12,9 +12,6 @@ namespace McWebsite.Application.Messages.Commands.CreateMessageCommand
     {
         public CreateMessageCommandValidator()
         {
-            RuleFor(x => x.ConversationId)
-                .NotEmpty()
-                .Must(id => Guid.TryParse(id.ToString(), out _));
             RuleFor(x => x.ReceiverId)
                 .NotEmpty()
                 .Must(id => Guid.TryParse(id.ToString(), out _));

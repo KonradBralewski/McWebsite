@@ -1,4 +1,5 @@
-﻿using McWebsite.Application.Common.Interfaces.Persistence;
+﻿using McWebsite.Application.Common.Interfaces.DomainIntegration;
+using McWebsite.Application.Common.Interfaces.Persistence;
 using McWebsite.Domain.Conversation;
 using McWebsite.Domain.Conversation.ValueObjects;
 using McWebsite.Domain.Message.Events;
@@ -11,24 +12,30 @@ namespace McWebsite.Application.Messages.Events
     {
         private readonly IConversationRepository _conversationRepository;
         private readonly IMessageRepository _messageRepository;
-        public MessageCreatedEventHandler(IConversationRepository conversationRepository, IMessageRepository messageRepository)
+        private readonly IConversationAndMessagesIntegration _conversationAndMessagesIntegration;
+        public MessageCreatedEventHandler(IConversationRepository conversationRepository,
+                                          IMessageRepository messageRepository,
+                                          IConversationAndMessagesIntegration conversationAndMessagesIntegration)
         {
             _conversationRepository = conversationRepository;
             _messageRepository = messageRepository;
+            _conversationAndMessagesIntegration = conversationAndMessagesIntegration;
         }
         public async Task Handle(MessageCreatedEvent notification, CancellationToken cancellationToken)
         {
-  
-            Conversation conversation = conversationSearchResult.Value;
+            var updatedResult = await _conversationAndMessagesIntegration.AddMessageToConversation(notification.ConversationId, notification.MessageId);
 
-            Conversation conversationUpdatedWithNewMessage = Conversation.Recreate(conversation.Id.Value,
-                                                                                   conversation.Participants.FirstParticipantId.Value,
-                                                                                   conversation.Participants.SecondParticipantId.Value,
-                                                                                   conversation.MessageIds.Select(mi => mi.Value),
-                                                                                   conversation.CreatedDateTime,
-                                                                                   DateTime.UtcNow);
+            if (updatedResult.FirstError.Type == ErrorOr.ErrorType.NotFound)
+            {
+                await _conversationAndMessagesIntegration.AddMessageToNotExistingYetConversation(notification.ConversationId, notification.MessageId);
+                return;
+            }
 
-            await _conversationRepository.UpdateConversation(conversationUpdatedWithNewMessage);
+            if (updatedResult.IsError)
+            {
+                Log.Error("MessageCreatedEventHandler integration failure, errors = {Errors}", updatedResult.Errors);
+                return;
+            }
 
             return;
         }

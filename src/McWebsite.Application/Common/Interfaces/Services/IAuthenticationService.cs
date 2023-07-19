@@ -1,7 +1,7 @@
 ﻿using ErrorOr;
 using McWebsite.Domain.User;
 
-namespace McWebsite.Application.Common.Services
+namespace McWebsite.Application.Common.Interfaces.Services
 {
     public interface IAuthenticationService
     {

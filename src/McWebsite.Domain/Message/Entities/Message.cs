@@ -58,7 +58,7 @@ namespace McWebsite.Domain.Message.Entities
                                      DateTime updatedDateTime)
         {
             return new Message(MessageId.CreateUnique(),
-                               ConversationId.Create(receiverId),
+                               ConversationId.Create(conversationId),
                                UserId.Create(receiverId),
                                UserId.Create(shipperId),
                                messageContent,

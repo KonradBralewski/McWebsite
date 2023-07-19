@@ -21,10 +21,12 @@ namespace McWebsite.Application.Conversations.Events
                                                   DateTime.UtcNow,
                                                   DateTime.UtcNow);
 
+
             firstMessage.Create();
 
             await _messageRepository.CreateMessage(firstMessage);
             // Unexpected creation failure already handled in repository by throwing predefined exception.
+
             return;
         }
     }

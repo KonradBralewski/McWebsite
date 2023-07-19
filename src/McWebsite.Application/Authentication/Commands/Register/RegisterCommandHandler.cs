@@ -5,7 +5,7 @@ using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.User;
 using McWebsite.Domain.User.ValueObjects;
 using Microsoft.AspNetCore.Identity;
-using McWebsite.Application.Common.Services;
+using McWebsite.Application.Common.Interfaces.Services;
 
 namespace McWebsite.Application.Authentication.Commands.Register
 {

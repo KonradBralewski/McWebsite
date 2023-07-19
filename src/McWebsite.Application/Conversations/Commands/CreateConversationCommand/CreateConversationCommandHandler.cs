@@ -32,6 +32,8 @@ namespace McWebsite.Application.Conversations.Commands.CreateConversationCommand
                 return secondParticipantSearchResult.Errors;
             }
 
+            //var alreadyExistingConversationSearchResult = await _conversationRepository.GetConversation()
+
             Conversation toBeAdded = Conversation.Create(command.FirstParticipantId,
                                                      command.SecondParticipantId,
                                                      DateTime.UtcNow,

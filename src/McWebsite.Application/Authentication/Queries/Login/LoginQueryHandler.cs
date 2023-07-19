@@ -3,7 +3,7 @@ using McWebsite.Application.Common.Interfaces.Authentication;
 using McWebsite.Domain.User;
 using MediatR;
 using McWebsite.Domain.Common.Errors;
-using McWebsite.Application.Common.Services;
+using McWebsite.Application.Common.Interfaces.Services;
 
 namespace McWebsite.Application.Authentication.Queries.Login
 {

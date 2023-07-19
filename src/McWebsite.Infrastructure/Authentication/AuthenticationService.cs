@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using McWebsite.Application.Common.Services;
+using McWebsite.Application.Common.Interfaces.Services;
 using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.Common.Errors.SystemUnexpected;
 using McWebsite.Domain.User;

@@ -4,6 +4,7 @@ using McWebsite.Domain.Common.DomainBase;
 using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.Conversation;
 using McWebsite.Domain.Conversation.ValueObjects;
+using McWebsite.Domain.User.ValueObjects;
 using McWebsite.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +30,19 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
         public async Task<ErrorOr<Conversation>> GetConversation(ConversationId conversationId)
         {
             var conversation = await _dbContext.Conversations.FirstOrDefaultAsync(gs => gs.Id == conversationId);
+
+            if (conversation is null)
+            {
+                return Errors.DomainModels.ModelNotFound;
+            }
+
+            return conversation;
+        }
+
+        public async Task<ErrorOr<Conversation>> GetConversation(UserId FirstParticipantId, UserId SecondParticipantId)
+        {
+            var conversation = await _dbContext.Conversations.FirstOrDefaultAsync(gs => gs.Participants.FirstParticipantId == FirstParticipantId
+            && gs.Participants.SecondParticipantId == SecondParticipantId);
 
             if (conversation is null)
             {

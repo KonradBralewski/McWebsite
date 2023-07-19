@@ -29,12 +29,11 @@ namespace McWebsite.API.Common.Mapping
                                                                                                     c.MessageIds.Select(mi => mi.Value)))));
 
 
-            //config.NewConfig<CreateConversationResult, CreateConversationResponse>()
-            //    .ConstructUsing(src => new CreateConversationResponse(src.Conversation.Id.Value,
-            //                                                  src.Conversation.Participants.FirstParticipantId.Value,
-            //                                                  src.Conversation.Participants.SecondParticipantId.Value,
-            //                                                  src.Conversation.MessageIds,
-            //                                                  src.Conversation.CreatedDateTime));
+            config.NewConfig<CreateConversationResult, CreateConversationResponse>()
+                .ConstructUsing(src => new CreateConversationResponse(src.Conversation.Id.Value,
+                                                              src.Conversation.Participants.FirstParticipantId.Value,
+                                                              src.Conversation.Participants.SecondParticipantId.Value,
+                                                              src.Conversation.CreatedDateTime));
         }
 
         public void RegisterQueriesCommandsMapping(TypeAdapterConfig config)

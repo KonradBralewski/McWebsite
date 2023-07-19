@@ -1,5 +1,4 @@
-﻿using McWebsite.Application.Common.Services;
-using McWebsite.Infrastructure.Authentication;
+﻿using McWebsite.Infrastructure.Authentication;
 using McWebsite.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +20,9 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using McWebsite.Infrastructure.Persistence.Identity;
 using McWebsite.Domain.GameServerSubscription;
+using McWebsite.Application.Common.Interfaces.Services;
+using McWebsite.Application.Common.Interfaces.DomainIntegration;
+using McWebsite.Infrastructure.Persistence.Integration;
 
 namespace McWebsite.Infrastructure
 {
@@ -54,6 +56,8 @@ namespace McWebsite.Infrastructure
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IConversationRepository, ConversationRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IConversationAndMessagesIntegration, ConversationAndMessagesIntegration>();
 
             return services;
         }

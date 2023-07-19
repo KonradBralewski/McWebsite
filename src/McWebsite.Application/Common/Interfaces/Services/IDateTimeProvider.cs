@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McWebsite.Application.Common.Services
+namespace McWebsite.Application.Common.Interfaces.Services
 {
     public interface IDateTimeProvider
     {
