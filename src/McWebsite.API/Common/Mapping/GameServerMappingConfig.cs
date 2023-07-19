@@ -43,10 +43,10 @@ namespace McWebsite.API.Common.Mapping
             config.NewConfig<CreateGameServerResult, CreateGameServerResponse>()
                 .ConstructUsing(src => new CreateGameServerResponse(src.GameServer.Id.Value,
                                                                     src.GameServer.MaximumPlayersNumber,
-                                                                    src.GameServer.CurrentPlayersNumber,
                                                                     src.GameServer.ServerLocation.Value.ToString(),
                                                                     src.GameServer.ServerType.Value.ToString(),
-                                                                    src.GameServer.Description));
+                                                                    src.GameServer.Description,
+                                                                    src.GameServer.CreatedDateTime));
      
 
         }
