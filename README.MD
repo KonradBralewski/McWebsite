@@ -15,13 +15,6 @@
 
 <hr/>
 
-### Event Storming
-![Initial Event Storming](https://iili.io/HgjV5yg.png)
-
-```json
-(Initial domain events for now) To be updated ...
-```
-
 ### [Domain Models](docs/DomainModels)
 ### [API Documentation](docs/API.md)
-
+### [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/25919237-0f152d61-1600-4b4d-b39e-e3b2d8efe3ab?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D25919237-0f152d61-1600-4b4d-b39e-e3b2d8efe3ab%26entityType%3Dcollection%26workspaceId%3D53d7e159-6288-43ed-a1cc-1a63af57b518)
