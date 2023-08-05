@@ -19,7 +19,7 @@ namespace McWebsite.Application.UnitTests.GameServers.Commands.DeleteGameServer
         }
 
         [Theory]
-        [MemberData(nameof(ValidIdsDeleteGameServerCommands))]
+        [MemberData(nameof(ValidIdDeleteGameServerCommands))]
         public async Task HandleDeleteGameServerCommand_ValidIdCommandGiven_ShouldDeleteGameServerAndReturnTrue(DeleteGameServerCommand command)
         {
             // Arrange
@@ -40,7 +40,7 @@ namespace McWebsite.Application.UnitTests.GameServers.Commands.DeleteGameServer
         }
 
         [Theory]
-        [MemberData(nameof(InvalidIdsDeleteGameServerCommands))]
+        [MemberData(nameof(InvalidIdDeleteGameServerCommands))]
         public async Task HandleDeleteGameServerCommand_InvalidIdCommandGiven_ShouldReturnNotFoundError(DeleteGameServerCommand command)
         {
             // Arrange
@@ -58,7 +58,7 @@ namespace McWebsite.Application.UnitTests.GameServers.Commands.DeleteGameServer
             _testEnvironment.MockGameServerRepository.Verify(x => x.DeleteGameServer(It.IsAny<GameServer>()), Times.Never);
         }
        
-        public static IEnumerable<object[]> ValidIdsDeleteGameServerCommands()
+        public static IEnumerable<object[]> ValidIdDeleteGameServerCommands()
         {
             var testEnvironment = UnitTestEnvironments.GameServerTestEnvironment.Create();
             foreach (GameServer gs in testEnvironment.GameServers)
@@ -66,7 +66,7 @@ namespace McWebsite.Application.UnitTests.GameServers.Commands.DeleteGameServer
                 yield return new[] { DeleteGameServerCommandUtils.Create(gs.Id.Value) };
             }
         }
-        public static IEnumerable<object[]> InvalidIdsDeleteGameServerCommands()
+        public static IEnumerable<object[]> InvalidIdDeleteGameServerCommands()
         {
             yield return new[] { DeleteGameServerCommandUtils.Create(Guid.NewGuid()) };
             yield return new[] { DeleteGameServerCommandUtils.Create(Guid.NewGuid()) };

@@ -63,7 +63,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.CreateGame
             // Assert
             commandResult.IsError.Should().BeTrue();
             commandResult.FirstError.Type.Should().Be(ErrorOr.ErrorType.NotFound);
-            _gameServerReportTestEnvironment.MockGameServerReportRepository.Verify(x => x.UpdateGameServerReport(It.IsAny<GameServerReport>()), Times.Never);
+            _gameServerReportTestEnvironment.MockGameServerReportRepository.Verify(x => x.CreateGameServerReport(It.IsAny<GameServerReport>()), Times.Never);
         }
 
         [Theory]

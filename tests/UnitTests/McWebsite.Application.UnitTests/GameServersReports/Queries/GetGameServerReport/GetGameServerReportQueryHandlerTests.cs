@@ -19,7 +19,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Queries.GetGameServ
         }
 
         [Theory]
-        [MemberData(nameof(ValidIdsGetGameServerReportQueries))]
+        [MemberData(nameof(ValidIdGetGameServerReportQueries))]
         public async Task HandleGetGameServerReportQuery_ValidQueryGiven_ShouldReturnGameServerReport(GetGameServerReportQuery query)
         {
             // Arrange
@@ -57,7 +57,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Queries.GetGameServ
             _testEnvironment.MockGameServerReportRepository.Verify(x => x.GetGameServerReport(It.IsAny<GameServerReportId>()), Times.Once);
         }
 
-        public static IEnumerable<object[]> ValidIdsGetGameServerReportQueries()
+        public static IEnumerable<object[]> ValidIdGetGameServerReportQueries()
         {
             var testEnvironment = UnitTestEnvironments.GameServerReportTestEnvironment.Create();
 

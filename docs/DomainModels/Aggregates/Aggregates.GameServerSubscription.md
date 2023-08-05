@@ -1,7 +1,3 @@
-```csharp
-GameServerSubscription Create(...);
-```
-
 ```json
 {
 	"Id" : "",

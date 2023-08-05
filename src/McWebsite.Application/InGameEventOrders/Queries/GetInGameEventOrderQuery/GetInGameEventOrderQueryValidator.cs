@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace McWebsite.Application.InGameEventOrders.Queries.GetInGameEventOrderQuery
 {
-    public sealed class GetInGameEventQueryOrderValidator : AbstractValidator<GetInGameEventOrderQuery>
+    public sealed class GetInGameEventOrderQueryValidator : AbstractValidator<GetInGameEventOrderQuery>
     {
 
-        public GetInGameEventQueryOrderValidator()
+        public GetInGameEventOrderQueryValidator()
         {
             RuleFor(x => x.InGameEventOrderId).NotEmpty().WithMessage("InGameEventOrderId cannot be empty.");
             RuleFor(x => x.InGameEventOrderId).Must(id => Guid.TryParse(id.ToString(), out _))

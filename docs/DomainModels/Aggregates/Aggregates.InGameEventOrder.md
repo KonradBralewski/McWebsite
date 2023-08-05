@@ -1,7 +1,3 @@
-```csharp
-InGameEventOrder Create(...);
-```
-
 ```json
 {
 	"Id" : "",

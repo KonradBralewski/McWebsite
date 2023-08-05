@@ -153,19 +153,14 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.UpdateGame
         public static IEnumerable<object[]> ValidButWithNoChangesUpdateGameServerReportCommands()
         {
             var testGameServerReportEnvironment = UnitTestEnvironments.GameServerReportTestEnvironment.Create();
-            GameServerReport firstGameServerReport = testGameServerReportEnvironment.GameServersReports.ElementAt(0);
-            GameServerReport secondGameServerReport = testGameServerReportEnvironment.GameServersReports.ElementAt(1);
 
-
-            yield return new[] { UpdateGameServerReportCommandUtils.Create(firstGameServerReport.Id.Value,
-                                                                           firstGameServerReport.GameServerId.Value,
-                                                                           firstGameServerReport.ReportType.Value.ToString(),
-                                                                           firstGameServerReport.ReportDescription) };
-
-            yield return new[] { UpdateGameServerReportCommandUtils.Create(secondGameServerReport.Id.Value,
-                                                                           secondGameServerReport.GameServerId.Value,
-                                                                           secondGameServerReport.ReportType.Value.ToString(),
-                                                                           secondGameServerReport.ReportDescription) };
+            foreach(GameServerReport gsr in testGameServerReportEnvironment.GameServersReports)
+            {
+                yield return new[] { UpdateGameServerReportCommandUtils.Create(gsr.Id.Value,
+                                                                           gsr.GameServerId.Value,
+                                                                           gsr.ReportType.Value.ToString(),
+                                                                           gsr.ReportDescription) };
+            }
         }
         public static IEnumerable<object[]> NotExistingIdUpdateGameServerReportCommands()
         {

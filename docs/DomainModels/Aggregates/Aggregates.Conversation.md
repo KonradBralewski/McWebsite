@@ -1,7 +1,3 @@
-```csharp
-    Conversation Create(...);
-```
-
 ```json
 {
 	"Id" : "",

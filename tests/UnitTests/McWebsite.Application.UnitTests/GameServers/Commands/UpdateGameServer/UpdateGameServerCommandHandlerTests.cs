@@ -155,22 +155,16 @@ namespace McWebsite.Application.UnitTests.GameServers.Commands.UpdateGameServer
         public static IEnumerable<object[]> ValidButWithNoChangesUpdateGameServerCommands()
         {
             var testEnvironment = UnitTestEnvironments.GameServerTestEnvironment.Create();
-            GameServer firstGameServer = testEnvironment.GameServers.ElementAt(0);
-            GameServer secondGameServer = testEnvironment.GameServers.ElementAt(1);
 
-            yield return new[] { UpdateGameServerCommandUtils.Create(firstGameServer.Id.Value,
-                                                                     firstGameServer.MaximumPlayersNumber,
-                                                                     firstGameServer.CurrentPlayersNumber,
-                                                                     firstGameServer.ServerLocation.Value.ToString(),
-                                                                     firstGameServer.ServerType.Value.ToString(),
-                                                                     firstGameServer.Description) };
-
-            yield return new[] { UpdateGameServerCommandUtils.Create(secondGameServer.Id.Value,
-                                                                     secondGameServer.MaximumPlayersNumber,
-                                                                     secondGameServer.CurrentPlayersNumber,
-                                                                     secondGameServer.ServerLocation.Value.ToString(),
-                                                                     secondGameServer.ServerType.Value.ToString(),
-                                                                     secondGameServer.Description) };
+            foreach(GameServer gs in testEnvironment.GameServers)
+            {
+                yield return new[] { UpdateGameServerCommandUtils.Create(gs.Id.Value,
+                                                                     gs.MaximumPlayersNumber,
+                                                                     gs.CurrentPlayersNumber,
+                                                                     gs.ServerLocation.Value.ToString(),
+                                                                     gs.ServerType.Value.ToString(),
+                                                                     gs.Description) };
+            }
         }
         public static IEnumerable<object[]> NotExistingIdUpdateGameServerCommands()
         {

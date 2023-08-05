@@ -1,7 +1,3 @@
-```csharp
-User Create(...);
-```
-
 ```json
 {
 	"Id" : "",

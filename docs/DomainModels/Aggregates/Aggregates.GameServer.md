@@ -1,6 +1,3 @@
-```csharp
-GameServer Create(...);
-```
 ```json
 {
 	"Id" : "",

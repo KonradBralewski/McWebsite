@@ -22,7 +22,7 @@ namespace McWebsite.Application.UnitTests.GameServers.Queries.GetGameServer
         }
 
         [Theory]
-        [MemberData(nameof(ValidIdsGetGameServerQueries))]
+        [MemberData(nameof(ValidIdGetGameServerQueries))]
         public async Task HandleGetGameServerQuery_ValidQueryGiven_ShouldReturnGameServer(GetGameServerQuery query)
         {
             // Arrange
@@ -42,7 +42,7 @@ namespace McWebsite.Application.UnitTests.GameServers.Queries.GetGameServer
         }
 
         [Theory]
-        [MemberData(nameof(BadIdsGetGameServerQueries))]
+        [MemberData(nameof(BadIdGetGameServerQueries))]
         public async Task HandleGetGameServerQuery_NotExistingIdQueryGiven_ShouldReturnNotFoundError(GetGameServerQuery query)
         {
             // Arrange
@@ -60,14 +60,14 @@ namespace McWebsite.Application.UnitTests.GameServers.Queries.GetGameServer
             _testEnvironment.MockGameServerRepository.Verify(x => x.GetGameServer(It.IsAny<GameServerId>()), Times.Once);
         }
 
-        public static IEnumerable<object[]> ValidIdsGetGameServerQueries()
+        public static IEnumerable<object[]> ValidIdGetGameServerQueries()
         {
             var testEnvironment = UnitTestEnvironments.GameServerTestEnvironment.Create();
 
             yield return new object[] { GetGameServerQueryUtils.Create()};
             yield return new object[] { GetGameServerQueryUtils.Create(testEnvironment.GameServers[1].Id.Value)};
         }
-        public static IEnumerable<object[]> BadIdsGetGameServerQueries()
+        public static IEnumerable<object[]> BadIdGetGameServerQueries()
         {
             yield return new object[] { GetGameServerQueryUtils.Create(Guid.NewGuid())};
             yield return new object[] { GetGameServerQueryUtils.Create(Guid.NewGuid())};

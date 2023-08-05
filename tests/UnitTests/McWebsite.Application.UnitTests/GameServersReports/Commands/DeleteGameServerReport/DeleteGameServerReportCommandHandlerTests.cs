@@ -19,7 +19,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.DeleteGame
         }
 
         [Theory]
-        [MemberData(nameof(ValidIdsDeleteGameServerReportCommands))]
+        [MemberData(nameof(ValidIdDeleteGameServerReportCommands))]
         public async Task HandleDeleteGameServerReportCommand_ValidIdCommandGiven_ShouldDeleteGameServerReportAndReturnTrue(DeleteGameServerReportCommand command)
         {
             // Arrange
@@ -40,7 +40,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.DeleteGame
         }
 
         [Theory]
-        [MemberData(nameof(InvalidIdsDeleteGameServerReportCommands))]
+        [MemberData(nameof(InvalidIdDeleteGameServerReportCommands))]
         public async Task HandleDeleteGameServerReportCommand_InvalidIdCommandGiven_ShouldReturnNotFoundError(DeleteGameServerReportCommand command)
         {
             // Arrange
@@ -58,7 +58,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.DeleteGame
             _testEnvironment.MockGameServerReportRepository.Verify(x => x.DeleteGameServerReport(It.IsAny<GameServerReport>()), Times.Never);
         }
 
-        public static IEnumerable<object[]> ValidIdsDeleteGameServerReportCommands()
+        public static IEnumerable<object[]> ValidIdDeleteGameServerReportCommands()
         {
             var testEnvironment = UnitTestEnvironments.GameServerReportTestEnvironment.Create();
             foreach (GameServerReport gs in testEnvironment.GameServersReports)
@@ -66,7 +66,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.DeleteGame
                 yield return new[] { DeleteGameServerReportCommandUtils.Create(gs.Id.Value) };
             }
         }
-        public static IEnumerable<object[]> InvalidIdsDeleteGameServerReportCommands()
+        public static IEnumerable<object[]> InvalidIdDeleteGameServerReportCommands()
         {
             yield return new[] { DeleteGameServerReportCommandUtils.Create(Guid.NewGuid()) };
             yield return new[] { DeleteGameServerReportCommandUtils.Create(Guid.NewGuid()) };

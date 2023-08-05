@@ -1,7 +1,3 @@
-```csharp
-GameServerReport Create(...);
-```
-
 ```json
 {
 	"Id" : "",
