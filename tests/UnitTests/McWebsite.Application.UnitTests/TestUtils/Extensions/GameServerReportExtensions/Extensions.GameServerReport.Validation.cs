@@ -19,7 +19,7 @@ namespace McWebsite.Application.UnitTests.TestUtils.Extensions.GameServerReportE
 
             gameServerReport.GameServerId.Value.Should().Be(command.ReportedGameServerId);
 
-            gameServerReport.ReportType.Value.ToString().Should().BeOneOf(Enum.GetNames(typeof(ReportType)));
+            gameServerReport.ReportType.Value.ToString().Should().Be(command.ReportType);
 
             gameServerReport.ReportDescription.Should().Be(command.ReportDescription);
         }

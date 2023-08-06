@@ -32,8 +32,6 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
         {
             public List<GameServerReport> GameServersReports = null!;
             public Mock<IGameServerReportRepository> MockGameServerReportRepository = null!;
-            public Mock<IGameServerRepository> MockGameServerRepository = null!;
-
             private GameServerReportTestEnvironment()
             {
             }

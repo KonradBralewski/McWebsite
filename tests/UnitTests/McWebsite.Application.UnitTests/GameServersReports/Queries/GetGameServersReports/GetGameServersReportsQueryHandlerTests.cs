@@ -19,7 +19,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Queries.GetGameServ
 
         [Theory]
         [MemberData(nameof(ValidFilterParametersGetGameServersReportsQueries))]
-        public async Task HandleGetGameServersReportsQuery_ValidQueryGiven_ShouldReturnGameServersList(GetGameServersReportsQuery query)
+        public async Task HandleGetGameServersReportsQuery_ValidQueryGiven_ShouldReturnGameServersReportList(GetGameServersReportsQuery query)
         {
             // Arrange
             var validator = new GetGameServersReportsQueryValidator();

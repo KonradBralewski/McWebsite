@@ -1,5 +1,4 @@
-﻿using McWebsite.Application.GameServers.Commands.CreateGameServerCommand;
-using McWebsite.Application.InGameEventOrders.Commands.CreateInGameEventOrderCommand;
+﻿using McWebsite.Application.InGameEventOrders.Commands.CreateInGameEventOrderCommand;
 using McWebsite.Application.UnitTests.TestUtils.Constants;
 
 namespace McWebsite.Application.UnitTests.InGameEventOrders.TestUtils

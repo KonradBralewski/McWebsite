@@ -16,7 +16,7 @@ namespace McWebsite.Application.UnitTests.TestUtils.Extensions.InGameEventExtens
 
             inGameEvent.InGameId.Should().Be(command.InGameId);
 
-            inGameEvent.InGameEventType.Value.ToString().Should().BeOneOf(Enum.GetNames(typeof(EventType)));
+            inGameEvent.InGameEventType.Value.ToString().Should().Be(command.InGameEventType);
 
             inGameEvent.Description.Should().Be(command.Description);
 
@@ -31,7 +31,7 @@ namespace McWebsite.Application.UnitTests.TestUtils.Extensions.InGameEventExtens
 
             inGameEvent.InGameId.Should().Be(command.InGameId);
 
-            inGameEvent.InGameEventType.Value.ToString().Should().BeOneOf(Enum.GetNames(typeof(EventType)));
+            inGameEvent.InGameEventType.Value.ToString().Should().Be(command.InGameEventType);
 
             inGameEvent.Description.Should().Be(command.Description);
 

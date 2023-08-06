@@ -16,10 +16,8 @@ namespace McWebsite.Application.UnitTests.TestUtils.Extensions.GameServerExtensi
 
             gameServer.MaximumPlayersNumber.Should().Be(command.MaximumPlayersNumber);
 
-            gameServer.ServerLocation.Value.ToString().Should().BeOneOf(Enum.GetNames(typeof(ServerLocation)));
-            gameServer.ServerType.Value.ToString().Should().BeOneOf(Enum.GetNames(typeof(ServerType)));
-
             gameServer.ServerType.Value.ToString().Should().Be(command.ServerType);
+
             gameServer.ServerLocation.Value.ToString().Should().Be(command.ServerLocation);
         }
 
@@ -30,12 +28,11 @@ namespace McWebsite.Application.UnitTests.TestUtils.Extensions.GameServerExtensi
             gameServer.Description.Should().Be(command.Description);
 
             gameServer.MaximumPlayersNumber.Should().Be(command.MaximumPlayersNumber);
+
             gameServer.CurrentPlayersNumber.Should().Be(command.CurrentPlayersNumber);
 
-            gameServer.ServerLocation.Value.ToString().Should().BeOneOf(Enum.GetNames(typeof(ServerLocation)));
-            gameServer.ServerType.Value.ToString().Should().BeOneOf(Enum.GetNames(typeof(ServerType)));
-
             gameServer.ServerType.Value.ToString().Should().Be(command.ServerType);
+
             gameServer.ServerLocation.Value.ToString().Should().Be(command.ServerLocation);
         }
     }
