@@ -45,8 +45,8 @@ namespace McWebsite.Application.UnitTests.GameServersSubscriptions.Commands.Crea
         }
 
         [Theory]
-        [MemberData(nameof(NotExistingGameServerIdCreateGameServerSubscriptionCommands))]
-        public async Task HandleCreateGameServerSubscriptionCommand_NotExistingGameServerIdCommandGiven_ShouldReturnNotFoundError(CreateGameServerSubscriptionCommand command)
+        [MemberData(nameof(InvalidNotExistingGameServerIdCreateGameServerSubscriptionCommands))]
+        public async Task HandleCreateGameServerSubscriptionCommand_InvalidNotExistingGameServerIdCommandGiven_ShouldReturnNotFoundError(CreateGameServerSubscriptionCommand command)
         {
             // Arrange
             var validator = new CreateGameServerSubscriptionCommandValidator();
@@ -139,7 +139,7 @@ namespace McWebsite.Application.UnitTests.GameServersSubscriptions.Commands.Crea
             yield return new[] { CreateGameServerSubscriptionCommandUtils.Create(subscriptionType: "MinigamesUnlocked", inGameSubscriptionId: 199985) };
         }
 
-        public static IEnumerable<object[]> NotExistingGameServerIdCreateGameServerSubscriptionCommands()
+        public static IEnumerable<object[]> InvalidNotExistingGameServerIdCreateGameServerSubscriptionCommands()
         {
             yield return new[] { CreateGameServerSubscriptionCommandUtils.Create(gameServerId : Guid.NewGuid())};
             yield return new[] { CreateGameServerSubscriptionCommandUtils.Create(gameServerId: Guid.NewGuid())};

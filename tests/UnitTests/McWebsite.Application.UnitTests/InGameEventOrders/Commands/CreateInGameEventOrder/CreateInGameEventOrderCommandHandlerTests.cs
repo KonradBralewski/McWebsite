@@ -48,7 +48,7 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.CreateInGam
 
         [Theory]
         [MemberData(nameof(InvalidNotExistingUserIdCreateInGameEventOrderCommands))]
-        public async Task HandleCreateInGameEventOrderCommand_InvalidNotExistingUserIdCommandGiven_ShouldBeCatchedByValidator(CreateInGameEventOrderCommand command)
+        public async Task HandleCreateInGameEventOrderCommand_InvalidNotExistingUserIdCommandGiven_ShouldReturnNotFoundError(CreateInGameEventOrderCommand command)
         {
             // Arrange
             var validator = new CreateInGameEventOrderCommandValidator();
@@ -67,7 +67,7 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.CreateInGam
 
         [Theory]
         [MemberData(nameof(InvalidNotExistingInGameEventIdCreateInGameEventOrderCommands))]
-        public async Task HandleCreateInGameEventOrderCommand_InvalidNotExistingInGameEventIdCommandGiven_ShouldBeCatchedByValidator(CreateInGameEventOrderCommand command)
+        public async Task HandleCreateInGameEventOrderCommand_InvalidNotExistingInGameEventIdCommandGiven_ShouldReturnNotFoundError(CreateInGameEventOrderCommand command)
         {
             // Arrange
             var validator = new CreateInGameEventOrderCommandValidator();
@@ -84,7 +84,7 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.CreateInGam
             _inGameEventOrderTestEnvironment.MockInGameEventOrderRepository.Verify(x => x.CreateInGameEventOrder(It.IsAny<InGameEventOrder>()), Times.Never);
         }
 
-        public static IEnumerable<object[]>ValidCreateInGameEventOrderCommands()
+        public static IEnumerable<object[]> ValidCreateInGameEventOrderCommands()
         {
             var gameEventTestEnvironment = UnitTestEnvironments.InGameEventTestEnvironment.Create();
 

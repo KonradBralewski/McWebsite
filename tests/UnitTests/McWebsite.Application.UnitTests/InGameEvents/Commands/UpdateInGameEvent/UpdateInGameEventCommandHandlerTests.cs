@@ -65,7 +65,7 @@ namespace McWebsite.Application.UnitTests.InGameEvents.Commands.UpdateInGameEven
         }
         [Theory]
         [MemberData(nameof(NotExistingIdUpdateInGameEventCommands))]
-        public async Task HandleUpdateInGameEventCommand_NotExistingIdCommandGiven_ShouldBeCatchedByValidator(UpdateInGameEventCommand command)
+        public async Task HandleUpdateInGameEventCommand_NotExistingIdCommandGiven_ShouldReturnNotFoundError(UpdateInGameEventCommand command)
         {
             // Arrange
             var validator = new UpdateInGameEventCommandValidator();

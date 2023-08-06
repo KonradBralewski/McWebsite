@@ -43,7 +43,7 @@ namespace McWebsite.Application.UnitTests.GameServers.Commands.UpdateGameServer
 
         [Theory]
         [MemberData(nameof(ValidButWithNoChangesUpdateGameServerCommands))]
-        public async Task HandleUpdateGameServerCommand_ValidCommandGivenButWithNoChangeIsNeeded_ShouldReturnNull(UpdateGameServerCommand command)
+        public async Task HandleUpdateGameServerCommand_ValidCommandGivenButNoChangeIsNeeded_ShouldReturnNull(UpdateGameServerCommand command)
         {
             // Arrange
             var validator = new UpdateGameServerCommandValidator();

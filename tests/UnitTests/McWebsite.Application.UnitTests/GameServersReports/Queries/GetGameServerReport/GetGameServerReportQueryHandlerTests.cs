@@ -39,8 +39,8 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Queries.GetGameServ
         }
 
         [Theory]
-        [MemberData(nameof(BadIdsGetGameServerReportQueries))]
-        public async Task HandleGetGameServerReportQuery_NotExistingIdQueryGiven_ShouldReturnNotFoundError(GetGameServerReportQuery query)
+        [MemberData(nameof(InvalidNotExistingIdGetGameServerReportQueries))]
+        public async Task HandleGetGameServerReportQuery_InvalidNotExistingIdQueryGiven_ShouldReturnNotFoundError(GetGameServerReportQuery query)
         {
             // Arrange
             var validator = new GetGameServerReportQueryValidator();
@@ -64,7 +64,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Queries.GetGameServ
             yield return new object[] { GetGameServerReportQueryUtils.Create() };
             yield return new object[] { GetGameServerReportQueryUtils.Create(testEnvironment.GameServersReports[1].Id.Value) };
         }
-        public static IEnumerable<object[]> BadIdsGetGameServerReportQueries()
+        public static IEnumerable<object[]> InvalidNotExistingIdGetGameServerReportQueries()
         {
             yield return new object[] { GetGameServerReportQueryUtils.Create(Guid.NewGuid()) };
             yield return new object[] { GetGameServerReportQueryUtils.Create(Guid.NewGuid()) };

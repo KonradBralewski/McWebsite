@@ -7,7 +7,6 @@ using McWebsite.Application.UnitTests.TestUtils.Extensions.InGameEventExtensions
 using McWebsite.Domain.InGameEvent.Entities;
 using Moq;
 using Xunit;
-using static McWebsite.Application.UnitTests.TestEnvironments.UnitTestEnvironments;
 
 namespace McWebsite.Application.UnitTests.InGameEvents.Commands.CreateInGameEvent
 {
@@ -47,7 +46,7 @@ namespace McWebsite.Application.UnitTests.InGameEvents.Commands.CreateInGameEven
 
         [Theory]
         [MemberData(nameof(InvalidNotExistingGameServerIdCreateInGameEventCommands))]
-        public async Task HandleCreateInGameEventCommand_InvalidNotExistingGameServerIdGiven_ShouldReturn404NotFound(CreateInGameEventCommand command)
+        public async Task HandleCreateInGameEventCommand_InvalidNotExistingGameServerIdGiven_ShouldReturnNotFoundError(CreateInGameEventCommand command)
         {
             // Arrange
             var validator = new CreateInGameEventCommandValidator();

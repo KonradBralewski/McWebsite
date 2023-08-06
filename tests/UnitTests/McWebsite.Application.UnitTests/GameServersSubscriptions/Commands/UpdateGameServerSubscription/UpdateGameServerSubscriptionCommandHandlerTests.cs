@@ -65,8 +65,8 @@ namespace McWebsite.Application.UnitTests.GameServersSubscriptions.Commands.Upda
         }
 
         [Theory]
-        [MemberData(nameof(NotExistingGameServerIdUpdateGameServerSubscriptionCommands))]
-        public async Task HandleUpdateGameServerSubscriptionCommand_NotExistingGameServerIdCommandGiven_ShouldReturn404NotFound(UpdateGameServerSubscriptionCommand command)
+        [MemberData(nameof(InvalidNotExistingGameServerIdUpdateGameServerSubscriptionCommands))]
+        public async Task HandleUpdateGameServerSubscriptionCommand_InvalidNotExistingGameServerIdCommandGiven_ShouldReturnNotFoundError(UpdateGameServerSubscriptionCommand command)
         {
             // Arrange
             var validator = new UpdateGameServerSubscriptionCommandValidator();
@@ -190,7 +190,7 @@ namespace McWebsite.Application.UnitTests.GameServersSubscriptions.Commands.Upda
             }
 
         }
-        public static IEnumerable<object[]> NotExistingGameServerIdUpdateGameServerSubscriptionCommands()
+        public static IEnumerable<object[]> InvalidNotExistingGameServerIdUpdateGameServerSubscriptionCommands()
         {
             yield return new[] { UpdateGameServerSubscriptionCommandUtils.Create(gameServerId: Guid.NewGuid()) };
             yield return new[] { UpdateGameServerSubscriptionCommandUtils.Create(gameServerId: Guid.NewGuid()) };

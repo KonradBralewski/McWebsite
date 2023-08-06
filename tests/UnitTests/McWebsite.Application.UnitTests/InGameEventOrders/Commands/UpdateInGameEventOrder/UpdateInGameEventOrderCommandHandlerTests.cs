@@ -47,7 +47,7 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.UpdateInGam
 
         [Theory]
         [MemberData(nameof(ValidButWithNoChangesUpdateInGameEventOrderCommands))]
-        public async Task HandleUpdateInGameEventOrderCommand_ValidCommandGivenButWithNoChangeIsNeeded_ShouldReturnNull(UpdateInGameEventOrderCommand command)
+        public async Task HandleUpdateInGameEventOrderCommand_ValidCommandGivenButNoChangeIsNeeded_ShouldReturnNull(UpdateInGameEventOrderCommand command)
         {
             // Arrange
             var validator = new UpdateInGameEventOrderCommandValidator();
@@ -63,8 +63,8 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.UpdateInGam
             _inGameEventOrderTestEnvironment.MockInGameEventOrderRepository.Verify(x => x.UpdateInGameEventOrder(It.IsAny<InGameEventOrder>()), Times.Never);
         }
         [Theory]
-        [MemberData(nameof(NotExistingIdUpdateInGameEventOrderCommands))]
-        public async Task HandleUpdateInGameEventOrderCommand_NotExistingIdCommandGiven_ShouldBeCatchedByValidator(UpdateInGameEventOrderCommand command)
+        [MemberData(nameof(InvalidNotExistingIdUpdateInGameEventOrderCommands))]
+        public async Task HandleUpdateInGameEventOrderCommand_InvalidNotExistingIdCommandGiven_ShouldReturnNotFoundError(UpdateInGameEventOrderCommand command)
         {
             // Arrange
             var validator = new UpdateInGameEventOrderCommandValidator();
@@ -83,8 +83,8 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.UpdateInGam
         }
 
         [Theory]
-        [MemberData(nameof(NotExistingInGameEventIdUpdateInGameEventOrderCommands))]
-        public async Task HandleUpdateInGameEventOrderCommand_InvalidMaximumPlayersNumberCommandGiven_ShouldBeCatchedByValidator(UpdateInGameEventOrderCommand command)
+        [MemberData(nameof(InvalidNotExistingInGameEventIdUpdateInGameEventOrderCommands))]
+        public async Task HandleUpdateInGameEventOrderCommand_InvalidNotExistingInGameEventIdCommandGiven_ShouldReturnNotFoundError(UpdateInGameEventOrderCommand command)
         { // Arrange
             var validator = new UpdateInGameEventOrderCommandValidator();
 
@@ -110,6 +110,7 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.UpdateInGam
             yield return new[] { UpdateInGameEventOrderCommandUtils.Create(inGameEventOrderTestEnvironment.InGameEventOrders[0].Id.Value,
                                                                            inGameEventTestEnvironment.InGameEvents[1].Id.Value)};
             // boughtEvent changed to different event (to event bought in last order, we do not touch first ordered event as it was changed)
+
             yield return new[] { UpdateInGameEventOrderCommandUtils.Create(inGameEventOrderTestEnvironment.InGameEventOrders[1].Id.Value,
                                   inGameEventTestEnvironment.InGameEvents[inGameEventTestEnvironment.InGameEvents.Count-1].Id.Value) };
         }
@@ -125,13 +126,13 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.UpdateInGam
             }
            
         }
-        public static IEnumerable<object[]> NotExistingIdUpdateInGameEventOrderCommands()
+        public static IEnumerable<object[]> InvalidNotExistingIdUpdateInGameEventOrderCommands()
         {
             yield return new[] { UpdateInGameEventOrderCommandUtils.Create(Guid.NewGuid()) };
 
             yield return new[] { UpdateInGameEventOrderCommandUtils.Create(Guid.NewGuid()) };
         }
-        public static IEnumerable<object[]> NotExistingInGameEventIdUpdateInGameEventOrderCommands()
+        public static IEnumerable<object[]> InvalidNotExistingInGameEventIdUpdateInGameEventOrderCommands()
         {
             yield return new[] { UpdateInGameEventOrderCommandUtils.Create(boughtInGameEventId: Guid.NewGuid()) };
 

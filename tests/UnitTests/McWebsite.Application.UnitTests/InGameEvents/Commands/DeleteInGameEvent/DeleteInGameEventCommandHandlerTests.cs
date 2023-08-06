@@ -40,8 +40,8 @@ namespace McWebsite.Application.UnitTests.InGameEvents.Commands.DeleteInGameEven
         }
 
         [Theory]
-        [MemberData(nameof(InvalidIdDeleteInGameEventCommands))]
-        public async Task HandleDeleteInGameEventCommand_InvalidIdCommandGiven_ShouldReturnNotFoundError(DeleteInGameEventCommand command)
+        [MemberData(nameof(InvalidNotExistingIdDeleteInGameEventCommands))]
+        public async Task HandleDeleteInGameEventCommand_InvalidNotExistingIdCommandGiven_ShouldReturnNotFoundError(DeleteInGameEventCommand command)
         {
             // Arrange
             var validator = new DeleteInGameEventCommandValidator();
@@ -66,7 +66,7 @@ namespace McWebsite.Application.UnitTests.InGameEvents.Commands.DeleteInGameEven
                 yield return new[] { DeleteInGameEventCommandUtils.Create(ige.Id.Value) };
             }
         }
-        public static IEnumerable<object[]> InvalidIdDeleteInGameEventCommands()
+        public static IEnumerable<object[]> InvalidNotExistingIdDeleteInGameEventCommands()
         {
             yield return new[] { DeleteInGameEventCommandUtils.Create(Guid.NewGuid()) };
             yield return new[] { DeleteInGameEventCommandUtils.Create(Guid.NewGuid()) };

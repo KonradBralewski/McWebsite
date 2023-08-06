@@ -89,8 +89,8 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.UpdateGame
         }
 
         [Theory]
-        [MemberData(nameof(NotExistingGameServerIdUpdateGameServerReportCommands))]
-        public async Task HandleUpdateGameServerReportCommand_NotExistingGameServerIdCommandGiven_ShouldBeCatchedByValidator(UpdateGameServerReportCommand command)
+        [MemberData(nameof(InvalidNotExistingGameServerIdUpdateGameServerReportCommands))]
+        public async Task HandleUpdateGameServerReportCommand_InvalidNotExistingGameServerIdCommandGiven_ShouldBeCatchedByValidator(UpdateGameServerReportCommand command)
         {
             // Arrange
             var validator = new UpdateGameServerReportCommandValidator();
@@ -169,7 +169,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.UpdateGame
             yield return new[] { UpdateGameServerReportCommandUtils.Create(Guid.NewGuid()) };
         }
 
-        public static IEnumerable<object[]> NotExistingGameServerIdUpdateGameServerReportCommands()
+        public static IEnumerable<object[]> InvalidNotExistingGameServerIdUpdateGameServerReportCommands()
         {
             yield return new[] { UpdateGameServerReportCommandUtils.Create(reportedGameServerId: Guid.NewGuid()) };
 

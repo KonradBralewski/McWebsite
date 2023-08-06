@@ -40,8 +40,8 @@ namespace McWebsite.Application.UnitTests.GameServers.Commands.DeleteGameServer
         }
 
         [Theory]
-        [MemberData(nameof(InvalidIdDeleteGameServerCommands))]
-        public async Task HandleDeleteGameServerCommand_InvalidIdCommandGiven_ShouldReturnNotFoundError(DeleteGameServerCommand command)
+        [MemberData(nameof(InvalidNotExistingIdDeleteGameServerCommands))]
+        public async Task HandleDeleteGameServerCommand_InvalidNotExistingIdCommandGiven_ShouldReturnNotFoundError(DeleteGameServerCommand command)
         {
             // Arrange
             var validator = new DeleteGameServerCommandValidator();
@@ -66,7 +66,7 @@ namespace McWebsite.Application.UnitTests.GameServers.Commands.DeleteGameServer
                 yield return new[] { DeleteGameServerCommandUtils.Create(gs.Id.Value) };
             }
         }
-        public static IEnumerable<object[]> InvalidIdDeleteGameServerCommands()
+        public static IEnumerable<object[]> InvalidNotExistingIdDeleteGameServerCommands()
         {
             yield return new[] { DeleteGameServerCommandUtils.Create(Guid.NewGuid()) };
             yield return new[] { DeleteGameServerCommandUtils.Create(Guid.NewGuid()) };

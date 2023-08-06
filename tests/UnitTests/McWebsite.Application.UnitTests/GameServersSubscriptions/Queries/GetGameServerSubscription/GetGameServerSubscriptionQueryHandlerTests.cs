@@ -39,8 +39,8 @@ namespace McWebsite.Application.UnitTests.GameServersSubscriptions.Queries.GetGa
         }
 
         [Theory]
-        [MemberData(nameof(BadIdGetGameServerSubscriptionQueries))]
-        public async Task HandleGetGameServerSubscriptionQuery_NotExistingIdQueryGiven_ShouldReturnNotFoundError(GetGameServerSubscriptionQuery query)
+        [MemberData(nameof(InvalidNotExistingIdGetGameServerSubscriptionQueries))]
+        public async Task HandleGetGameServerSubscriptionQuery_InvalidNotExistingIdQueryGiven_ShouldReturnNotFoundError(GetGameServerSubscriptionQuery query)
         {
             // Arrange
             var validator = new GetGameServerSubscriptionQueryValidator();
@@ -64,7 +64,7 @@ namespace McWebsite.Application.UnitTests.GameServersSubscriptions.Queries.GetGa
             yield return new object[] { GetGameServerSubscriptionQueryUtils.Create() };
             yield return new object[] { GetGameServerSubscriptionQueryUtils.Create(testEnvironment.GameServersSubscriptions[1].Id.Value) };
         }
-        public static IEnumerable<object[]> BadIdGetGameServerSubscriptionQueries()
+        public static IEnumerable<object[]> InvalidNotExistingIdGetGameServerSubscriptionQueries()
         {
             yield return new object[] { GetGameServerSubscriptionQueryUtils.Create(Guid.NewGuid()) };
             yield return new object[] { GetGameServerSubscriptionQueryUtils.Create(Guid.NewGuid()) };

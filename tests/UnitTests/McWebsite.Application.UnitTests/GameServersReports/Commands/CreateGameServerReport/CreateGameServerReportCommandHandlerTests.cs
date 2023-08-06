@@ -48,8 +48,8 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.CreateGame
         }
 
         [Theory]
-        [MemberData(nameof(NotExistingGameServerIdCreateGameServerReportCommands))]
-        public async Task HandleCreateGameServerReportCommand_NotExistingGameServerIdCommandGiven_ShouldReturnNotFoundError(CreateGameServerReportCommand command)
+        [MemberData(nameof(InvalidNotExistingGameServerIdCreateGameServerReportCommands))]
+        public async Task HandleCreateGameServerReportCommand_InvalidNotExistingGameServerIdCommandGiven_ShouldReturnNotFoundError(CreateGameServerReportCommand command)
         {
             // Arrange
             var validator = new CreateGameServerReportCommandValidator();
@@ -100,7 +100,7 @@ namespace McWebsite.Application.UnitTests.GameServersReports.Commands.CreateGame
             yield return new[] { CreateGameServerReportCommandUtils.Create(reportType: "ExploitableVulnerability", description: "Test description 321") };
         }
 
-        public static IEnumerable<object[]> NotExistingGameServerIdCreateGameServerReportCommands()
+        public static IEnumerable<object[]> InvalidNotExistingGameServerIdCreateGameServerReportCommands()
         {
             yield return new[] { CreateGameServerReportCommandUtils.Create(reportedGameServerId : Guid.NewGuid())};
             yield return new[] { CreateGameServerReportCommandUtils.Create(reportedGameServerId: Guid.NewGuid())};

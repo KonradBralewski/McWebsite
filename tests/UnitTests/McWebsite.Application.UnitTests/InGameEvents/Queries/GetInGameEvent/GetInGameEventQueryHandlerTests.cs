@@ -39,8 +39,8 @@ namespace McWebsite.Application.UnitTests.InGameEvents.Queries.GetInGameEvent
         }
 
         [Theory]
-        [MemberData(nameof(BadIdsGetInGameEventQueries))]
-        public async Task HandleGetInGameEventQuery_NotExistingIdQueryGiven_ShouldReturnNotFoundError(GetInGameEventQuery query)
+        [MemberData(nameof(InvalidNotExistingIdGetInGameEventQueries))]
+        public async Task HandleGetInGameEventQuery_InvalidNotExistingIdQueryGiven_ShouldReturnNotFoundError(GetInGameEventQuery query)
         {
             // Arrange
             var validator = new GetInGameEventQueryValidator();
@@ -64,7 +64,7 @@ namespace McWebsite.Application.UnitTests.InGameEvents.Queries.GetInGameEvent
             yield return new object[] { GetInGameEventQueryUtils.Create()};
             yield return new object[] { GetInGameEventQueryUtils.Create(testEnvironment.InGameEvents[1].Id.Value)};
         }
-        public static IEnumerable<object[]> BadIdsGetInGameEventQueries()
+        public static IEnumerable<object[]> InvalidNotExistingIdGetInGameEventQueries()
         {
             yield return new object[] { GetInGameEventQueryUtils.Create(Guid.NewGuid())};
             yield return new object[] { GetInGameEventQueryUtils.Create(Guid.NewGuid())};
