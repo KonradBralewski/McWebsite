@@ -11,22 +11,18 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
     {
         private static List<User> Users = new List<User>
             {
-                //User.Recreate(Constants.UserQueriesAndCommands.Id,
-                //                    Constants.GameServerQueriesAndCommands.Id,
-                //                    10009,
-                //                    EventType.PlayerEvent,
-                //                    "TestDescription NUMBER 1",
-                //                    2000,
-                //                    DateTime.UtcNow,
-                //                    DateTime.UtcNow),
+                User.Recreate(Constants.UserQueriesAndCommands.Id,
+                              10000,
+                              "testEmail!2222@McWebsite.com",
+                              "WeakestP@ssw0rdOnE@rth!4768!;",
+                              DateTime.UtcNow,
+                              DateTime.UtcNow),
 
-                //User.Create(Constants.GameServerQueriesAndCommands.Id,
-                //                   10010,
-                //                   EventType.WeatherEvent,
-                //                   "TestDescription NUMBER 2",
-                //                   3000,
-                //                   DateTime.UtcNow,
-                //                   DateTime.UtcNow)
+                User.Create(10001,
+                            "testEmail!4444@McWebsite.com",
+                            "M@ybeN0tWeakestP@ssw0rdOnE@rth!4768!;",
+                            DateTime.UtcNow,
+                            DateTime.UtcNow),
             };
         public class UserTestEnvironment
         {

@@ -39,9 +39,9 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.UpdateInGam
             // Assert
             commandResult.HasValue.Should().BeTrue();
             commandResult.Value.IsError.Should().BeFalse();
-            var gameServer = commandResult.Value.Value.InGameEventOrder; // Nullable object (ErrorOr<UpdateInGameEventOrderResult>?)
-            gameServer.Should().NotBeNull();
-            gameServer.ValidateIfUpdatedFrom(command);
+            var inGameEventOrder = commandResult.Value.Value.InGameEventOrder; // Nullable object (ErrorOr<UpdateInGameEventOrderResult>?)
+            inGameEventOrder.Should().NotBeNull();
+            inGameEventOrder.ValidateIfUpdatedFrom(command);
             _inGameEventOrderTestEnvironment.MockInGameEventOrderRepository.Verify(x => x.UpdateInGameEventOrder(It.IsAny<InGameEventOrder>()), Times.Once);
         }
 
@@ -105,12 +105,13 @@ namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.UpdateInGam
             var inGameEventOrderTestEnvironment = UnitTestEnvironments.InGameEventOrderTestEnvironment.Create();
             var inGameEventTestEnvironment = UnitTestEnvironments.InGameEventTestEnvironment.Create();
 
+            // boughtEvent changed to different event (to event bought in second order)
 
             yield return new[] { UpdateInGameEventOrderCommandUtils.Create(inGameEventOrderTestEnvironment.InGameEventOrders[0].Id.Value,
                                                                            inGameEventTestEnvironment.InGameEvents[1].Id.Value)};
-
+            // boughtEvent changed to different event (to event bought in last order, we do not touch first ordered event as it was changed)
             yield return new[] { UpdateInGameEventOrderCommandUtils.Create(inGameEventOrderTestEnvironment.InGameEventOrders[1].Id.Value,
-                                                                           inGameEventTestEnvironment.InGameEvents[0].Id.Value) };
+                                  inGameEventTestEnvironment.InGameEvents[inGameEventTestEnvironment.InGameEvents.Count-1].Id.Value) };
         }
 
         public static IEnumerable<object[]> ValidButWithNoChangesUpdateInGameEventOrderCommands()

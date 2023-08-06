@@ -15,14 +15,14 @@ namespace McWebsite.Application.UnitTests.TestUtils.Extensions.InGameEventOrderE
 
             inGameEventOrder.BuyingUserId.Value.Should().Be(command.BuyingUserId);
 
-            inGameEventOrder.BoughtInGameEventId.Should().Be(command.BoughtInGameEventId);
+            inGameEventOrder.BoughtInGameEventId.Value.Should().Be(command.BoughtInGameEventId);
         }
 
         public static void ValidateIfUpdatedFrom(this InGameEventOrder inGameEventOrder, UpdateInGameEventOrderCommand command)
         {
             inGameEventOrder.Id.Value.Should().Be(command.InGameEventOrderId);
 
-            inGameEventOrder.BoughtInGameEventId.Should().Be(command.BoughtInGameEventId);
+            inGameEventOrder.BoughtInGameEventId.Value.Should().Be(command.BoughtInGameEventId);
         }
     }
 }

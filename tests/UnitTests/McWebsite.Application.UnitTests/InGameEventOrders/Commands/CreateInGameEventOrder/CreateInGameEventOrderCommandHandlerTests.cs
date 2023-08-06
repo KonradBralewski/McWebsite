@@ -1,6 +1,4 @@
 ﻿using FluentAssertions;
-using FluentValidation;
-using McWebsite.Application.GameServerReports.Commands.CreateGameServerReportCommand;
 using McWebsite.Application.InGameEventOrders.Commands.CreateInGameEventOrderCommand;
 using McWebsite.Application.UnitTests.InGameEventOrders.TestUtils;
 using McWebsite.Application.UnitTests.TestEnvironments;
@@ -8,7 +6,6 @@ using McWebsite.Application.UnitTests.TestUtils.Extensions.InGameEventOrderExten
 using McWebsite.Domain.InGameEventOrder;
 using Moq;
 using Xunit;
-using static McWebsite.Application.UnitTests.TestEnvironments.UnitTestEnvironments;
 
 namespace McWebsite.Application.UnitTests.InGameEventOrders.Commands.CreateInGameEventOrder
 {

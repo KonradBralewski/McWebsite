@@ -14,7 +14,7 @@ namespace McWebsite.Application.UnitTests.TestUtils.Constants
             public static int EntriesPerPage = 50;
 
             public static Guid Id = Guid.NewGuid();
-            public static Guid BuyingUserId = Guid.NewGuid();
+            public static Guid BuyingUserId = UserQueriesAndCommands.Id;
             public static Guid BoughtInGameEventId = InGameEventQueriesAndCommands.Id;
         }
 

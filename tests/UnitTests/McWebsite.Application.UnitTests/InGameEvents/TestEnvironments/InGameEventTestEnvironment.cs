@@ -27,6 +27,13 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                                    "TestDescription NUMBER 2",
                                    3000,
                                    DateTime.UtcNow,
+                                   DateTime.UtcNow),
+                InGameEvent.Create(Constants.GameServerQueriesAndCommands.Id,
+                                   10011,
+                                   EventType.TradeEvent,
+                                   "TestDescription NUMBER 3",
+                                   4000,
+                                   DateTime.UtcNow,
                                    DateTime.UtcNow)
             };
         public class InGameEventTestEnvironment
