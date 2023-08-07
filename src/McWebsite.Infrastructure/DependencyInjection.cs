@@ -23,6 +23,7 @@ using McWebsite.Domain.GameServerSubscription;
 using McWebsite.Application.Common.Interfaces.Services;
 using McWebsite.Application.Common.Interfaces.DomainIntegration;
 using McWebsite.Infrastructure.Persistence.Integration;
+using Azure.Identity;
 
 namespace McWebsite.Infrastructure
 {
@@ -44,7 +45,7 @@ namespace McWebsite.Infrastructure
         public static IServiceCollection AddPersistance(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddDbContext<McWebsiteDbContext>(options =>
-                options.UseSqlServer(configuration["ConnectionString"]));
+                options.UseSqlServer(configuration["McWebsiteDatabaseConnectionString"]));
 
             services.AddScoped<PublishDomainEventsInterceptor>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -92,7 +93,7 @@ namespace McWebsite.Infrastructure
                 .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
                 .WriteTo.Console()
                 .WriteTo.MSSqlServer(
-                    connectionString: configuration["ConnectionString"],
+                    connectionString: configuration["McWebsiteDatabaseConnectionString"],
                     sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions
                     {
                         TableName = "Logs",
