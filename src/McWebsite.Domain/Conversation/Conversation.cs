@@ -25,7 +25,7 @@ namespace McWebsite.Domain.Conversation
         private readonly IList<MessageId> _messageIds;
         public ConversationParticipants Participants { get; private set; }
 
-        public IReadOnlyCollection<MessageId> MessageIds => (_messageIds as List<MessageId>).AsReadOnly();
+        public IReadOnlyCollection<MessageId> MessageIds => (_messageIds as List<MessageId>)!.AsReadOnly();
 
         public DateTime CreatedDateTime { get; private set; }
         public DateTime UpdatedDateTime { get; private set; }
@@ -54,11 +54,12 @@ namespace McWebsite.Domain.Conversation
                                     updatedDateTime);
         }
 
-        public static Conversation Recreate(Guid id, Guid firstParticipant,
-                                          Guid secondParticipant,
-                                          IEnumerable<Guid> messagesIds,
-                                          DateTime createdDateTime,
-                                          DateTime updatedDateTime)
+        public static Conversation Recreate(Guid id,
+                                            Guid firstParticipant,
+                                            Guid secondParticipant,
+                                            IEnumerable<Guid> messagesIds,
+                                            DateTime createdDateTime,
+                                            DateTime updatedDateTime)
         {
             return new Conversation(ConversationId.Create(id),
                                     ConversationParticipants.Create(firstParticipant, secondParticipant),

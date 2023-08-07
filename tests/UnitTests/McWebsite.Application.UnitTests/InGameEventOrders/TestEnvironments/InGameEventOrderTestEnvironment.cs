@@ -55,7 +55,7 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                 mock.Setup(m => m.GetInGameEventOrder(It.IsAny<InGameEventOrderId>())).ReturnsAsync((InGameEventOrderId Id)
                     =>
                 {
-                    if (testCollection.FirstOrDefault(gs => gs.Id.Value == Id.Value) is not InGameEventOrder foundInGameEventOrder)
+                    if (testCollection.FirstOrDefault(igeo => igeo.Id.Value == Id.Value) is not InGameEventOrder foundInGameEventOrder)
                     {
                         return Errors.DomainModels.ModelNotFound;
                     }
@@ -71,16 +71,16 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                         .ToList());
 
                 mock.Setup(m => m.DeleteInGameEventOrder(It.IsAny<InGameEventOrder>()))
-                    .Returns((InGameEventOrder gameserver) =>
+                    .Returns((InGameEventOrder inGameEventOrder) =>
                     {
-                        testCollection.RemoveAll(gsEntry => gsEntry.Id.Value == gameserver.Id.Value);
+                        testCollection.RemoveAll(igeoEntry => igeoEntry.Id.Value == inGameEventOrder.Id.Value);
                         return Task.CompletedTask;
                     });
 
                 mock.Setup(m => m.UpdateInGameEventOrder(It.IsAny<InGameEventOrder>()))
                     .ReturnsAsync((InGameEventOrder updatedInGameEventOrder) =>
                     {
-                        int inGameEventOrderIndex = testCollection.FindIndex(gs => gs.Id.Value == updatedInGameEventOrder.Id.Value);
+                        int inGameEventOrderIndex = testCollection.FindIndex(igeo => igeo.Id.Value == updatedInGameEventOrder.Id.Value);
 
 
                         testCollection[inGameEventOrderIndex] = InGameEventOrder.Recreate(updatedInGameEventOrder.Id.Value,

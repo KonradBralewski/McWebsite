@@ -20,33 +20,44 @@ namespace McWebsite.Application.Messages.Commands.CreateMessageCommand
     {
         private readonly IMessageRepository _messageRepository;
         private readonly IConversationRepository _conversationRepository;
-        public CreateMessageCommandHandler(IMessageRepository messageRepository, IConversationRepository conversationRepository)
+        private readonly IUserRepository _userRepository;
+        public CreateMessageCommandHandler(IMessageRepository messageRepository, IConversationRepository conversationRepository, IUserRepository userRepository)
         {
             _messageRepository = messageRepository;
             _conversationRepository = conversationRepository;
+            _userRepository = userRepository;
         }
         public async Task<ErrorOr<CreateMessageResult>> Handle(CreateMessageCommand command, CancellationToken cancellationToken)
         {
-            var existingConversationSearchResult = await _conversationRepository.GetConversation(UserId.Create(command.ShipperId),
-                                                                                                 UserId.Create(command.ReceiverId));
-
             Guid? conversationId = null;
 
-            if(existingConversationSearchResult.FirstError.Type == ErrorType.NotFound)
+            var conversationSearchResult = await FindExistingConversation(command.ShipperId, command.ReceiverId);
+
+            if(conversationSearchResult.IsError)
             {
-                var conversationCreationResult = await _conversationRepository.CreateConversation(Conversation.Create(command.ShipperId,
-                                                                                     command.ReceiverId,
-                                                                                     DateTime.UtcNow,
-                                                                                     DateTime.UtcNow));
-                if (conversationCreationResult.IsError)
+                if(conversationSearchResult.FirstError.Type != ErrorType.NotFound)
                 {
-                    return conversationCreationResult.Errors;
+                    return conversationSearchResult.Errors;
                 }
 
-                conversationId = conversationCreationResult.Value.Id.Value;
+                var newConversation = await CreateNewConversation(command.ShipperId, command.ReceiverId);
+
+                if(newConversation.IsError)
+                {
+                    return newConversation.Errors;
+                }
+
+                conversationId = newConversation.Value.Id.Value;
             }
 
-            conversationId ??= existingConversationSearchResult.Value.Id.Value;
+            var participantsSearchResult = await CheckIfParticipantsExists(command.ShipperId, command.ReceiverId);
+
+            if(participantsSearchResult.IsError)
+            {
+                return participantsSearchResult.Errors;
+            }
+
+            conversationId ??= conversationSearchResult.Value.Id.Value;
 
             Message toBeAdded = Message.Create(conversationId.Value,
                                                command.ReceiverId,
@@ -65,6 +76,55 @@ namespace McWebsite.Application.Messages.Commands.CreateMessageCommand
             Message createdMessage = creationResult.Value;
 
             return new CreateMessageResult(createdMessage);
+        }
+
+        private async Task<ErrorOr<Conversation>> FindExistingConversation(Guid shipperId, Guid receiverId)
+        {
+            var existingConversationSearchResult = await _conversationRepository.GetConversation(UserId.Create(shipperId),
+                                                                                               UserId.Create(receiverId));
+
+            if (existingConversationSearchResult.IsError)
+            {
+                return existingConversationSearchResult.Errors;
+            }
+
+            return existingConversationSearchResult;
+        }
+
+        private async Task<ErrorOr<Conversation>> CreateNewConversation(Guid shipperId, Guid receiverId)
+        {
+            Conversation conversation = Conversation.Create(receiverId,
+                                                            shipperId,
+                                                            DateTime.UtcNow,
+                                                            DateTime.UtcNow);
+
+            var conversationCreationResult = await _conversationRepository.CreateConversation(conversation);
+
+            if (conversationCreationResult.IsError)
+            {
+                return conversationCreationResult.Errors;
+            }
+
+            return conversationCreationResult;
+        }
+
+        private async Task<ErrorOr<bool>> CheckIfParticipantsExists(Guid shipperId, Guid receiverId)
+        {
+            var shipperSearchResult = await _userRepository.GetUser(UserId.Create(shipperId));
+
+            if (shipperSearchResult.IsError)
+            {
+                return shipperSearchResult.Errors;
+            }
+
+            var receiverSearchResult = await _userRepository.GetUser(UserId.Create(receiverId));
+
+            if (receiverSearchResult.IsError)
+            {
+                return receiverSearchResult.Errors;
+            }
+
+            return true;
         }
     }
 }

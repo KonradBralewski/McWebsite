@@ -41,8 +41,9 @@ namespace McWebsite.Infrastructure.Persistence.Repositories
 
         public async Task<ErrorOr<Conversation>> GetConversation(UserId FirstParticipantId, UserId SecondParticipantId)
         {
-            var conversation = await _dbContext.Conversations.FirstOrDefaultAsync(gs => gs.Participants.FirstParticipantId == FirstParticipantId
-            && gs.Participants.SecondParticipantId == SecondParticipantId);
+            var conversation = await _dbContext.Conversations.FirstOrDefaultAsync(
+                gs => (gs.Participants.FirstParticipantId == FirstParticipantId && gs.Participants.SecondParticipantId == SecondParticipantId) ||
+                (gs.Participants.FirstParticipantId == SecondParticipantId && gs.Participants.SecondParticipantId == FirstParticipantId));
 
             if (conversation is null)
             {

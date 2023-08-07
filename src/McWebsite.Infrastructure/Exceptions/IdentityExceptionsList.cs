@@ -11,18 +11,18 @@ namespace McWebsite.Infrastructure.Exceptions
 {
     public static partial class ExceptionsList
     {
-        public static McWebsiteException ThrowIdenificationTryException()
+        public static void ThrowIdenificationTryException()
         {
-            var exception = new McWebsiteException(new Exception(), UnexpectedErrors.Identity.IdentifactionTryFailureError).Exception;
+            var exception = McWebsiteInfrastructureException.Create(UnexpectedErrors.Identity.IdentifactionTryFailureError);
             throw exception;
         }
 
         /// <summary>
         /// Should never happen. Identity table & Table defining User domain bounded context are out of sync.
         /// </summary>
-        public static McWebsiteException ThrowUserNotFoundButShouldBeException()
+        public static void ThrowUserNotFoundButShouldBeException()
         {
-            var exception = new McWebsiteException(new Exception(), UnexpectedErrors.Identity.UserNotFoundButShouldBeError).Exception;
+            var exception = McWebsiteInfrastructureException.Create(UnexpectedErrors.Identity.UserNotFoundButShouldBeError);
             throw exception;
         }
 

@@ -7,27 +7,27 @@ namespace McWebsite.Infrastructure.Exceptions
 {
     public static partial class ExceptionsList
     {
-        public static McWebsiteException ThrowCreationException()
+        public static void ThrowCreationException()
         {
-            var exception =  new McWebsiteException(new DbUpdateException(), UnexpectedErrors.Persistence.UnitCreationError).Exception;
+            var exception = McWebsiteInfrastructureException.Create(UnexpectedErrors.Persistence.UnitCreationError);
             throw exception;
         }
 
-        public static McWebsiteException ThrowDeletionException()
+        public static void ThrowDeletionException()
         {
-            var exception = new McWebsiteException(new DbUpdateException(), UnexpectedErrors.Persistence.UnitDeletionError).Exception;
+            var exception =  McWebsiteInfrastructureException.Create(UnexpectedErrors.Persistence.UnitDeletionError);
             throw exception;
         }
 
-        public static McWebsiteException ThrowUpdateException()
+        public static void ThrowUpdateException()
         {
-            var exception = new McWebsiteException(new DbUpdateException(), UnexpectedErrors.Persistence.UnitUpdateError).Exception;
+            var exception = McWebsiteInfrastructureException.Create(UnexpectedErrors.Persistence.UnitUpdateError);
             throw exception;
         }
 
-        public static McWebsiteException ThrowUnitBoundToEventNotFound()
+        public static void ThrowUnitBoundToEventNotFound()
         {
-            var exception = new McWebsiteException(new DbUpdateException(), UnexpectedErrors.Persistence.UnitUpdateError).Exception;
+            var exception = McWebsiteInfrastructureException.Create(UnexpectedErrors.Persistence.UnitUpdateError);
             throw exception;
         }
 

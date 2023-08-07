@@ -62,7 +62,7 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                 mock.Setup(m => m.GetGameServerSubscription(It.IsAny<GameServerSubscriptionId>())).ReturnsAsync((GameServerSubscriptionId Id)
                     =>
                 {
-                    if (testCollection.FirstOrDefault(gs => gs.Id.Value == Id.Value) is not GameServerSubscription foundGameServerSubscription)
+                    if (testCollection.FirstOrDefault(gss => gss.Id.Value == Id.Value) is not GameServerSubscription foundGameServerSubscription)
                     {
                         return Errors.DomainModels.ModelNotFound;
                     }
@@ -78,16 +78,16 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                         .ToList());
 
                 mock.Setup(m => m.DeleteGameServerSubscription(It.IsAny<GameServerSubscription>()))
-                    .Returns((GameServerSubscription gameserver) =>
+                    .Returns((GameServerSubscription gameServerSubscription) =>
                     {
-                        testCollection.RemoveAll(gsEntry => gsEntry.Id.Value == gameserver.Id.Value);
+                        testCollection.RemoveAll(gssEntry => gssEntry.Id.Value == gameServerSubscription.Id.Value);
                         return Task.CompletedTask;
                     });
 
                 mock.Setup(m => m.UpdateGameServerSubscription(It.IsAny<GameServerSubscription>()))
                     .ReturnsAsync((GameServerSubscription updatedGameServerSubscription) =>
                     {
-                        int foundServerSubscriptionIndex = testCollection.FindIndex(gs => gs.Id.Value == updatedGameServerSubscription.Id.Value);
+                        int foundServerSubscriptionIndex = testCollection.FindIndex(gss => gss.Id.Value == updatedGameServerSubscription.Id.Value);
 
                         testCollection[foundServerSubscriptionIndex] = GameServerSubscription.Recreate(updatedGameServerSubscription.Id.Value,
                                                                          updatedGameServerSubscription.GameServerId.Value,

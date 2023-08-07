@@ -51,15 +51,15 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                 Mock<IGameServerReportRepository> mock = new Mock<IGameServerReportRepository>();
 
                 mock.Setup(m => m.CreateGameServerReport(It.IsAny<GameServerReport>()))
-                    .ReturnsAsync((GameServerReport gameServer) => {
-                        testCollection.Add(gameServer);
-                        return gameServer;
+                    .ReturnsAsync((GameServerReport gameServerReport) => {
+                        testCollection.Add(gameServerReport);
+                        return gameServerReport;
                     });
 
                 mock.Setup(m => m.GetGameServerReport(It.IsAny<GameServerReportId>())).ReturnsAsync((GameServerReportId Id)
                     =>
                 {
-                    if (testCollection.FirstOrDefault(gs => gs.Id.Value == Id.Value) is not GameServerReport foundGameServerReport)
+                    if (testCollection.FirstOrDefault(gsr => gsr.Id.Value == Id.Value) is not GameServerReport foundGameServerReport)
                     {
                         return Errors.DomainModels.ModelNotFound;
                     }
@@ -75,16 +75,16 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                         .ToList());
 
                 mock.Setup(m => m.DeleteGameServerReport(It.IsAny<GameServerReport>()))
-                    .Returns((GameServerReport gameserver) =>
+                    .Returns((GameServerReport gameServerReport) =>
                     {
-                        testCollection.RemoveAll(gsEntry => gsEntry.Id.Value == gameserver.Id.Value);
+                        testCollection.RemoveAll(gsrEntry => gsrEntry.Id.Value == gameServerReport.Id.Value);
                         return Task.CompletedTask;
                     });
 
                 mock.Setup(m => m.UpdateGameServerReport(It.IsAny<GameServerReport>()))
                     .ReturnsAsync((GameServerReport updatedGameServerReport) =>
                     {
-                        int foundServerReportIndex = testCollection.FindIndex(gs => gs.Id.Value == updatedGameServerReport.Id.Value);
+                        int foundServerReportIndex = testCollection.FindIndex(gsr => gsr.Id.Value == updatedGameServerReport.Id.Value);
 
                         testCollection[foundServerReportIndex] = GameServerReport.Recreate(updatedGameServerReport.Id.Value,
                                                                          updatedGameServerReport.GameServerId.Value,

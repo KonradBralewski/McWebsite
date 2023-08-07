@@ -68,7 +68,7 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                 mock.Setup(m => m.GetInGameEvent(It.IsAny<InGameEventId>())).ReturnsAsync((InGameEventId id)
                     =>
                 {
-                    if (testCollection.FirstOrDefault(gs => gs.Id.Value == id.Value) is not InGameEvent foundInGameEvent)
+                    if (testCollection.FirstOrDefault(ige => ige.Id.Value == id.Value) is not InGameEvent foundInGameEvent)
                     {
                         return Errors.DomainModels.ModelNotFound;
                     }
@@ -86,14 +86,14 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                 mock.Setup(m => m.DeleteInGameEvent(It.IsAny<InGameEvent>()))
                     .Returns((InGameEvent inGameEvent) =>
                     {
-                        testCollection.RemoveAll(gsEntry => gsEntry.Id.Value == inGameEvent.Id.Value);
+                        testCollection.RemoveAll(igeEntry => igeEntry.Id.Value == inGameEvent.Id.Value);
                         return Task.CompletedTask;
                     });
 
                 mock.Setup(m => m.UpdateInGameEvent(It.IsAny<InGameEvent>()))
                     .ReturnsAsync((InGameEvent updatedInGameEvent) =>
                     {
-                        int foundInGameEventIndex = testCollection.FindIndex(gs => gs.Id.Value == updatedInGameEvent.Id.Value);
+                        int foundInGameEventIndex = testCollection.FindIndex(ige => ige.Id.Value == updatedInGameEvent.Id.Value);
 
 
                         testCollection[foundInGameEventIndex] = InGameEvent.Recreate(updatedInGameEvent.Id.Value,

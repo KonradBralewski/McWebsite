@@ -1,5 +1,7 @@
 ﻿using ErrorOr;
 using McWebsite.Application.Common.Interfaces.Persistence;
+using McWebsite.Application.Exceptions;
+using McWebsite.Domain.Common.Errors.SystemUnexpected;
 using McWebsite.Domain.Conversation;
 using McWebsite.Domain.Conversation.ValueObjects;
 using McWebsite.Domain.User.ValueObjects;
@@ -18,6 +20,21 @@ namespace McWebsite.Application.Conversations.Commands.CreateConversationCommand
         }
         public async Task<ErrorOr<CreateConversationResult>> Handle(CreateConversationCommand command, CancellationToken cancellationToken)
         {
+            var alreadyExistingConversationSearchResult = await _conversationRepository.GetConversation(
+                UserId.Create(command.FirstParticipantId),
+                UserId.Create(command.SecondParticipantId));
+
+            if (!alreadyExistingConversationSearchResult.IsError)
+            {
+                ExceptionsList.ThrowAlreadyExistingUnitCreationTryException();
+            }
+
+            if(alreadyExistingConversationSearchResult.IsError 
+                && alreadyExistingConversationSearchResult.FirstError.Type != ErrorType.NotFound)
+            {
+                return alreadyExistingConversationSearchResult.Errors;
+            }
+
             var firstParticipantSearchResult = await _userRepository.GetUser(UserId.Create(command.FirstParticipantId));
 
             if (firstParticipantSearchResult.IsError)
@@ -32,7 +49,6 @@ namespace McWebsite.Application.Conversations.Commands.CreateConversationCommand
                 return secondParticipantSearchResult.Errors;
             }
 
-            //var alreadyExistingConversationSearchResult = await _conversationRepository.GetConversation()
 
             Conversation toBeAdded = Conversation.Create(command.FirstParticipantId,
                                                      command.SecondParticipantId,
