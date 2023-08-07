@@ -1,6 +1,8 @@
 ﻿using Azure.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Serilog;
 using System.Configuration;
+using System.Threading.RateLimiting;
 
 namespace McWebsite.API
 {
@@ -12,6 +14,8 @@ namespace McWebsite.API
         public static WebApplicationBuilder Configure(this WebApplicationBuilder builder)
         {
             builder.AddAzureKeyVaults();
+
+            builder.ConfigureRateLimiter();
 
             return builder;
         }
@@ -26,6 +30,20 @@ namespace McWebsite.API
             var keyVaultEndpoint = new Uri(builder.Configuration["VaultUri"]!);
 
             builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+
+            return builder;
+        }
+
+        private static WebApplicationBuilder ConfigureRateLimiter(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddRateLimiter(_ => _
+                .AddFixedWindowLimiter(policyName: "fixed", options =>
+                {
+                    options.PermitLimit = 10;
+                    options.Window = TimeSpan.FromSeconds(15);
+                    options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                    options.QueueLimit = 4;
+                }));
 
             return builder;
         }
