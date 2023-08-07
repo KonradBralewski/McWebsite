@@ -23,11 +23,9 @@ namespace McWebsite.API
                 return builder;
             }
 
-            var keyVaultUrl = new Uri(builder.Configuration["KeyVaultUrl"]!);
+            var keyVaultEndpoint = new Uri(builder.Configuration["VaultUri"]!);
 
-            var azureCredential = new DefaultAzureCredential();
-
-            builder.Configuration.AddAzureKeyVault(keyVaultUrl, azureCredential);
+            builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
             return builder;
         }

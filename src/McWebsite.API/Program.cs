@@ -1,8 +1,6 @@
 using McWebsite.API;
-using McWebsite.API.Common.Errors;
 using McWebsite.Application;
 using McWebsite.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

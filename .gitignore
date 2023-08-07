@@ -334,3 +334,6 @@ logs/
 
 .DS_Store
 
+/src/McWebsite.API/Properties/ServiceDependencies
+/src/McWebsite.API/Properties/serviceDependencies.json
+/src/McWebsite.API/Properties/serviceDependencies.McWebsite - Web Deploy.json
