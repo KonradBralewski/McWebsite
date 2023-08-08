@@ -10,9 +10,9 @@ namespace McWebsite.Application.UnitTests.TestUtils.Extensions.ConversationExten
         {
             conversation.Id.Value.ToString().Should().NotBeEmpty();
 
-            conversation.Participants.FirstParticipantId.Should().Be(command.FirstParticipantId);
+            conversation.Participants.FirstParticipantId.Value.Should().Be(command.FirstParticipantId);
 
-            conversation.Participants.SecondParticipantId.Should().Be(command.SecondParticipantId);
+            conversation.Participants.SecondParticipantId.Value.Should().Be(command.SecondParticipantId);
         }
     }
 }

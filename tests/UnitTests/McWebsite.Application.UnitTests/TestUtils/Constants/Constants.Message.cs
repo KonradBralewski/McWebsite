@@ -9,7 +9,7 @@
 
             public static Guid Id = Guid.NewGuid();
             public static Guid ReceiverId = UserQueriesAndCommands.Id;
-            public static Guid ShipperId = Guid.NewGuid();
+            public static Guid ShipperId = UserQueriesAndCommands.SecondUserId;
             public static string MessageContent = "Hey! This my new message!";
         }
     }

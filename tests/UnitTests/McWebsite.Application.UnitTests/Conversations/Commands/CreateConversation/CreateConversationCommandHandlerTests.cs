@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using McWebsite.Application.Conversations.Commands.CreateConversationCommand;
+using McWebsite.Application.UnitTests.Conversations.TestUtils;
 using McWebsite.Application.UnitTests.Messages.TestUtils;
 using McWebsite.Application.UnitTests.TestEnvironments;
 using McWebsite.Application.UnitTests.TestUtils.Extensions.ConversationExtensions;
@@ -28,6 +29,8 @@ namespace McWebsite.Application.UnitTests.Conversations.Commands.CreateConversat
         public async Task HandleCreateConversationCommand_ValidCommandGiven_ShouldReturnAndCreateConversation(CreateConversationCommand command)
         {
             // Arrange
+
+            _conversationTestEnvironment.Conversations.Clear(); // Domain rules does not allow to duplicate conversations;
             var validator = new CreateConversationCommandValidator();
 
             // Act (& Assert validator)
@@ -64,20 +67,18 @@ namespace McWebsite.Application.UnitTests.Conversations.Commands.CreateConversat
 
         public static IEnumerable<object[]> ValidCreateConversationCommands()
         {
-            var gameEventTestEnvironment = UnitTestEnvironments.InGameEventTestEnvironment.Create();
-
-            yield return new[] { CreateMessageCommandUtils.Create() };
-            yield return new[] { CreateMessageCommandUtils.Create(messageContent: "HI") };
-            yield return new[] { CreateMessageCommandUtils.Create(messageContent: "HELLO!") };
+            yield return new[] { CreateConversationCommandUtils.Create() };
+            yield return new[] { CreateConversationCommandUtils.Create(firstMessageContent: "HI") };
+            yield return new[] { CreateConversationCommandUtils.Create(firstMessageContent: "HELLO!") };
         }
 
         public static IEnumerable<object[]> InvalidNotExistingUserIdCreateConversationCommands()
         {
-            yield return new[] { CreateMessageCommandUtils.Create(receiverId: Guid.NewGuid()) };
-            yield return new[] { CreateMessageCommandUtils.Create(receiverId: Guid.NewGuid()) };
-            yield return new[] { CreateMessageCommandUtils.Create(shipperId: Guid.NewGuid()) };
-            yield return new[] { CreateMessageCommandUtils.Create(shipperId: Guid.NewGuid()) };
-            yield return new[] { CreateMessageCommandUtils.Create(Guid.NewGuid(), Guid.NewGuid()) };
+            yield return new[] { CreateConversationCommandUtils.Create(firstParticipantId: Guid.NewGuid()) };
+            yield return new[] { CreateConversationCommandUtils.Create(firstParticipantId: Guid.NewGuid()) };
+            yield return new[] { CreateConversationCommandUtils.Create(secondParticipantId: Guid.NewGuid()) };
+            yield return new[] { CreateConversationCommandUtils.Create(secondParticipantId: Guid.NewGuid()) };
+            yield return new[] { CreateConversationCommandUtils.Create(Guid.NewGuid(), Guid.NewGuid()) };
 
         }
     }

@@ -3,6 +3,7 @@ using McWebsite.Application.UnitTests.TestUtils.Constants;
 using McWebsite.Domain.Common.Errors;
 using McWebsite.Domain.Conversation;
 using McWebsite.Domain.Conversation.ValueObjects;
+using McWebsite.Domain.User.ValueObjects;
 using Moq;
 
 namespace McWebsite.Application.UnitTests.TestEnvironments
@@ -63,6 +64,28 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                     return foundConversation;
                 });
 
+                mock.Setup(m => m.GetConversation(It.IsAny<UserId>(), It.IsAny<UserId>()))
+                    .ReturnsAsync((UserId firstParticipantId, UserId secondParticipantId) =>
+                    {
+                        var foundConversation = testCollection.FirstOrDefault(c => c.Participants.FirstParticipantId.Value == firstParticipantId.Value
+                            && c.Participants.SecondParticipantId.Value == secondParticipantId.Value);
+
+                        if (foundConversation is not null)
+                        {
+                            return foundConversation;
+                        }
+
+                        foundConversation = testCollection.FirstOrDefault(c => c.Participants.SecondParticipantId.Value == firstParticipantId.Value
+                            && c.Participants.FirstParticipantId.Value == secondParticipantId.Value);
+
+                        if (foundConversation is not null)
+                        {
+                            return foundConversation;
+                        }
+
+                        return Errors.DomainModels.ModelNotFound;
+                    });
+
                 mock.Setup(m => m.GetConversations(It.IsAny<int>(), It.IsAny<int>()))
                     .ReturnsAsync((int page, int entriesPerPage) =>
                     testCollection.OrderByDescending(p => p.CreatedDateTime)
@@ -76,6 +99,7 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                         testCollection.RemoveAll(cEntry => cEntry.Id.Value == conversation.Id.Value);
                         return Task.CompletedTask;
                     });
+
 
                 return mock;
             }

@@ -18,11 +18,12 @@ namespace McWebsite.Application.UnitTests.TestEnvironments
                               DateTime.UtcNow,
                               DateTime.UtcNow),
 
-                User.Create(10001,
-                            "testEmail!4444@McWebsite.com",
-                            "M@ybeN0tWeakestP@ssw0rdOnE@rth!4768!;",
-                            DateTime.UtcNow,
-                            DateTime.UtcNow),
+                User.Recreate(Constants.UserQueriesAndCommands.SecondUserId,
+                              10001,
+                              "testEmail!4444@McWebsite.com",
+                              "M@ybeN0tWeakestP@ssw0rdOnE@rth!4768!;",
+                              DateTime.UtcNow,
+                              DateTime.UtcNow),
             };
         public class UserTestEnvironment
         {

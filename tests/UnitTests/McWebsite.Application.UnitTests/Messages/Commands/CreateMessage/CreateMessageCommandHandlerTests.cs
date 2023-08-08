@@ -4,6 +4,7 @@ using McWebsite.Application.UnitTests.Messages.TestUtils;
 using McWebsite.Application.UnitTests.TestEnvironments;
 using McWebsite.Application.UnitTests.TestUtils.Extensions.MessageExtensions;
 using McWebsite.Domain.Message.Entities;
+using McWebsite.Domain.User.ValueObjects;
 using Moq;
 using Xunit;
 
@@ -68,7 +69,9 @@ namespace McWebsite.Application.UnitTests.Messages.Commands.CreateMessage
         public static IEnumerable<object[]> ValidCreateMessageCommands()
         {
             yield return new[] { CreateMessageCommandUtils.Create() };
+
             yield return new[] { CreateMessageCommandUtils.Create(messageContent: "Hello!") };
+
             yield return new[] { CreateMessageCommandUtils.Create(messageContent: "Hello :)") };
         }
 
