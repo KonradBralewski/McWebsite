@@ -46,6 +46,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{C9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McWebsite.Application.UnitTests", "tests\UnitTests\McWebsite.Application.UnitTests\McWebsite.Application.UnitTests.csproj", "{D64F797C-E642-464D-B930-8E5A43F378C1}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "McWebsite.VueJs", "src\McWebsite.VueJs\McWebsite.VueJs.esproj", "{E1711A78-D6D9-4BB5-AAA7-CAD103D811CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,12 @@ Global
 		{D64F797C-E642-464D-B930-8E5A43F378C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D64F797C-E642-464D-B930-8E5A43F378C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D64F797C-E642-464D-B930-8E5A43F378C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1711A78-D6D9-4BB5-AAA7-CAD103D811CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1711A78-D6D9-4BB5-AAA7-CAD103D811CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1711A78-D6D9-4BB5-AAA7-CAD103D811CB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E1711A78-D6D9-4BB5-AAA7-CAD103D811CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1711A78-D6D9-4BB5-AAA7-CAD103D811CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1711A78-D6D9-4BB5-AAA7-CAD103D811CB}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +93,7 @@ Global
 		{880EF834-A6F6-4936-AC5F-556BB96BD2F1} = {527FD11E-26EC-40D5-9B28-60D08145753B}
 		{C9CBB296-90F0-4C59-9FA2-A98021CB0A8E} = {527FD11E-26EC-40D5-9B28-60D08145753B}
 		{D64F797C-E642-464D-B930-8E5A43F378C1} = {54A53F4D-5D68-40D7-A9FA-9265EAF1CF70}
+		{E1711A78-D6D9-4BB5-AAA7-CAD103D811CB} = {404476C1-7F48-483E-9389-C1485AD70245}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {48CA43D0-C968-4C25-8234-A757CF433B31}
