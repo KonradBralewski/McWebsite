@@ -7,7 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    IconDeviconGithub: typeof import('~icons/devicon/github')['default']
+    IconIconoirMenu: typeof import('~icons/iconoir/menu')['default']
+    IconOouimenu: typeof import('~icons/ooui/menu')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ThemeSwitcher: typeof import('./common/components/ThemeSwitcher.vue')['default']
   }
 }

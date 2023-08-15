@@ -15,10 +15,11 @@
     "isolatedModules": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "baseUrl": ".",
     "types": ["webpack-env", "vite/client", "vite-plugin-pages/client"],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "#root/*": ["./*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
