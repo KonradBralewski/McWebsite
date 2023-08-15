@@ -16,7 +16,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "baseUrl": ".",
-    "types": ["webpack-env"],
+    "types": ["webpack-env", "vite/client", "vite-plugin-pages/client"],
     "paths": {
       "@/*": ["src/*"]
     },
