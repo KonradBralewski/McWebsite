@@ -1,9 +1,12 @@
 import {UserPreferencesProvider} from "#root/src/common/services/UserPreferences/UserPreferencesProvider"
 
 const services = {
-    UserPreferencesProvider
+    [UserPreferencesProvider.injectKey] : new UserPreferencesProvider()
 }
 
-export default provideServices(){
-
+export function provideServices(appInstance : any){
+    Object.entries(services).forEach(serviceEntry => {
+        const [key, value] = serviceEntry
+        appInstance.provide(key, value)
+    })
 }

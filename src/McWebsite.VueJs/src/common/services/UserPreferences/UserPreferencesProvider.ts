@@ -4,6 +4,7 @@ import { userPreferences } from "../../types/preferences/userPreferences";
 
 export class UserPreferencesProvider implements IUserPreferencesProvider
 {
+    static injectKey = "UserPreferencesProvider"
     userPreferences : userPreferences;
 
     constructor(){

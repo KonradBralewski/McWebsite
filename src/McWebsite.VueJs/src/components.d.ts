@@ -7,9 +7,14 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ErrorAlert: typeof import('./common/components/Alerts/ErrorAlert.vue')['default']
     IconDeviconGithub: typeof import('~icons/devicon/github')['default']
     IconIconoirMenu: typeof import('~icons/iconoir/menu')['default']
+    IconNotoSun: typeof import('~icons/noto/sun')['default']
+    IconNotoV1NewMoonFace: typeof import('~icons/noto-v1/new-moon-face')['default']
     IconOouimenu: typeof import('~icons/ooui/menu')['default']
+    IconTeenyiconsMoonSolid: typeof import('~icons/teenyicons/moon-solid')['default']
+    InfoAlert: typeof import('./common/components/Alerts/InfoAlert.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ThemeSwitcher: typeof import('./common/components/ThemeSwitcher.vue')['default']

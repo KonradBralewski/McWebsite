@@ -1,8 +1,37 @@
 <script setup lang="ts">
+
+import {IUserPreferencesProvider} from "#root/src/common/services/UserPreferences/IUserPreferencesProvider"
+import { UserPreferencesProvider } from "@/common/services/UserPreferences/UserPreferencesProvider";
+import { inject } from "vue";
+
+const userPreferencesProvider : IUserPreferencesProvider | undefined = inject(UserPreferencesProvider.injectKey)
+
+const hasDarkMode = () => {
+  if(userPreferencesProvider === undefined){
+    return false;
+  }
+
+  const preferences = userPreferencesProvider!.getPreferences();
+
+  return preferences.darkMode;
+}
+
+const setHasDarkMode = (hasDarkMode : boolean) => {
+  console.log(hasDarkMode)
+  if(userPreferencesProvider === undefined){
+    return false;
+  }
+
+  const preferences = userPreferencesProvider!.getPreferences();
+
+  userPreferencesProvider.setPreferences({...preferences, darkMode : hasDarkMode})
+}
+
 </script>
 
 <template>
   <nav 
+  :class="{dark : hasDarkMode()}"
   class="flex flex-row gap-5 text-4xl justify-center align-middle relative border-b-black pb-0.5
      border-b">
     <RouterLink 
@@ -13,7 +42,7 @@
     <RouterLink to="/docs" class="hidden md:block">Docs</RouterLink>
     <RouterLink to="/about" class="hidden md:block">About</RouterLink>
     <icon-devicon-github class="hidden"/>
-    <ThemeSwitcher/>
+    <ThemeSwitcher :dark-mode="hasDarkMode()" @theme-changed="(hasDarkMode) => setHasDarkMode(hasDarkMode)"/>
     <icon-iconoir-menu class="text-2xl self-center mt-1.5 ml-auto mr-2 md:hidden"/>
   </nav>
   <RouterView></RouterView>
