@@ -2,48 +2,47 @@
 
 import {IUserPreferencesProvider} from "#root/src/common/services/UserPreferences/IUserPreferencesProvider"
 import { UserPreferencesProvider } from "@/common/services/UserPreferences/UserPreferencesProvider";
-import { inject } from "vue";
+import { watch } from "vue";
+import { onUpdated, ref, onMounted, inject, computed, Ref, unref} from "vue";
+import { UserPreferences } from "./common/types/preferences/UserPreferences";
 
-const userPreferencesProvider : IUserPreferencesProvider | undefined = inject(UserPreferencesProvider.injectKey)
+const userPreferencesProvider : IUserPreferencesProvider = inject(UserPreferencesProvider.injectKey, new UserPreferencesProvider())
 
-const hasDarkMode = () => {
-  if(userPreferencesProvider === undefined){
-    return false;
-  }
+const preferences = ref(userPreferencesProvider.getPreferences())
 
-  const preferences = userPreferencesProvider!.getPreferences();
-
-  return preferences.darkMode;
-}
-
-const setHasDarkMode = (hasDarkMode : boolean) => {
-  console.log(hasDarkMode)
-  if(userPreferencesProvider === undefined){
-    return false;
-  }
-
-  const preferences = userPreferencesProvider!.getPreferences();
-
-  userPreferencesProvider.setPreferences({...preferences, darkMode : hasDarkMode})
+const onThemeChanged = (hasDarkMode : boolean) => {
+  preferences.value.setDarkMode(hasDarkMode)
+  userPreferencesProvider.setPreferences(unref(preferences.value) as UserPreferences)
 }
 
 </script>
 
 <template>
   <nav 
-  :class="{dark : hasDarkMode()}"
+  :class="{dark : preferences.getDarkMode(), 'bg-black' : preferences.getDarkMode()}"
   class="flex flex-row gap-5 text-4xl justify-center align-middle relative border-b-black pb-0.5
      border-b">
     <RouterLink 
     to="/" 
-    class="ml-2 md:absolute md:left-4 font-extrabold text-transparent bg-clip-text 
+    class="ml-3 md:absolute md:left-4 font-extrabold text-transparent bg-clip-text 
      bg-gradient-to-t from-black to-emerald-800 animate-pulse-6
+     dark:from-white dark:to-emerald-800
     ">McWebsite</RouterLink>
-    <RouterLink to="/docs" class="hidden md:block">Docs</RouterLink>
-    <RouterLink to="/about" class="hidden md:block">About</RouterLink>
+    <RouterLink 
+    to="/docs" class="hidden md:block dark:text-white" 
+    active-class="underline underline-offset-6">Docs</RouterLink>
+    <RouterLink 
+    to="/about" class="hidden md:block dark:text-white"
+    active-class="underline underline-offset-6">About</RouterLink>
     <icon-devicon-github class="hidden"/>
-    <ThemeSwitcher :dark-mode="hasDarkMode()" @theme-changed="(hasDarkMode) => setHasDarkMode(hasDarkMode)"/>
+    <ThemeSwitcher 
+    class="hidden mt-1.5 md:flex gap-3"
+    :dark-mode="preferences.getDarkMode()" @theme-changed="onThemeChanged"/>
     <icon-iconoir-menu class="text-2xl self-center mt-1.5 ml-auto mr-2 md:hidden"/>
   </nav>
-  <RouterView></RouterView>
+  <main :class="{dark : preferences.getDarkMode()}">
+    <div class="dark:bg-gray-800 dark:text-white">
+      <RouterView></RouterView>
+    </div>
+  </main>
 </template>

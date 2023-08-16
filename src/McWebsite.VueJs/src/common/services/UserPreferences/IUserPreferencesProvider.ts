@@ -1,6 +1,6 @@
-import {userPreferences} from "../../types/preferences/userPreferences"
+import {UserPreferences} from "../../types/preferences/UserPreferences"
 
 export interface IUserPreferencesProvider{
-    getPreferences() : userPreferences
-    setPreferences(updatedPreferences : userPreferences) : void
+    getPreferences() : UserPreferences;
+    setPreferences(updatedPreferences : UserPreferences) : void;
 }

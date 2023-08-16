@@ -13,6 +13,7 @@ declare module 'vue' {
     IconNotoSun: typeof import('~icons/noto/sun')['default']
     IconNotoV1NewMoonFace: typeof import('~icons/noto-v1/new-moon-face')['default']
     IconOouimenu: typeof import('~icons/ooui/menu')['default']
+    IconTeenyiconsMoonOutline: typeof import('~icons/teenyicons/moon-outline')['default']
     IconTeenyiconsMoonSolid: typeof import('~icons/teenyicons/moon-solid')['default']
     InfoAlert: typeof import('./common/components/Alerts/InfoAlert.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
