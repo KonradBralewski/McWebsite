@@ -1,8 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import vueRouter from './common/infrastracture/vueRouter/vueRouterSetup'
-import {provideServices} from "#root/src/common/services/servicesContainer"
-import "./main.css"
+import vueRouter from "./common/infrastracture/vueRouter/vueRouterSetup";
+import { provideServices } from "#root/src/common/services/servicesContainer";
+import "./main.css";
 
 const app = createApp(App);
 

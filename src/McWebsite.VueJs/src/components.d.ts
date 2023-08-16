@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    DropdownMenu: typeof import('./common/components/Navigation/DropdownMenu.vue')['default']
+    DropdownMenuItem: typeof import('./common/components/Navigation/DropdownMenuItem.vue')['default']
     ErrorAlert: typeof import('./common/components/Alerts/ErrorAlert.vue')['default']
     IconDeviconGithub: typeof import('~icons/devicon/github')['default']
     IconIconoirMenu: typeof import('~icons/iconoir/menu')['default']
@@ -18,6 +20,6 @@ declare module 'vue' {
     InfoAlert: typeof import('./common/components/Alerts/InfoAlert.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    ThemeSwitcher: typeof import('./common/components/ThemeSwitcher.vue')['default']
+    ThemeSwitcher: typeof import('./common/components/Theme/ThemeSwitcher.vue')['default']
   }
 }
