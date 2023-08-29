@@ -28,7 +28,8 @@ const onThemeChanged = (hasDarkMode: boolean) => {
   >
     <RouterLink
       to="/"
-      class="ml-3 md:absolute md:left-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-t from-black to-emerald-800 animate-pulse-6 dark:from-white dark:to-emerald-800"
+      class="ml-3 font-extrabold text-transparent bg-clip-text
+       bg-gradient-to-t from-black to-emerald-800 animate-pulse-6 dark:from-white dark:to-emerald-800"
       >McWebsite</RouterLink
     >
     <RouterLink
@@ -49,9 +50,6 @@ const onThemeChanged = (hasDarkMode: boolean) => {
       :dark-mode="preferences.getDarkMode()"
       @theme-changed="onThemeChanged"
     />
-    <!-- <icon-iconoir-menu
-      class="text-2xl self-center mt-1.5 ml-auto mr-2 md:hidden"
-    /> -->
     <DropdownMenu :dark-mode="preferences.getDarkMode()" :theme-change-handler="onThemeChanged"/>
   </nav>
   <main :class="{ dark: preferences.getDarkMode() }">

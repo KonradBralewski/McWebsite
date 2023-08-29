@@ -7,6 +7,10 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    copy: typeof import('./pages/docs/components/DocumentationSections copy.vue')['default']
+    DocumentationCategories: typeof import('./pages/docs/components/DocumentationCategories.vue')['default']
+    DocumentationSections: typeof import('./pages/docs/components/DocumentationSections.vue')['default']
+    DocumentationUnderSectionList: typeof import('./pages/docs/components/DocumentationUnderSectionList.vue')['default']
     DropdownMenu: typeof import('./common/components/Navigation/DropdownMenu.vue')['default']
     DropdownMenuItem: typeof import('./common/components/Navigation/DropdownMenuItem.vue')['default']
     ErrorAlert: typeof import('./common/components/Alerts/ErrorAlert.vue')['default']
@@ -20,6 +24,7 @@ declare module 'vue' {
     IconTeenyiconsMoonOutline: typeof import('~icons/teenyicons/moon-outline')['default']
     IconTeenyiconsMoonSolid: typeof import('~icons/teenyicons/moon-solid')['default']
     InfoAlert: typeof import('./common/components/Alerts/InfoAlert.vue')['default']
+    MarkdownPlaceholder: typeof import('./pages/docs/components/MarkdownPlaceholder.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ThemeSwitcher: typeof import('./common/components/Theme/ThemeSwitcher.vue')['default']

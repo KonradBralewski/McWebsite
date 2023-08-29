@@ -13,13 +13,19 @@ const path = require("path");
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      include: [/\.vue$/]
+    }),
     Pages({
       extensions: ["vue"],
-      pagesDir: [{ dir: "src/**/pages", baseRoute: "" }],
+      dirs: [
+        { dir: 'src/pages', baseRoute: '' },
+        { dir: 'src/pages/**', baseRoute: '' }
+      ]
     }),
+
     Components({
-      dirs: "src/**/components",
+      dirs: ["src/**/components", "src/pages/**/components"],
       dts: "src/components.d.ts",
       deep: true,
       include: [/\.vue$/, /\.vue\?vue/],
