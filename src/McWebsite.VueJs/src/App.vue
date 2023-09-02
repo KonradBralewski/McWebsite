@@ -53,7 +53,7 @@ const onThemeChanged = (hasDarkMode: boolean) => {
     <DropdownMenu :dark-mode="preferences.getDarkMode()" :theme-change-handler="onThemeChanged"/>
   </nav>
   <main :class="{ dark: preferences.getDarkMode() }">
-    <div class="dark:bg-gray-800 dark:text-white h-screen w-full">
+    <div class="dark:bg-gray-800 dark:text-white min-h-screen w-full">
       <RouterView></RouterView>
     </div>
   </main>

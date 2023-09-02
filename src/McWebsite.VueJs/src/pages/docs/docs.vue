@@ -21,14 +21,14 @@ const categories : category[] = [
             id : 5,
             name : "User",
             level : 3,
-            docsUri : "Aggregates/User.md",
+            docsUri : "DomainModels/Aggregates/Aggregates.User.md",
             subCategories : null
           },
           {
             id : 6,
             name : "Conversation",
             level : 3,
-            docsUri : "Aggregates/Conversation.md",
+            docsUri : "DomainModels/Aggregates/Aggregates.Conversation.md",
             subCategories : [{
               id : 999,
               name : "test",
@@ -41,7 +41,7 @@ const categories : category[] = [
             id : 7,
             name : "Game Server",
             level : 3,
-            docsUri : "Aggregates/GameServer.md",
+            docsUri : "DomainModels/Aggregates/Aggregates.GameServer.md",
             subCategories : null
           },
           {
@@ -55,24 +55,39 @@ const categories : category[] = [
             id : 9,
             name : "Game Server Subscription",
             level : 3,
-            docsUri : null,
+            docsUri : "DomainModels/Aggregates/Aggregates.GameServerSubscription.md",
             subCategories : null
           },
           {
             id : 10,
             name : "In Game Event Order",
             level : 3,
-            docsUri : null,
+            docsUri : "DomainModels/Aggregates/Aggregates.InGameEventOrder.md",
             subCategories : null
           }
         ]
       },
       {
         id : 4,
-        name : "Entitites",
+        name : "Entities",
         level : 2,
         docsUri : null,
-        subCategories : null
+        subCategories : [
+          {
+            id : 11,
+            name : "Message",
+            level : 2,
+            docsUri : "DomainModels/Entities/Entities.Message.md",
+            subCategories : null
+          },
+          {
+            id : 12,
+            name : "In Game Event",
+            level : 2,
+            docsUri : "DomainModels/Entities/Entities.InGameEvent.md",
+            subCategories : null
+          },
+        ]
       },
     ]
   },
@@ -86,7 +101,7 @@ const categories : category[] = [
         id : 2,
         name : "API Documentation",
         level : 2,
-        docsUri : null, 
+        docsUri : "API.md", 
         subCategories : null
       }
     ]
@@ -118,18 +133,17 @@ watchEffect(async () => {
   if(selectedCategory.value === null)
     return
 
-  const response = await fetch(`https://raw.githubusercontent.com/KonradBralewski/McWebsite/main/docs/${selectedCategory.value}`)
-
-  categoryMarkdownSource.value = await response.json()
+  window.open(`https://github.com/KonradBralewski/McWebsite/tree/main/docs/${selectedCategory.value}`, "_blank")
 })
 
-const onCategorySelect = (event : Event) => {
-  console.log(event)  
+const onCategorySelect = (category : string) => {
+  if(category !== null){
+    selectedCategory.value = category
+  }
 }
 
 </script>
 
 <template>
   <DocumentationCategories class="p-0 md:p-10" :categories="clickableCategories" @category-selected="onCategorySelect"/>
-  <MarkdownPlaceholder :src=" categoryMarkdownSource"/>
 </template>
